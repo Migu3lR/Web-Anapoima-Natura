@@ -1,0 +1,102 @@
+<script>
+function existeClase(obj,cls)
+  {
+	return obj.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+  }
+
+  function addClass(obj,cls)
+  {
+   if(!existeClase(obj,cls)) {
+    obj.className+=" "+cls;
+   }
+  }
+
+  function removeClass(obj,cls)
+  {
+   if(existeClase(obj,cls)) {
+    var exp =new RegExp('(\\s|^)'+cls+'(\\s|$)');
+    obj.className=obj.className.replace(exp,"");
+   }
+  }
+
+var body = document.body; 
+var html = document.documentElement; 
+
+var menu1 = document.getElementById('menu-item-44');
+var menu2 = document.getElementById('menu-item-45');
+var menu3 = document.getElementById('menu-item-46');
+var menu4 = document.getElementById('menu-item-47');
+var menu5 = document.getElementById('menu-item-48');
+var menu6 = document.getElementById('menu-item-50');
+var a = 'actual';
+
+addClass(menu1,a);
+removeClass(menu2,a);
+removeClass(menu3,a);
+removeClass(menu4,a);
+removeClass(menu5,a);
+removeClass(menu6,a);
+
+document.addEventListener(
+    'scroll',
+    function(event){
+var scroll = body.scrollTop + html.scrollTop;      
+
+if (scroll >=0 && scroll <=587){
+addClass(menu1,a);
+removeClass(menu2,a);
+removeClass(menu3,a);
+removeClass(menu4,a);
+removeClass(menu5,a);
+removeClass(menu6,a);
+}
+
+if (scroll >=588 && scroll <=1086){
+addClass(menu2,a);
+removeClass(menu1,a);
+removeClass(menu3,a);
+removeClass(menu4,a);
+removeClass(menu5,a);
+removeClass(menu6,a);
+}
+
+if (scroll >=1087 && scroll <=1264){
+addClass(menu3,a);
+removeClass(menu2,a);
+removeClass(menu1,a);
+removeClass(menu4,a);
+removeClass(menu5,a);
+removeClass(menu6,a);
+}
+
+if (scroll >=1265 && scroll <=1805){
+addClass(menu4,a);
+removeClass(menu2,a);
+removeClass(menu3,a);
+removeClass(menu1,a);
+removeClass(menu5,a);
+removeClass(menu6,a);
+}
+
+if (scroll >=2056 && scroll <=2444){
+addClass(menu5,a);
+removeClass(menu2,a);
+removeClass(menu3,a);
+removeClass(menu4,a);
+removeClass(menu1,a);
+removeClass(menu6,a);
+}
+
+if (scroll >=2445){
+addClass(menu6,a);
+removeClass(menu2,a);
+removeClass(menu3,a);
+removeClass(menu4,a);
+removeClass(menu5,a);
+removeClass(menu1,a);
+}
+
+    }
+    ,true // Capture event
+);
+</script>

@@ -1,0 +1,75 @@
+/* ==========================================================================
+	#General
+========================================================================== */
+.stivaContainer a { color: #77a63e; }
+.stivaContainer a:hover { color: #55ae6e; }
+
+/* ==========================================================================
+	#stivaPanel
+========================================================================== */
+.stivaPanel .stivaPanelHead { background: #f8f8f6; }
+.stivaPanel .stivaPanelBody { background: #e3e3e1; }
+
+/* ==========================================================================
+	#Buttons
+========================================================================== */
+.stivaContainer .btn-default { border: 0; border-bottom: 2px solid #77a63e; background: #9acf5b; color: #fff; text-transform: uppercase; }
+.stivaContainer .btn-default:hover { border: 0; border-bottom: 2px solid #77a63e; background: #77a63e; color: #fff; }
+
+.stivaContainer .stivaBtnHome,
+.stivaContainer .stivaBtnNav { border: 0; border-bottom: 2px solid #d7dacf; background: #e3e3e1; color: #55ae6e; }
+
+.stivaContainer .stivaBtnHome:hover,
+.stivaContainer .stivaBtnNav:hover { border: 0; border-bottom: 2px solid #d7dacf; background: #d7dacf; color: #636361; }
+
+.stivaContainer .stivaNav .stivaBtnPassed { color: #77a63e; }
+.stivaContainer .stivaNav .stivaBtnActive,
+.stivaContainer .stivaLanguage .stivaBtnActive { background: #9acf5b; color: #fff; }
+
+/* ==========================================================================
+	#stivaPanelBody
+========================================================================== */
+.stivaPanelTitle { color: #55ae6e; text-transform: uppercase; text-align: center; }
+
+/* ==========================================================================
+	#stivaFormCheck
+========================================================================== */
+.stivaFormCheck label { color: #4b4d4c; }
+.stivaCalendar .calendar-trigger { color: #77a63e; }
+
+/* ==========================================================================
+	#stivaProduct
+========================================================================== */
+.stivaProduct .panel-heading { background: #fff; color: #77a63e; text-transform: uppercase; }
+.stivaProduct .panel-body { color: #4b4d4c; }
+.stivaProduct .input-group-addon { color: #77a63e; }
+.stivaProductPrice { color: #3d3938; font-weight: bold; }
+
+/* ==========================================================================
+	#stivaPanelBooking
+========================================================================== */
+.stivaPanelBooking a { color: #3d3938; }
+.stivaPanelBookingTitle { color: #77a63e; }
+.stivaPanelBooking { color: #4b4d4c; }
+.stivaPanelBooking .stivaPanelBookingMeta,
+.stivaPanelBooking strong { color: #3d3938; }
+
+/* ==========================================================================
+	#stivaExtras
+========================================================================== */
+.stivaExtras p,
+.stivaExtras .table-responsive { color: #4b4d4c; }
+.stivaExtrasTitle { color: #77a63e; }
+.stivaExtraPrice { color: #3d3938; }
+
+/* ==========================================================================
+	#stivaFormCheckOut
+========================================================================== */
+.stivaFormCheckOutTitle { color: #77a63e; text-transform: uppercase; text-align: center; }
+.stivaFormCheckOut .control-label { color: #4b4d4c; }
+.stivaTimePicker .input-group-addon { color: #77a63e; cursor: pointer; }
+
+/* ==========================================================================
+	#stivaPanelBodyLast
+========================================================================== */
+.stivaPanelBodyLast { color: #4b4d4c; }

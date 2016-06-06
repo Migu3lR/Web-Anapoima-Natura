@@ -1,0 +1,63 @@
+ul.general_stats{
+    padding: 0;
+    list-style:none;
+}
+
+ul.general_stats a.star{
+    margin-left: 2em;
+}
+.tabla { 
+    display:table;
+    border-collapse: separate;
+    border-spacing: 5px;
+    width: auto;
+    background-color: #eee;
+    border: 1px solid #666666;
+}
+.registro { 
+    display:table-row;
+    width: auto;
+    clear: both;
+}
+.celda { 
+    float: left;
+    display:table-column; 
+    overflow: hidden;
+}
+
+.thead {
+    background-color: #ccc;
+}
+
+.thead .celda{
+    font-weight: bolder;
+    text-align: center;
+}
+
+#fecha.celda{
+    min-width: 12rem;
+    width: 20rem;
+}
+#cliente.celda{
+    min-width: 10rem;
+    width: 20rem;
+}
+#correo.celda{
+    min-width: 16rem;
+    width: 20rem;    
+}
+#rate.celda{
+    min-width: 5rem;
+    width: 10rem;
+    text-align: center;
+}
+#estado.celda{
+    min-width: 10rem;
+    width: 15rem;
+    text-align: center;
+}
+#publicar.celda{
+    min-width: 10rem;
+    width: 15rem;
+    text-align: center;
+}

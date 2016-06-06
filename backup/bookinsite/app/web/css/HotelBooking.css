@@ -1,0 +1,89 @@
+.stivaContainer select{
+	-webkit-appearance: menulist-button;
+}
+.stivaContainer input[type="text"], 
+.stivaContainer input[type="submit"],
+.stivaContainer input[type="button"],
+.stivaContainer textarea, 
+.stivaContainer select{
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+.stivaContainer input[type="text"], 
+.stivaContainer input[type="password"],
+.stivaContainer input[type="email"],
+.stivaContainer input[type="phone"],
+.stivaContainer textarea{
+	cursor: text;
+}
+.stivaContainer .btn{
+	cursor: pointer;
+}
+.stivaContainer .stivaAccommodate{
+	margin-bottom: 10px;
+}
+.stivaContainer hr.stivaAccommodateLimiter{
+	margin-top: 7px;
+	margin-bottom: 7px;
+	border-color: transparent;
+}
+.stivaFormCheck .form-control{
+	cursor: pointer;
+}
+.stivaPanelBooking hr{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.stivaProduct a.hbSelectorThumb{
+	display: inline-block;
+	margin: 0 3px 7px 0;
+}
+.bootstrap-timepicker-widget.dropdown-menu{
+	min-width: 185px;	
+}
+.stivaDatepicker.ui-widget{
+	font-size: 1em;
+}
+@media (max-width: 480px) {
+	select.form-control.hbSelectorPeople {
+		width: 60px;
+	}
+}
+
+@media (min-width: 320px){
+	.stivaPanelHead div[class^='col-']:nth-child(2) .stivaBtnNav,
+	.stivaPanelHead div[class^='col-']:nth-child(2) .dropdown-menu{
+		width: 100% !important;
+	}
+	.stivaPanelHead div[class^='col-']:nth-child(2) .stivaNav{
+		width: 100% !important;
+	}
+	.stivaPanelHead div[class^='col-']:nth-child(2) .stivaBtnNav{
+		max-width: 100%;
+	}
+	.stivaPanelHead div[class^='col-']:last-child{
+		padding-top: 10px;
+	}
+	.stivaPanelHead div[class^='col-']:last-child .stivaLanguage,
+	.stivaPanelHead div[class^='col-']:last-child .stivaBtnNav,
+	.stivaPanelHead div[class^='col-']:last-child .dropdown-menu{
+		width: 100% !important;
+	}
+}
+@media (min-width: 768px) {
+	.stivaPanelHead div[class^='col-']:last-child{
+		padding-top: inherit;
+	}
+	.stivaPanelHead div[class^='col-']:first-child .stivaBtnHome,
+	.stivaPanelHead div[class^='col-']:nth-child(2) .stivaBtnNav,
+	.stivaPanelHead div[class^='col-']:nth-child(2) .dropdown-menu,
+	.stivaPanelHead div[class^='col-']:last-child .stivaLanguage,
+	.stivaPanelHead div[class^='col-']:last-child .stivaBtnNav,
+	.stivaPanelHead div[class^='col-']:last-child .dropdown-menu{
+		width: auto !important;
+	}
+	.stivaPanelHead div[class^='col-']:last-child .stivaLanguage{
+		float: right;
+	}
+}

@@ -1,0 +1,69 @@
+.icon {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  width: 48px;
+  height: 48px;
+  font-size: 0;
+  text-indent: -9999px;
+}
+
+.icon-mono {
+  background: url("../img/icons.png");
+  background-size: 240px;
+  background-repeat: no-repeat;
+  background-color: #008da1;
+  -webkit-transition: background 0.3s;
+  -moz-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+/* facebook */
+.icon-mono.facebook {
+  background-position: 0px 0px;
+}
+
+.icon-mono.facebook:hover {
+  background-color: #3b5998;
+  background-position: 0 -48px;
+}
+
+/* twitter */
+.icon-mono.twitter {
+  background-position: -48px 0;
+}
+
+.icon-mono.twitter:hover {
+  background-color: #4099ff;
+  background-position: -48px -48px;
+}
+
+/* google plus */
+.icon-mono.googleplus {
+  background-position: -96px 0;
+}
+
+.icon-mono.googleplus:hover {
+  background-color: #d34836;
+  background-position: -96px -48px;
+}
+
+/* instragram */
+.icon-mono.instagram {
+  background-position: -144px 0;
+}
+
+.icon-mono.instagram:hover {
+  background-color: #6b4b3c;
+  background-position: -144px -48px;
+}
+
+/* youtube */
+.icon-mono.youtube {
+  background-position: -192px 0;
+}
+
+.icon-mono.youtube:hover {
+  background-color: #ce2520;
+  background-position: -192px -48px;
+}

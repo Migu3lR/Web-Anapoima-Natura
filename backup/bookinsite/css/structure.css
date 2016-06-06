@@ -1,0 +1,72 @@
+html, body,
+h1,h2,h3,h4,h5,
+a,p {
+	font-family: "Titillium Web" !important;
+}
+
+.callout {
+	margin : 0;
+}
+
+.sticky{
+	position: fixed;
+	z-index: 9999;
+}
+/* Main Menu */
+.logo-container, .logo-container img {
+    height: 4rem;
+    width: auto;
+}
+.top-bar, .top-bar ul {
+    background-color: #fffae1;
+}
+.top-bar {
+    padding: 0 0.5rem;
+	width: 100%;
+}
+.top-bar-left {
+    padding: 5px 0;
+}
+#main-menu .menu-wrap .callout{
+	padding: 0 !important;
+	border: 0;
+}
+.menu > li > a {
+	font-size: 13px;
+    padding: 0.7rem 0.65rem;
+	padding-bottom: 0;
+	color: #5D4C3D;
+	border-bottom: 6px solid rgba(0,0,0,0);
+	-webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+.menu > li > a.actual,
+.menu > li > a:hover {
+	border-bottom: 6px solid rgba(93, 76, 61, 1);
+	-webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.menu-text {
+    padding: 0;
+}
+.top-bar-right {
+    position: relative;
+    top: 2.75rem;
+}
+
+#logo a {
+	width: 100%;
+	margin-left: 0;
+}
+
+footer{
+	width: 100%;
+    bottom: 0;
+}
+
+#separator {
+	height: 3em;
+}

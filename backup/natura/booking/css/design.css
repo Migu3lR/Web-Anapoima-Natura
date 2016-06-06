@@ -1,0 +1,31 @@
+#logo {
+	background: none;
+	font-size: 50px;
+	font-weight: initial;
+}
+html, body {
+	background: none;
+	background: #f6f4f5;
+	    background-image: url("../img/FONDO.jpg");
+}
+/* Secciones */
+.callout {
+	color: #000;
+	margin : 0;
+}
+
+/*  Footer  */
+footer p{
+	font-size: 10pt;
+	color: #fff;
+}
+footer{
+	background-color: #008da1;
+}
+footer a{
+	color: #fff;
+	font-weight: 600;
+}
+footer a:hover{
+	color: #463629;
+}

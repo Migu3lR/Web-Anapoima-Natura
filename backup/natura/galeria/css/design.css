@@ -1,0 +1,81 @@
+.title {
+	background-color: #008da1;
+}
+.title h1{
+	color:white;
+}
+
+#galeria .seccion {
+    background-color: #fff;
+    border: 0;
+    border-left: 15px solid;
+    background-position: right 2em top 1.25em !important;
+    background-size: auto 20px;
+    background-repeat: no-repeat;
+	margin-top: 2em;
+}
+
+#galeria .seccion.sec_1 {
+	border-left-color: #008da1;
+	background-image: url("../img/mas1.png");
+}
+
+#galeria .seccion.sec_2 {
+	border-left-color: #00B0BC;
+	background-image: url("../img/mas2.png");
+}
+
+#galeria .seccion.sec_3 {
+	border-left-color: #F8A51C;
+	background-image: url("../img/mas3.png");
+}
+
+#galeria .seccion.sec_4 {
+	border-left-color: #FECA07;
+	background-image: url("../img/mas4.png");
+}
+
+#galeria .seccion.sec_5 {
+	border-left-color: #BED538;
+	background-image: url("../img/mas5.png");
+}
+
+#galeria .seccion.sec_6 {
+	border-left-color: #8BC541;
+	background-image: url("../img/mas6.png");
+}
+
+
+p {
+	text-align: justify;
+}
+
+/* Secciones */
+.callout {
+	color: #000;
+	margin : 0;
+}
+/*tabla */
+table thead th,
+table {
+	text-align: center;
+}
+table thead{
+	background: #ffae00;
+}
+
+/*  Footer  */
+footer p{
+	font-size: 10pt;
+	color: #fff;
+	margin-bottom: 0.5em;
+}
+footer{
+	background-color: #008da1;
+}
+footer a{
+	color: #fff;
+}
+footer a:hover{
+	color: #463629;
+}

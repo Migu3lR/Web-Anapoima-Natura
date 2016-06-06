@@ -1,0 +1,12 @@
+<?php
+if (!defined("PJ_HOST")) define("PJ_HOST", "localhost");
+if (!defined("PJ_USER")) define("PJ_USER", "hbzzadmin");
+if (!defined("PJ_PASS")) define("PJ_PASS", "C@c6w217DS");
+if (!defined("PJ_DB")) define("PJ_DB", "naturabase");
+if (!defined("PJ_PREFIX")) define("PJ_PREFIX", "bk_");
+if (!defined("PJ_INSTALL_FOLDER")) define("PJ_INSTALL_FOLDER", "/booking/");
+if (!defined("PJ_INSTALL_PATH")) define("PJ_INSTALL_PATH", "/home/hbzzadmin/public_html/anapoimanatura.com/booking/");
+if (!defined("PJ_INSTALL_URL")) define("PJ_INSTALL_URL", "http://anapoimanatura.com/booking/");
+if (!defined("PJ_SALT")) define("PJ_SALT", "34813ZMU");
+if (!defined("PJ_INSTALLATION")) define("PJ_INSTALLATION", "MzA4MzI5NjQxMzc0MzE3NTA2MjE4NTcxOTI4OTc5MjI2MTE0NzIzMjcxOTQ2NzgzNTMzNzkwMjQ3MDY3NzE4MjMxMjYyMzY1NzcwMjAxNTg5NzkzOTc1NTc1NzY4Nzc4MzE1IDEyMjcyMzYyMjA5NzkxMDM1OTY3MzMyNTEzNjc1MzQwMjk4OTc3OTQ0OTI3MDI4NzgzMDc1MTI0NjY1NDM1NzUyMjUxMDgyOTcyMTI5NzI0OTI5NTE4MjY5MzcyODA3Njk0MyAzMDcxMDYyNzI5MjI2OTQ3OTI0ODQyMTg5NjkxMjQwNTQ4NTY5MDkwNjg0NDY0Njg2MjM4OTM2ODgxMjcyNjM3MjUxNTEzMzA0NTU5ODA4OTcxNjA2ODQxNzc4MjU0NzI0NDIgMTQ1MDg0Mzc0NzY5MjE5MTM3MTc4ODQ4ODk3NTYyNTg4NjgxMjEwNTk2Nzc5ODUyNDkxMDY0OTMyNDEzNTkzMjMzMjcxNDAzNjA3NDI5MjU5MTA0MDg3MTg4MzAxNDA5MTg3MyA0Nzk4MDg2Njc4NDgxNzMwMTY1ODMzMDI3MjczMDg3MjcwMTA0MjAwMjkxNjQyMTc2NjUwOTAyMDEzMDQ0NDkwMDk4MzM0OTE1Mzg0NjI0NDAxNzIwMDgxNDM2NDU0MDgxMjMgMTYzNTIzNzM4OTAxNzkxNTYzOTE3MTgwNjU4NDU0NTI1MDkyNjg1NTY0OTcyMjI4NDk3OTk0MzI0ODE4MDM4NDI4NjY2Mjk0OTg5NDA2NzM0Mjc3MjM1NjAzMTg2ODQxMTMw");
+?>

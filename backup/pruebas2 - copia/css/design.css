@@ -1,0 +1,383 @@
+/* Main menu */
+/*
+.top-bar, .top-bar ul {
+	background-color : white;	
+}
+*/
+
+/* Slides */
+div.slide_description {
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	background-color:rgba(30,24,20,0.7);
+	/*background-color:rgba(0,0,0,0.8);*/
+}
+#Slider .item.slide_0 div.background {
+    background-image: url('../img/slide0.jpg');
+}
+#Slider .item.slide_1 div.background {
+    background-image: url('../img/slide1.jpg');
+}
+#Slider .item.slide_2 div.background {
+    background-image: url('../img/slide2.jpg');
+}
+#Slider .item.slide_3 div.background {
+    background-image: url('../img/slide3.jpg');
+}
+#Slider .container h1,
+#Slider .container h2,
+#Slider .container h3,
+#Slider .container h4,
+#Slider .container p,
+#Slider .container a  {
+	color: #fff;
+	font-weight: 300;
+	margin: 0;
+	padding-top: 0;	
+	padding-bottom: 0;
+	line-height: 1em
+}
+
+#Slider .container h1 {
+	font-size: 3.5em;
+}
+#Slider .container h2,
+#Slider .container p {
+	text-align: right;
+}
+#Slider .container h2 {
+	padding-bottom: 0.3em;
+}
+
+#Slider .container a  {
+	margin-left: 1em;
+	
+}
+#hospedaje .condiciones a  {
+	margin-left: 2em;
+	border-color: white;
+}
+
+#hospedaje .condiciones a,
+#Slider .container a,
+#Slider .container a.button:after,
+#reservas a,
+#reservas a.button:after,
+#contacts button,
+#contacts button.button:after{
+	line-height: 1em !important;
+    font-size: 1em;
+}
+
+.slide_content {
+	font-size: 14px;
+	font-weight: 400;
+}
+
+/* Secciones */
+.callout ,
+#condiciones a{
+	color: #fff;
+	margin : 0;
+}
+
+#condiciones a:hover{
+	color: #47362a;
+}
+
+
+/* Hospedaje - Servicios*/
+#servicios{
+	background-image: url('../img/servicios.jpg');
+}
+#hospedaje{
+	background-image: url('../img/hospedaje.jpg');
+}
+#servicios p.serv {
+	text-align: center;
+	line-height: 20px;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 1);
+}
+#servicios p:last-child.serv {
+	padding-bottom:30px;
+}
+#hospedaje .accordion,
+#servicios .accordion{
+    color: black;
+}
+#hospedaje .accordion_in{
+	background-color: rgba(255,255,255,0.4);
+}
+#hospedaje .accordion_in.condiciones .acc_head {
+	background-color: #00B0BC;
+}
+
+#servicios .accordion_in{
+	background-color: rgba(255,255,255,0.6);
+}
+
+#hospedaje .smk_accordion .accordion_in.acc_0 .acc_head,
+#hospedaje .smk_accordion .accordion_in.acc_1 .acc_head,
+#hospedaje .smk_accordion .accordion_in.acc_2 .acc_head,
+#hospedaje .smk_accordion .accordion_in.acc_3 .acc_head,
+#hospedaje .smk_accordion .accordion_in.acc_active.acc_0 > .acc_head,
+#hospedaje .smk_accordion .accordion_in.acc_active.acc_1 > .acc_head,
+#hospedaje .smk_accordion .accordion_in.acc_active.acc_2 > .acc_head,
+#hospedaje .smk_accordion .accordion_in.acc_active.acc_3 > .acc_head {
+	background-image: url("../img/persona.png");
+	background-position: right 55px top 1px !important;
+    background-size: auto 47px;
+}
+
+#hospedaje .condiciones .button:after{
+	line-height: 0.9em;
+}
+
+.acc_content a{
+	color: #47362a;
+}
+.acc_content a:hover{
+	color: white;
+}
+
+.acc_content span.super{
+	vertical-align: super;
+	font-size: 0.6em;
+}
+
+.smk_accordion .accordion_in{
+	padding: 5px 0;
+}
+.smk_accordion .accordion_in.condiciones{
+	padding: 0;
+}
+
+.smk_accordion .accordion_in,
+.accordion_in .acc_content p,
+.accordion_in .acc_content_left,
+.accordion_in .acc_content_right {
+	color: #47362a;
+}
+.smk_accordion .accordion_in.condiciones{
+	color: #ffffff;
+}
+
+.smk_accordion .acc_border.acc_0{
+	border-left-color: #F8A51C;
+}
+.smk_accordion .acc_border.acc_1{
+	border-left-color: #FECA07;
+}
+.smk_accordion .acc_border.acc_2{
+	border-left-color: #BED538;
+}
+.smk_accordion .acc_border.acc_3 {
+    border-left-color: #8BC541;
+}
+.smk_accordion .acc_border.acc_4 {
+    border-left-color: #008DA1;
+}
+#hospedaje .smk_accordion .acc_0 .acc_head:after,
+#hospedaje .smk_accordion .acc_1 .acc_head:after,
+#hospedaje .smk_accordion .acc_2 .acc_head:after,
+#hospedaje .smk_accordion .acc_3 .acc_head:after {
+	font-weight: 100;
+    position: absolute;
+    right: 105px;
+    top: 30px;
+    font-size: 14px;
+    color: #fff;
+    content: "Personas (Adultos y niños mayores de 2 años)";
+}
+#hospedaje .smk_accordion .acc_0 .acc_head:before,
+#hospedaje .smk_accordion .acc_1 .acc_head:before,
+#hospedaje .smk_accordion .acc_2 .acc_head:before,
+#hospedaje .smk_accordion .acc_3 .acc_head:before {
+	position: absolute;
+    right: 105px;
+    top: -7px;
+    font-size: 35px;
+    color: #fff;
+    
+}
+#hospedaje .smk_accordion .acc_head p,
+#servicios .smk_accordion .acc_head p{
+	font-size: 18px;
+	margin-bottom: 0;
+	font-weight :600;
+}
+
+#hospedaje .smk_accordion .acc_0 .acc_head:before {
+	content: "11-13";
+}
+#hospedaje .smk_accordion .acc_1 .acc_head:before {
+	content: "6-7";
+}
+#hospedaje .smk_accordion .acc_2 .acc_head:before {
+	content: "4-6";
+}
+#hospedaje .smk_accordion .acc_3 .acc_head:before {
+	content: "2-4";
+}
+
+
+.smk_accordion .accordion_in .acc_head > h5 {
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 22px;
+	margin-bottom: 0px;
+	
+	
+}
+
+#servicios #foot{
+	color: #fff;
+    background-color: rgba(30,24,20,0.7);
+	width: 80%;
+    margin: 0 auto;
+    /*height: 3em;*/
+    vertical-align: middle;
+	font-size
+}
+
+#servicios #foot p{
+	width: 100%;
+    margin: 3px auto;
+    /*height: 3em;*/
+    vertical-align: middle;
+}
+
+.acc_bottom span a{
+	font-size: 1.25em;
+	color: #47362a;
+}
+
+/* Reservas-Puntajes */
+div#reservas,
+div#reservation{
+    background-color: #FFCB04;
+}
+
+#reservas h2,
+#reservas a,
+#reservas p{
+	color: #5e4c3e;
+}
+#reservas h2{
+    line-height: 1em;
+	margin-bottom: 0;	
+	margin-top: 0.5em;	
+}
+#reservas p{
+	font-size: 0.8em;	
+	margin-bottom: 0.4em;	
+}
+#reservas a{
+	margin-bottom: 1.7em;
+	font-size: 0.8em;
+	
+}
+div#puntajes {
+	background-color: #F8A51C;
+    background-image: url('../img/puntajes.jpg');
+	background-size: contain;
+	background-position: bottom;
+	background-repeat: no-repeat;
+}
+#puntajes .callout {
+	margin:0;
+}
+#informacion .callout{
+	color: #47362a;
+}
+#puntajes h2{
+	font-weight: bold;
+    font-size: 24px;
+}
+#puntajes #capacidad h2,
+#puntajes #dias h2 {
+	height:66px;
+}
+#puntajes p{	
+    font-weight: 500;
+    text-align: justify;
+}
+#puntajes a{
+	color: white;
+}
+#puntajes a:hover{
+	color: #47362a;
+}
+
+/*  Contacto  */
+div#contacts{
+	background-color: #008da1;
+	background-image: url('../img/contacto.jpg');
+	background-size: contain;
+    background-repeat: no-repeat;
+	background-position: bottom;
+	color: #fff;
+}
+
+div#contacts a{
+	color: white;
+}
+
+div#contacts h2{
+	margin-top: 0.1em;
+	margin-bottom: 0;
+	line-height: 1em !important;
+}
+
+div#contacts h2:hover{
+	color: #47362a;
+}
+
+div#contacts img.arrow{
+	height: 0.5em;
+	margin-top: -0.5em;
+}
+/*  Footer  */
+footer p{
+	font-size: 10pt;
+	color: #fff;
+	margin-bottom: 0.5em;
+}
+footer{
+	background-color: #008da1;
+}
+footer a{
+	color: #fff;
+	font-weight: 600;
+}
+footer a:hover{
+	color: #47362a;
+}
+ 
+ /*  Galeria  */
+.overlay-fade-in p {
+  letter-spacing: 0.15em;
+  color: #f4f4f4;
+  font-size: 18px;
+  font-style: italic;
+}
+#img_1 .overlay-fade-in .image-overlay-content {
+  background-color: rgba( 248, 165, 28, 0.9);}
+#img_3 .overlay-fade-in .image-overlay-content {
+  background-color: rgba( 254, 202, 7, 0.9);}
+#img_2 .overlay-fade-in .image-overlay-content {
+  background-color: rgba( 190, 213, 56, 0.9);}
+#img_4 .overlay-fade-in .image-overlay-content {
+  background-color: rgba( 0, 141, 161, 0.9);}
+#img_8 .overlay-fade-in .image-overlay-content {
+  background-color: rgba( 190, 213, 56, 0.9);}
+#img_6 .overlay-fade-in .image-overlay-content {
+  background-color: rgba( 0, 141, 161, 0.9);}
+#img_7 .overlay-fade-in .image-overlay-content {
+  background-color: rgba( 248, 165, 28, 0.9);}
+#img_5 .overlay-fade-in .image-overlay-content {
+ background-color: rgba( 254, 202, 7, 0.9);}
+.overlay-fade-in h2 {
+  color: #f2f2f2;
+  font-weight: 500;
+  font-size: 32px;
+}
