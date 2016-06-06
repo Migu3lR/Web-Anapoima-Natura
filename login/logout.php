@@ -3,10 +3,10 @@ session_start();
 session_destroy();
 if(isset($_GET['returnUrl'])) {
     $u = $_GET['returnUrl'];	
-    header("Location: /produccion/");
+    header("Location: /");
     exit;
 } else{
-    header("Location: /produccion/");
+    header("Location: /");
     exit;
 }
 
