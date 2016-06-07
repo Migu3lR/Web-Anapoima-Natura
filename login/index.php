@@ -1,19 +1,3 @@
-<?php
-session_start();
-$rol = "";
-
-if(isset($_SESSION['rol'])) $rol = $_SESSION['rol'];
-if($rol == "0" || $rol == "1") {
-	if(isset($_GET['returnUrl'])) {
-		$u = $_GET['returnUrl'];	
-		header("Location: $u");
-		exit;
-	} else{
-		header("Location: ../");
-		exit;
-	}
-}
-?>
 ﻿<!doctype html>
 <html class="no-js" lang="en" ng-app="app">
 <head>
@@ -30,6 +14,8 @@ if($rol == "0" || $rol == "1") {
 	<script src="../js/angular.min.js"></script>	
 	<script src="../js/angular-animate.js"></script>	
 	<script src="../js/angular-hmac-sha512.js"></script>
+	<script src="../js/angular-jwt.js"></script>
+	<script src="../js/angular-storage.js"></script>
 	<script src="js/control.js"></script>
 
 </head>
@@ -203,12 +189,12 @@ if($rol == "0" || $rol == "1") {
 							<input ng-model="claveIn" type="password" autocomplete="off" />
 						</div>
 					</div>
-				      <div class="row text-center">
-					<button type="submit" class="promo_button button" />Entrar</button>
-                                      </div>
-                                      <div ng-show="showError && eIn" class="row text-center" style="color:red">
-					<p>{{ msg }}</p>
-			              </div>
+				  <div class="row text-center">
+						<button type="submit" class="promo_button button" />Entrar</button>
+          </div>
+          <div ng-show="showError && eIn" class="row text-center" style="color:red">
+						<p>{{ msg }}</p>
+			    </div>
 				</form>
 			</div>
 			</div>

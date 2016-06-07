@@ -262,7 +262,7 @@ function seccion(id){
 	var divh = document.getElementById(id).offsetHeight;
 	var divh = divh * (-1);
 	var dist = getDist(id) - document.getElementById('main-menu').offsetHeight;
-	console.log(id+'|'+dist+':'+divh);
+	//console.log(id+'|'+dist+':'+divh);
 	if(dist <= 0 && dist >= divh) return true;
 	else return false
 	

@@ -3638,7 +3638,7 @@ table.hover tr:nth-of-type(even):hover {
   left: 10px;
   top: 50%;
   margin-top: -9px;
-  background: url(../images/plusminus.png) center 0;
+  background: url(../images/home/plusminus.png) center 0;
 }
 /**
  * --------------------------------------------------------------
@@ -3678,7 +3678,7 @@ table.hover tr:nth-of-type(even):hover {
   background: #F9F9F9;
 }
 .smk_accordion .accordion_in.acc_active > .acc_head .acc_icon_expand {
-  background: url(../images/plusminus.png) center -18px;
+  background: url(../images/home/plusminus.png) center -18px;
 }
 .smk_accordion.acc_with_icon .accordion_in .acc_head,
 .smk_accordion.acc_with_icon .accordion_in .acc_content {

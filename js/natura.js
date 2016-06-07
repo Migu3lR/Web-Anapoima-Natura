@@ -1,7 +1,22 @@
 /*  Angular Framework  */
-app = angular.module("app",[]);
-app.controller("control",function($scope,$window,$http,$interval){
+app = angular.module("app",['angular-jwt', 'angular-storage']);
+app.controller("control",function($scope,$window,$http,$interval,jwtHelper,store){
 
+//Usuario Autorizado?
+	//obtenemos el token en localStorage
+	//decodificamos para obtener los datos del user
+	//los mandamos a la vista como user
+	$scope.isAuth = function(){
+		var token = store.get("token") || null;
+		if (token) {
+		if (jwtHelper.isTokenExpired(token)) store.remove("token");
+			else {
+				$scope.user = jwtHelper.decodeToken(token);
+				return true;
+			}
+		}return false;
+	}
+		
 	$scope.sendMail = function(nombre,email,body){
 		
 		var request = $http({
@@ -24,6 +39,10 @@ app.controller("control",function($scope,$window,$http,$interval){
 		});
 
 	}
+	
+	
+	
+	
 });
 app.filter('html', ['$sce', function($sce) {
 	return function(text) { return $sce.trustAsHtml(text); };

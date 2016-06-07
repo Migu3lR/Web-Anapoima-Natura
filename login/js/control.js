@@ -1,5 +1,20 @@
-angular.module("app",['angular-hmac-sha512','ngAnimate'])
-.controller("control",function($scope,$crypthmac,$window,$http){
+app = angular.module("app",['angular-hmac-sha512','ngAnimate','angular-jwt', 'angular-storage']);
+app.controller("control",function($scope,$crypthmac,$window,$http,jwtHelper,store){
+
+//Usuario Autorizado?
+	//obtenemos el token en localStorage
+	//decodificamos para obtener los datos del user
+	//los mandamos a la vista como user
+	$scope.isAuth = function(){
+		var token = store.get("token") || null;
+		if (token) {
+		if (jwtHelper.isTokenExpired(token)) store.remove("token");
+			else {
+				$scope.user = jwtHelper.decodeToken(token);
+				return true;
+			}
+		}return false;
+	}
 var db_isdown = 521;
 var db_unknown_error = 520;
 var user_conflict = 409;
@@ -40,16 +55,24 @@ $scope.msg = "";
                 $scope.showError = false;
 		var request = $http({
 			method: "post",
-			url: "../login/" + dir + ".php",
-			data: dataCode,
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+			url: "../api/index.php",
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			skipAuthorization: true,
+			/*transformRequest: function(obj) {
+				var str = [];
+				for(var p in obj)
+				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+				return str.join("&");
+			},*/
+			data: dataCode
 		});
 
 		/* Check whether the HTTP Request is successful or not. */
-		request.success(function (data) {	
-			$scope.resp = angular.fromJson(data).resp;
-			console.log($scope.resp);
-			switch ($scope.resp) {
+		request.success(function (res) {
+			
+			if(res && res.code == user_accepted) store.set('token', res.response.token);
+			
+			switch (res.code) {
 				case db_isdown:
 					$scope.msg = "Ha ocurrido un error inesperado, por favor vuelve a intentarlo";
 					$scope.error
@@ -72,13 +95,13 @@ $scope.msg = "";
 					break;
 				case user_accepted:
 					$scope.msg = "";
-					$window.location.reload();
+					$window.location = "/";
 					break;
 				case user_unauthorized:
 					$scope.msg = "Usuario o Contraseña invalidos, intentalo nuevamente";
 					break;
 			}	
-			if ($scope.resp > user_accepted)
+			if (res.code > user_accepted)
 				$scope.showError = true;
 			else $scope.showError = false;
 			
@@ -134,7 +157,7 @@ $scope.msg = "";
 		}
 	}
 	$scope.signin = function (correoIn, claveIn){
-                $scope.eIn = false;
+        $scope.eIn = false;
 		if ( correoIn == undefined || correoIn.length == 0) $scope.valid.correoIn = false;
 		else $scope.valid.correoIn = true;
 		if ( claveIn == undefined || claveIn.length == 0) $scope.valid.claveIn = false;
@@ -143,16 +166,33 @@ $scope.msg = "";
 		if($scope.valid.correoIn && $scope.valid.claveIn){
 			
 			var data = {
+				action	: 'login',
 				correo   : correoIn,
 				clave    : claveIn
 			};
 			data.clave = $crypthmac.encrypt(data.clave,"NtraSfe")
 			sql(data,"loginUser");
-                        $scope.eIn = true;
+            $scope.eIn = true;
 		}
 	}
 	
-})
-.filter('html', ['$sce', function($sce) {
-	return function(text) { return $sce.trustAsHtml(text); };
+});
+
+app.controller("logout",function($scope,$crypthmac,$window,$http,jwtHelper,store){
+	
+	//obtenemos el token en localStorage
+		var token = store.get("token") || null;
+		if (token) store.remove("token");
+		$window.location = "/";
+});
+
+app.config(["$httpProvider", "jwtInterceptorProvider",  function ($httpProvider, jwtInterceptorProvider) 
+{
+    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+    
+    //en cada petición enviamos el token a través de los headers con el nombre Authorization
+    jwtInterceptorProvider.tokenGetter = function() {
+        return localStorage.getItem('token');
+    };
+    $httpProvider.interceptors.push('jwtInterceptor');
 }]);

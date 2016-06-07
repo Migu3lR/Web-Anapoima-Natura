@@ -6,6 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Natura Anapoima</title>
+	
 <?php
 
 if(isset($_POST['buscar'])){
@@ -31,18 +32,12 @@ if(isset($_POST['buscar'])){
 	
 	<!-- Natura System -->
 	<script src="js/angular.min.js"></script>	
-
+	<script src="js/angular-jwt.js"></script>
+	<script src="js/angular-storage.js"></script>
 
 	
   </head>
 <body ng-controller="control" ng-cloak>
-<?php
-session_start();
-$nombre = "";
-if(isset($_SESSION['nombre'])) $nombre = $_SESSION['nombre'];
-$rol = "";
-if(isset($_SESSION['rol'])) $rol = $_SESSION['rol'];
-?>
 	<div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="large">
 	  <button class="menu-icon" type="button" data-toggle></button>
 	  <div class="title-bar-title">Menu</div>
@@ -62,48 +57,33 @@ if(isset($_SESSION['rol'])) $rol = $_SESSION['rol'];
 	  </div>
 	
 	  <div class="top-bar-right">
-		<div class="user">
-		<p><?php
-		if ($nombre != ""){
-			echo "Bienvenido " . $nombre ;
-		} else {
-			echo "<a href=\"login/\">Inicia sesión en Natura!</a>";
-		}
-			
-		?> 
-		</p>
+		<div class="user" ng-switch="isAuth()">
+		<p ng-switch-when="true"> {{"Bienvenido " + user.name}} </p>
+		<p ng-switch-default><a href="login/">Inicia sesión en Natura!</a></p>
 		</div>
-		<ul class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
+		<ul ng-switch="user.rol" class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
 			<li><a id="item1" link href="index.php#inicio">INICIO</a></li>
 			<li><a id="item2" link href="index.php#hospedaje">HOSPEDAJE</a></li>
 			<li><a id="item3" link href="index.php#reservas">RESERVAS</a></li>
 			<li><a id="item4" link href="index.php#servicios">SERVICIOS</a></li>
 			<li><a id="item5" link href="index.php#galeria">GALERÍA</a></li>
 			<li><a id="item6" link href="index.php#contacto">CONTACTO</a></li>
-			<?php
-			if($rol == "1"){
-			?>			
-				<li><a href="#">ADMINISTRACIÓN</a>
-					<ul class="menu">
+			<li class="has-dropdown hover" ng-switch-when="1"><a ref="#">ADMINISTRACIÓN</a>
+				<ul class="dropdown">
 					<li><a href="#">Clientes</a></li>
 					<li><a href="booking/bookAdmin.php">Reservaciones</a></li>
 					<li><a href="comentAdmin">Gestion de Comentarios</a></li>
 					<li><a href="promocodesAPP">Códigos Promocionales</a></li>
 					<li><a href="login/logout.php">CERRAR SESIÓN</a></li>
-					</ul>
-				</li>
-			<?php
-			} elseif ($rol == "0") {
-			?>
-				<li><a href="#">MI CUENTA</a>
-					<ul class="menu">
-					<li><a href="#">Portal de Usuario</a></li>
-					<li><a href="login/logout.php">CERRAR SESIÓN</a></li>
-					</ul>
-				</li>
-			<?php
-			}
-			?>
+				</ul>
+			</li>
+			<li ng-switch-when="0">
+				<a href="#">MI CUENTA</a>
+				<ul class="menu">
+				<li><a href="#">Portal de Usuario</a></li>
+				<li><a href="login/logout.php">CERRAR SESIÓN</a></li>
+				</ul>
+			</li>
 		</ul>
 	  </div>
 	</div>
