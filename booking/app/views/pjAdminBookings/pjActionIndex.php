@@ -49,10 +49,21 @@ if (isset($tpl['status']))
 	} else {
 		?>
 		<div class="b10">
-			<form action="" method="get" class="float_left pj-form frm-filter">
-				<input type="text" name="q" class="pj-form-field pj-form-field-search w150" placeholder="<?php __('btnSearch'); ?>" />
+			
+			<form id="buscarCorreo" action="" method="get" class="float_left pj-form frm-filter">
+				<input type="text" name="q" class="pj-form-field pj-form-field-search w150" placeholder="<?php __('btnSearch'); ?>" 
+				<?php if (isset($_GET['buscar']) && !isset($_GET['q'])) echo ' value="'.$_GET['buscar'].'"'; ?>
+				/>
+				<?php if (isset($_GET['buscar']) && !isset($_GET['q'])) {
+					echo '<input type="hidden" name="controller" value="pjAdminBookings" />';
+					echo '<input type="hidden" name="action" value="pjActionGetBooking" />';				
+				}	
+				?>
 				<button type="button" class="pj-button pj-button-detailed"><span class="pj-button-detailed-arrow"></span></button>
 			</form>
+			<?php if (isset($_GET['buscar']) && !isset($_GET['q'])) {
+			 echo '<script type="text/javascript" language="javascript"> document.getElementById("buscarCorreo").submit();</script>';
+			}?>
 			<div class="float_right t5">
 				<a href="#" class="pj-button btn-all"><?php __('lblAll'); ?></a>
 				<a href="#" class="pj-button btn-filter btn-status" data-column="status" data-value="confirmed"><?php echo $bs['confirmed']; ?></a>
@@ -60,7 +71,7 @@ if (isset($tpl['status']))
 				<a href="#" class="pj-button btn-filter btn-status" data-column="status" data-value="not_confirmed"><?php echo $bs['not_confirmed']; ?></a>
 				<a href="#" class="pj-button btn-filter btn-status" data-column="status" data-value="cancelled"><?php echo $bs['cancelled']; ?></a>
 			</div>
-			<br class="clear_both" />
+			<br class="clear_both" /> 
 		</div>
 	
 		<div class="pj-form-filter-advanced" style="display: none">

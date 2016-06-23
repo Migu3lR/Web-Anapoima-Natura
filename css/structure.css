@@ -3781,12 +3781,12 @@ h1,h2,h3,h4,h5 {
 	padding-bottom: 1em;
 }
 
-.sticky{
+.stick{
 	position: fixed;
 	z-index: 9999;
 }
 
-#reservation.sticky{
+#reservation.stick{
     width: 100%;
     bottom: 0;
     margin-top: -5px;
@@ -3794,13 +3794,13 @@ h1,h2,h3,h4,h5 {
     background-color: #00879E;
 }
 
-#reservation.sticky .field {
+#reservation.stick .field {
     width: 20%;
     float: left;
     padding: 0.7rem;
 }
-#reservation.sticky .field input, 
-#reservation.sticky .field select {
+#reservation.stick .field input, 
+#reservation.stick .field select {
     height: 2rem;
     padding: 0 0.3rem;
     border-color: #47362a;
@@ -3810,22 +3810,22 @@ h1,h2,h3,h4,h5 {
     color: gray;
 }
 
-#reservation.sticky .search {
+#reservation.stick .search {
     width: 20%;
     float: left;
     text-align: center;
     padding: 0.47em;
 }
 
-#reservation.sticky .search button {
+#reservation.stick .search button {
     background: rgb(254, 203, 0);
     line-height: 20px !important;
     border-color: rgb(246, 166, 4);
 }
-#reservation.sticky .search button:after {
+#reservation.stick .search button:after {
     line-height: 1em;
 }
-#reservation.sticky .search button:hover {
+#reservation.stick .search button:hover {
     background-color: rgb(246, 166, 4);
     
 }
@@ -3833,32 +3833,30 @@ h1,h2,h3,h4,h5 {
 
 
 /* Main Menu */
-/*
+
 .top-bar {
 	padding: 0 5.55rem;
-	height : 4rem;	
+	height: 4.6rem;	
     width: 100%;
 }
-.top-bar-title {
-    height: 100%;
-}*/
 .logo-container, .logo-container img {
     height: 4rem;
     width: auto;
 }
 .top-bar, .top-bar ul {
-    background-color: #fffae1;
+    background-color: #FFFAE1 !important;
 }
 .top-bar {
-    padding: 0 0.5rem;
+    padding: 0;
 	width: 100%;
 }
 .top-bar-left {
     padding: 5px 0;
 }
-#main-menu .menu-wrap .callout{
+.menu-wrap .callout{
 	padding-top: 0 !important;
 }
+
 .menu > li > a {
 	font-size: 13px;
     padding: 0.7rem 0.65rem;

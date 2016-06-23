@@ -40,7 +40,7 @@ if (isset($tpl['status']))
 		<form action="" method="get" class="pj-form frm-filter">
 			<input type="text" name="q" class="pj-form-field pj-form-field-search w150" placeholder="<?php __('btnSearch'); ?>" />
 		</form>
-	</div>
+	</div> 
 	
 	<div id="grid"></div>
 	<script type="text/javascript">

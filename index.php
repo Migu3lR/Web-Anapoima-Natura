@@ -32,63 +32,12 @@ if(isset($_POST['buscar'])){
 	
 	<!-- Natura System -->
 	<script src="js/angular.min.js"></script>	
-	<script src="js/angular-jwt.js"></script>
-	<script src="js/angular-storage.js"></script>
+	
 
 	
   </head>
 <body ng-controller="control" ng-cloak>
-	<div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="large">
-	  <button class="menu-icon" type="button" data-toggle></button>
-	  <div class="title-bar-title">Menu</div>
-	</div>
-
-	<div class="top-bar sticky" id="main-menu">
-	<div class="row column menu-wrap">
-	<div class="callout large">
-	  <div class="top-bar-left">
-		<ul class="dropdown menu" data-dropdown-menu>
-		  <li class="menu-text">
-			<div class="logo-container" >
-			  <a href="/"><img src="images/home/logo.png" alt="Natura Anapoima"> </a>
-			</div>
-		  </li>
-		</ul>
-	  </div>
-	
-	  <div class="top-bar-right">
-		<div class="user" ng-switch="isAuth()">
-		<p ng-switch-when="true"> {{"Bienvenido " + user.name}} </p>
-		<p ng-switch-default><a href="login/">Inicia sesión en Natura!</a></p>
-		</div>
-		<ul ng-switch="user.rol" class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
-			<li><a id="item1" link href="index.php#inicio">INICIO</a></li>
-			<li><a id="item2" link href="index.php#hospedaje">HOSPEDAJE</a></li>
-			<li><a id="item3" link href="index.php#reservas">RESERVAS</a></li>
-			<li><a id="item4" link href="index.php#servicios">SERVICIOS</a></li>
-			<li><a id="item5" link href="index.php#galeria">GALERÍA</a></li>
-			<li><a id="item6" link href="index.php#contacto">CONTACTO</a></li>
-			<li class="has-dropdown hover" ng-switch-when="1"><a ref="#">ADMINISTRACIÓN</a>
-				<ul class="dropdown">
-					<li><a href="#">Clientes</a></li>
-					<li><a href="booking/bookAdmin.php">Reservaciones</a></li>
-					<li><a href="comentAdmin">Gestion de Comentarios</a></li>
-					<li><a href="promocodesAPP">Códigos Promocionales</a></li>
-					<li><a href="login/logout.php">CERRAR SESIÓN</a></li>
-				</ul>
-			</li>
-			<li ng-switch-when="0">
-				<a href="#">MI CUENTA</a>
-				<ul class="menu">
-				<li><a href="#">Portal de Usuario</a></li>
-				<li><a href="login/logout.php">CERRAR SESIÓN</a></li>
-				</ul>
-			</li>
-		</ul>
-	  </div>
-	</div>
-	</div>
-	</div>
+<?php $_GET['section']='header'; require_once('layout.php'); ?>
 	<div id="inicio" style="height:0"></div>
 	<div id="Slider" class="owl-carousel owl-theme slider_parallax">
 		<div class="item slide_0">
@@ -146,7 +95,7 @@ if(isset($_POST['buscar'])){
 		</div>
 		
 	</div>
-	<div id="reservation" class="sticky">
+	<div id="reservation" class="stick">
 	
 	<form name="registro" accept-charset="UTF-8" method="post" action="index.php">
 		<div class="field">
@@ -714,7 +663,9 @@ if(isset($_POST['buscar'])){
 	</footer>
 	
 	<div id="separator"></div>
-	
+	</div>
+  </div>
+</div>
 	<!-- Natura Core -->
     <script src="js/vendor/jquery-1.10.2.js"></script>
     <script src="js/vendor/jquery-ui.js"></script>	

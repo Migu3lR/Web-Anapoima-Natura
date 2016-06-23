@@ -1,12 +1,12 @@
 <?php
-session_start();
+/*session_start();
 $rol = "";
 if(isset($_SESSION['rol'])) $rol = $_SESSION['rol'];
 if ($rol!="1") {
 	header("HTTP/1.1 403 Unauthorized");
 	echo "¡ACCESO DENEGADO!";
 	exit;	
-}
+}*/
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +68,7 @@ if ($rol!="1") {
 	                      <li class="dropdown">
 	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opciones<b class="caret"></b></a>
 	                        <ul class="dropdown-menu animated fadeInUp">
-	                          <li><a href="/login/logout.php">Logout</a></li>
+	                          <li><a href="/index.php">Salir</a></li>
 	                        </ul>
 	                      </li>
 	                    </ul>

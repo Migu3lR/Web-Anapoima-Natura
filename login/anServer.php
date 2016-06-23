@@ -157,7 +157,7 @@ function editarCodigo($id, $cdgo, $dscr, $asgn, $dscn, $fmin, $fmax, $list){
   echo json_encode('{"error":'. $er .'}');
  }
 
-function nuevoUsuario($nombre, $apellido, $correo, $clave, $fecha, $telefono, $tipo, $documento, $nacionalidad, $municipio){
+function nuevoUsuario($nombre, $correo, $clave, $fecha, $telefono, $tipo, $documento, $nacionalidad, $municipio){
  $sql = connectDB();
  $er = 0;
  $cmd = "Select id_cln FROM clntes where " . "crreo='".$correo."' or (tpo_numdoc=".$tipo." and id_numdoc=".$documento.")";
@@ -165,8 +165,8 @@ function nuevoUsuario($nombre, $apellido, $correo, $clave, $fecha, $telefono, $t
  if (!is_null($rslt)) $er = user_conflict;
  else{
  
-	$cmd = "INSERT INTO clntes (id_cln, crreo, nmbre, aplldo, fcha_ncmnto, tpo_numdoc, id_numdoc, tlfno, ncnldad,cdad)
-			VALUES (NULL, '" . $correo . "','" . $nombre . "','" . $apellido . "','".$fecha."',".$tipo.",".$documento.",".$telefono.",'".$nacionalidad."','".$municipio."')";
+	$cmd = "INSERT INTO clntes (id_cln, crreo, nmbre, fcha_ncmnto, tpo_numdoc, id_numdoc, tlfno, ncnldad,cdad)
+			VALUES (NULL, '" . $correo . "','" . $nombre . "','" .$fecha."',".$tipo.",".$documento.",".$telefono.",'".$nacionalidad."','".$municipio."')";
 	 if (!mysqli_query($sql, $cmd)) $er = bad_insert_request;
 	 
 	 if ($er == 0){
@@ -190,7 +190,7 @@ function entrarUsuario($correo, $clave){
  $sql = connectDB();
  $er = 0;
  $cant = 0;
- $cmd = "Select id_cln, nmbre, aplldo, tlfno, crreo, ncnldad, cdad  FROM clntes where crreo='".$correo."'";
+ $cmd = "Select id_cln, nmbre, tlfno, crreo, ncnldad, cdad  FROM clntes where crreo='".$correo."'";
  $user = getRowSQL($cmd);
  $cmd = "Select rol FROM rol_clntes where id_cln=".$user[0];
  $rol = getRowSQL($cmd);
@@ -205,7 +205,6 @@ function entrarUsuario($correo, $clave){
 		session_start();
 		$_SESSION['nombre'] = $user[1];
 		$_SESSION['rol'] = $rol[0];
-		$_SESSION['apellido'] = $user[2];
 		$_SESSION['telefono'] = $user[3];
 		$_SESSION['correo'] = $user[4];
 		$_SESSION['pais'] = $user[5];

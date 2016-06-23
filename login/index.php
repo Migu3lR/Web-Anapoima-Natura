@@ -43,24 +43,17 @@
 			</div>
 			<div class="row">
 			<div class="callout small">
-				<form name="registro" accept-charset="UTF-8" ng-submit="signup(nombre, apellido, correo, correoCnf, clave, claveCnf, fecha, telefono, tipo, documento, nacionalidad, municipio)">
-					<div class="row small-up-2 medium-up-2 large-up-2">
+				<form name="registro" accept-charset="UTF-8" ng-submit="signup(nombre, correo, correoCnf, clave, claveCnf, fecha, telefono, tipo, documento, nacionalidad, municipio)">
+					<div class="row">
 						<div class="column">
 							<label ng-class="valid.nombre ? '' : 'error'">Nombre<span class="req">*</span>
 							  <div ng-if="!valid.nombre" class="tooltip">
-							  Ingrese solo caracteres alfabeticos. Minimo 3 letras, maximo 20.
+							  Ingrese solo caracteres alfabeticos. Minimo 5 letras, maximo 50.
 							  </div>
 							</label>
 							<input ng-model="nombre" type="text" autocomplete="off" required />
 						</div>
-						<div class="column">
-							<label ng-class="valid.apellido ? '' : 'error'">Apellido<span class="req">*</span>
-							  <span ng-if="!valid.apellido" class="tooltip">
-							  Ingrese solo caracteres alfabeticos. Minimo 3 letras, maximo 20.
-							  </span>
-							</label>
-							<input ng-model="apellido" type="text" autocomplete="off" required />
-						</div>
+						
 					</div>
 					<div class="row small-up-2 medium-up-2 large-up-2">
 						<div class="column">

@@ -261,7 +261,7 @@ function getDist(id){
 function seccion(id){
 	var divh = document.getElementById(id).offsetHeight;
 	var divh = divh * (-1);
-	var dist = getDist(id) - document.getElementById('main-menu').offsetHeight;
+	var dist = getDist(id) - document.getElementById('widemenu').offsetHeight;
 	//console.log(id+'|'+dist+':'+divh);
 	if(dist <= 0 && dist >= divh) return true;
 	else return false

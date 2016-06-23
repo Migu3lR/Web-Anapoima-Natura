@@ -1,4 +1,6 @@
+
 <?php
+
 if (!headers_sent())
 {
 	session_name('HotelBooking');
@@ -36,6 +38,8 @@ if (!isset($_GET['controller']) || empty($_GET['controller']))
 
 if (isset($_GET['controller']))
 {
+	
+
 	$pjObserver = pjObserver::factory();
 	$pjObserver->init();
 }

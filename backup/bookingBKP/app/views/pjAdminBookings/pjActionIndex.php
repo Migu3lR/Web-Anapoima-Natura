@@ -1,4 +1,5 @@
 <?php
+$_GET['q']='ingmromero34@gmail.com';
 if (isset($tpl['status']))
 {
 	$status = __('status', true);

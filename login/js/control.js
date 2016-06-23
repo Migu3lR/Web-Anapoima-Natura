@@ -32,7 +32,6 @@ $scope.eUp = false;
 
 $scope.valid = {
 	nombre : true, 
-	apellido : true, 
 	correo : true, 
 	correoCnf : true, 
 	clave : true, 
@@ -116,9 +115,7 @@ $scope.msg = "";
 		var mail = new RegExp("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$");
 		
 		if (nombre == undefined || nombre.length == 0) $scope.valid.nombre = false;
-		else $scope.valid.nombre = mas3menos20.test(nombre);
-		if (apellido == undefined || apellido.length == 0) $scope.valid.apellido = false;
-		else $scope.valid.apellido = mas3menos20.test(apellido);
+		else $scope.valid.nombre = mas5menos20.test(nombre);
 		$scope.valid.correo = mail.test(correo);
 		if (correo != correoCnf) $scope.valid.correoCnf = false;
 		if (correo == correoCnf) $scope.valid.correoCnf =  true;
@@ -137,10 +134,9 @@ $scope.msg = "";
 		if (municipio == undefined || municipio.length == 0) $scope.valid.municipio = false;
 		else $scope.valid.municipio = mas3menos20.test(municipio);
 		
-		if ($scope.valid.nombre && $scope.valid.apellido && $scope.valid.correo && $scope.valid.correoCnf && $scope.valid.clave && $scope.valid.claveCnf && $scope.valid.telefono && $scope.valid.documento && $scope.valid.nacionalidad && $scope.valid.municipio){
+		if ($scope.valid.nombre && $scope.valid.correo && $scope.valid.correoCnf && $scope.valid.clave && $scope.valid.claveCnf && $scope.valid.telefono && $scope.valid.documento && $scope.valid.nacionalidad && $scope.valid.municipio){
 			var data = {
 				nombre   : nombre,
-				apellido : apellido,
 				correo   : correo,
 				clave    : clave,
 				fecha	 : fecha,
@@ -182,7 +178,10 @@ app.controller("logout",function($scope,$crypthmac,$window,$http,jwtHelper,store
 	
 	//obtenemos el token en localStorage
 		var token = store.get("token") || null;
-		if (token) store.remove("token");
+		if (token) {
+			store.remove("token");
+			store.remove("r");
+		}
 		$window.location = "/";
 });
 
