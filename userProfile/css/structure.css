@@ -1,0 +1,63 @@
+footer{
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+}
+
+#profile .editPersonal input{
+  margin-bottom: 0;
+}
+
+#profile button.success.button,
+#profile button.secondary.button{
+  margin-bottom: 0;
+}
+
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:500px;
+    height:350px;
+}
+
+img-crop {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+img-crop canvas {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  /* mobile webkit */
+}
+
+label {
+    position: relative;
+    display: inline-block;
+ 
+}
+
+label .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(0,0,0,0.4);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+label:hover .tooltip {
+    visibility: visible;
+}

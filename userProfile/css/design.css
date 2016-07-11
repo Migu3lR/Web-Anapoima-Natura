@@ -1,0 +1,23 @@
+#profile img.avatar{
+  height: 8em;
+  width: auto;
+}
+
+#profile .userProfile td.title{
+  background: #edf3f4;
+  text-align: right;
+  width: 10rem;
+}
+
+#profile .editPersonal td.title{
+  text-align: right;
+  width: 10rem;
+}
+
+#profile .bt_volver{
+  margin-top: 1.5rem;
+}
+
+label.error{
+	color: red;  
+}

@@ -1,4 +1,8 @@
-﻿﻿<!doctype html>
+﻿﻿<?php
+if (!isset($_GET['tk'])) header("Location: index.php");
+?>
+
+<!doctype html>
 <html class="no-js" lang="en" ng-app="app">
 <head>
 	
@@ -8,6 +12,6 @@
 	<script src="js/controller.Login.js"></script>
 
 </head>
-<body ng-controller="logout">
+<body ng-controller="activate" ng-init="sendToken('<?php echo $_GET['tk']; ?>')">
 </body>
 </html>

@@ -1,23 +1,13 @@
 ﻿<!doctype html>
 <html class="no-js" lang="en" ng-app="app">
 <head>
-	<meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Natura Anapoima</title>
-                                                                                                                  
-<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900' rel='stylesheet' type='text/css'>
-	<!-- Frontend FrameWork CSS -->
-    <link rel="stylesheet" href="css/foundation.css" /> 
+	<?php $_GET['section']='initSite'; require('../layout.php'); ?> 
+	
 	<link rel="stylesheet" href="css/structure.css">
 	<link rel="stylesheet" href="css/design.css">
-	<script src="../js/angular.min.js"></script>	
-	<script src="../js/angular-animate.js"></script>	
-	<script src="../js/angular-hmac-sha512.js"></script>
-	<script src="../js/angular-jwt.js"></script>
-	<script src="../js/angular-storage.js"></script>
-	<script src="js/control.js"></script>
-
+	
+	<script src="/js/angular-animate.js"></script>	
+	
 </head>
 <body ng-controller="control">
 
@@ -43,7 +33,7 @@
 			</div>
 			<div class="row">
 			<div class="callout small">
-				<form name="registro" accept-charset="UTF-8" ng-submit="signup(nombre, correo, correoCnf, clave, claveCnf, fecha, telefono, tipo, documento, nacionalidad, municipio)">
+				<form name="registro" accept-charset="UTF-8" ng-submit="signup(nombre, correo, correoCnf, clave, claveCnf, fecha, telefono, nacionalidad, municipio)">
 					<div class="row">
 						<div class="column">
 							<label ng-class="valid.nombre ? '' : 'error'">Nombre<span class="req">*</span>
@@ -105,25 +95,7 @@
 							<input ng-model="telefono" type="text" autocomplete="off" />
 						</div>
 					</div>
-					<div class="row small-up-2 medium-up-2 large-up-2">
-						<div class="column">
-							<label>Tipo de documento<span class="req">*</span>
-							</label>
-							<select ng-model="tipo" >
-								<option value="1">Cédula de Ciudadanía</option>
-								<option value="2">Cédula de Extranjería</option>
-								<option value="3">Tarjeta de Identidad</option>
-							</select>
-						</div>
-						<div class="column">
-							<label ng-class="valid.documento ? '' : 'error'">Número de documento<span class="req">*</span>
-							<span ng-if="!valid.documento" class="tooltip">
-							  Documento invalido, solo debe ingresar datos númericos.
-							  </span>
-							</label>
-							<input ng-model="documento" type="text" autocomplete="off"  required />
-						</div>
-					</div>
+					
 					<div class="row small-up-2 medium-up-2 large-up-2">
 						<div class="column">
 							<label ng-class="valid.nacionalidad ? '' : 'error'">Nacionalidad<span class="req">*</span>
@@ -195,9 +167,10 @@
     </div>
 </div>
 
-	<script src="../js/vendor/jquery.min.js"></script>
-	<script src="js/login.js"></script>
-	<script src="../js/structure.js"></script>
+	<script src="/js/vendor/jquery.min.js"></script>
+	<script src="/js/Foundation.js"></script>
+	
+	<script src="js/controller.Login.js"></script>
 		
 </body>
 </html>

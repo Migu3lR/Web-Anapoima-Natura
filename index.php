@@ -1,43 +1,15 @@
-
 <!doctype html>
 <html class="no-js" lang="en" ng-app="app">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Natura Anapoima</title>
-	
-<?php
-
-if(isset($_POST['buscar'])){
-	if(isset($_POST['adultos']) && isset($_POST['ninos']) && isset($_POST['from']) && isset($_POST['to'])){
-		$adultos = $_POST['adultos'];
-		$ninos = $_POST['ninos'];
-		$from = $_POST['from'];
-		$to = $_POST['to'];
+    <?php $_GET['section']='initSite'; require('layout.php'); ?>
 		
-		$book_url = 'booking/#!/Rooms/date_from:' . $from . '/date_to:' . $to . '/adults:' . $adultos . '/children:' . $ninos;
-		
-		header("Location: " . $book_url);
-		exit();
-	}
-}
-?>
-	<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900' rel='stylesheet' type='text/css'>
-	
-	<!-- Natura Wireframe -->
-	<link rel="stylesheet" href="css/jquery-ui.css">
 	<link rel="stylesheet" href="css/structure.css">
 	<link rel="stylesheet" href="css/design.css">
-	
-	<!-- Natura System -->
-	<script src="js/angular.min.js"></script>	
-	
-
-	
+		
   </head>
 <body ng-controller="control" ng-cloak>
-<?php $_GET['section']='header'; require_once('layout.php'); ?>
+<?php $_GET['section']='header'; require('layout.php'); ?>
+
 	<div id="inicio" style="height:0"></div>
 	<div id="Slider" class="owl-carousel owl-theme slider_parallax">
 		<div class="item slide_0">
@@ -95,54 +67,9 @@ if(isset($_POST['buscar'])){
 		</div>
 		
 	</div>
-	<div id="reservation" class="stick">
 	
-	<form name="registro" accept-charset="UTF-8" method="post" action="index.php">
-		<div class="field">
-			<select name="adultos" required autocomplete="off">
-				<option value="" disabled selected hidden>Adultos</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
-			</select>
-		</div>
-		<div class="field">
-			<select name="ninos" required autocomplete="off">
-				<option value="" disabled selected hidden>Niños</option>
-				<option value="0">0</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
-			</select>
-		</div>
-		
-		<div  class="field">
-			<input type="text" id="from" name="from"  placeholder="Llegada" required autocomplete="off"/>
-		</div>
-		<div class="field">
-			<input type="text" id="to" name="to" placeholder="Salida" required autocomplete="off"/>
-		</div>
-		<div class="search">
-		<button type="submit" class="promo_button button" name="buscar" />Reservar</button>
-		</div>
-		
-	</form>
+	<?php $_GET['section']='reservation'; require('layout.php'); ?>
 	
-	</div>
 	<div id="hospedaje" class="paraxify">
 		<div class="row">
 			<div class="large-12 columns">
@@ -648,39 +575,13 @@ if(isset($_POST['buscar'])){
 	</div>	
 	
 	<div id="map"></div>
-	<footer>
-		<div class="row text-center small-up-1 medium-up-3 large-up-3">
-		<div class="column">
-			<p>Desarrollo y programación Web: <a href="http://hitbizz.com" target="blank"> hitbizz.com</a></p>
-		</div>
-		<div class="column">
-			<p>Diseño Gráfico: <a href="http://mickerstudio.com" target="blank">mickerstudio.com</a></p>
-		</div>
-		<div class="column">
-			<p>www.anapoimanatura.com · Todos los derechos reservados</p>
-		</div>
-	</div>
-	</footer>
 	
-	<div id="separator"></div>
-	</div>
-  </div>
-</div>
-	<!-- Natura Core -->
-    <script src="js/vendor/jquery-1.10.2.js"></script>
-    <script src="js/vendor/jquery-ui.js"></script>	
-    <script src="js/vendor/what-input.min.js"></script>
+	<?php $_GET['section']='footer'; require('layout.php'); ?>
 	
-	<script src="js/structure.js"></script>
-	
-	<!-- Apps -->
-	<script src="js/scroll.js"> </script> <!-- Scroll Control -->
-	<script src="js/natura.js"> </script>
-	<script src="js/smooth-scroll.js"></script> <!-- SmoothScrolling -->
-	
-	<script src="js/initialize.js"></script> <!-- SlideShow -->
-	
-	<!-- Resources -->
+	<script src="/js/initialize.Home.js"></script>
 	<script src='http://maps.google.com/maps/api/js?sensor=false&callback=initMap'> </script>
+	<script src="/js/scroll.js"> </script>
+	<script src="/js/controller.Home.js"> </script>
+		
   </body>
 </html>

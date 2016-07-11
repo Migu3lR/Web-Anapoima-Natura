@@ -7,18 +7,12 @@ var lineWidth 	= 8;
 
 var activado = 0;
 
-var capacidadF	= 75;
-var diasF		= 365;
 var	bookingF	= 93;
 var	visitantesF	= 94;
 
-var capacidad	= 0;
-var	dias		= 0;
 var	booking		= 0;
 var	visitantes	= 0;
 
-var intC;
-var intD;
 var intB;
 var intV;
 
@@ -108,16 +102,6 @@ function drawV() {
 }  
 
 /*  Sequence  */	
-/*function sumarC(){ 
-	capacidad  += 1; 
-	document.getElementById("pntj1").innerHTML = "<h1>"+capacidad+"</h1>";
-	if (capacidad >= capacidadF) clearInterval(intC); 
-}
-function sumarD(){ 
-	dias 	   += 1; 
-	document.getElementById("pntj2").innerHTML = "<h1>"+dias+"</h1>";
-	if (dias >= diasF) clearInterval(intD);
-}*/
 function sumarB(){ 
 	booking    += 1; 
 	requestAnimationFrame(drawB);
@@ -135,8 +119,6 @@ function sumarB(){
 }
 
 function activarPntj(){
-	/*intC = setInterval(sumarC, (segDelay*1000)/capacidadF);
-	intD = setInterval(sumarD, (segDelay*1000)/diasF);*/
 	intB = setInterval(sumarB, (segDelay*1000)/bookingF);
 	intV = setInterval(sumarV, (segDelay*1000)/visitantesF);
 	
@@ -155,6 +137,17 @@ function existeClase(obj,cls)
   {
    if(!existeClase(obj,cls)) {
 	obj.className+=" "+cls;
+   }
+  }
+  
+  function alterClass(obj,cls)
+  {
+   if(!existeClase(obj,cls)) {
+    obj.className+=" "+cls;
+   }
+   else{
+	   var exp =new RegExp('(\\s|^)'+cls+'(\\s|$)');
+		obj.className=obj.className.replace(exp,"");
    }
   }
 
@@ -182,7 +175,6 @@ removeClass(menu4,a);
 removeClass(menu5,a);
 removeClass(menu6,a);
 
-
 /*  SCROLL LISTENER  */
 document.addEventListener(
     'scroll',
@@ -190,62 +182,7 @@ document.addEventListener(
 
 var scroll = document.body.scrollTop + document.documentElement.scrollTop;   
 
-//console.log(scroll);
-/*
-if (scroll >=0 && scroll <=568){
-addClass(menu1,a);
-removeClass(menu2,a);
-removeClass(menu3,a);
-removeClass(menu4,a);
-removeClass(menu5,a);
-removeClass(menu6,a);
-}
 
-if (scroll >=569 && scroll <=1007){
-addClass(menu2,a);
-removeClass(menu1,a);
-removeClass(menu3,a);
-removeClass(menu4,a);
-removeClass(menu5,a);
-removeClass(menu6,a);
-}
-
-if (scroll >=1008 && scroll <=1137){
-addClass(menu3,a);
-removeClass(menu2,a);
-removeClass(menu1,a);
-removeClass(menu4,a);
-removeClass(menu5,a);
-removeClass(menu6,a);
-}
-
-if (scroll >=1138 && scroll <=1936){
-addClass(menu4,a);
-removeClass(menu2,a);
-removeClass(menu3,a);
-removeClass(menu1,a);
-removeClass(menu5,a);
-removeClass(menu6,a);
-}
-
-if (scroll >=1937 && scroll <=2422){
-addClass(menu5,a);
-removeClass(menu2,a);
-removeClass(menu3,a);
-removeClass(menu4,a);
-removeClass(menu1,a);
-removeClass(menu6,a);
-}
-
-if (scroll >=2423){
-addClass(menu6,a);
-removeClass(menu2,a);
-removeClass(menu3,a);
-removeClass(menu4,a);
-removeClass(menu5,a);
-removeClass(menu1,a);
-}
-*/
 if (scroll >= 1446 && activado == 0){ activarPntj();} /* Activa Puntajes */
 
     }
@@ -322,3 +259,17 @@ $(window).on('scroll', function () {
 	removeClass(menu1,a);
 	}
 });
+
+
+/////////////* ACCION BOTON CONTACTO HOME *///////////
+var contact = document.getElementById('info');
+var contact2 = document.getElementById('contactForm');
+var contact3 = document.getElementById('social');
+var cls = 'active';
+
+function activate(){
+	alterClass(contact,cls);
+	alterClass(contact2,cls);
+	alterClass(contact3,cls);
+}
+
