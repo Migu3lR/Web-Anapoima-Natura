@@ -1,6 +1,7 @@
 /*  Angular Framework  */
 app = angular.module("app",['angular-jwt', 'angular-storage','ngCookies']);
 app.controller("control",function($scope,$window,$http,$interval,jwtHelper,store,$cookies,$location){
+
 	
 	var url = function (){ store.set('url', $location.absUrl());}
 

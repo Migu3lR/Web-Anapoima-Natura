@@ -27,7 +27,7 @@ function sendMail($to,$from,$subject,$body){
     $headers = "From: $from\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-    $result = true; //mail($to, $subject, $body, $headers);
+    $result = mail($to, $subject, $body, $headers);
     
     if ($result) return response_ok;
     else return error_send_mail;
@@ -389,18 +389,18 @@ function NewTokenforComment($auth,$r){
         
         $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
         $email_message .= '<center>';
-        $email_message .= '<img src="http://anapoimanatura.com/img/logo.png" />';
+        $email_message .= '<img src="http://186.147.34.63/images/home/logo.png" />';
         $email_message .= '</center>';
         $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
         $email_message .= '<tbody>';
         $email_message .= '<tr style="border-bottom: 1px solid #eee;">';
-        $email_message .= '<th style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
+        $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
         $email_message .= "<b>Hola $nombre, <br>Gracias por visitarnos en Natura, te invitamos a darnos tu opinion sobre nosotros!</b>";
-        $email_message .= '</th>';
+        $email_message .= '</td>';
         $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
         $email_message .= "Utiliza el siguiente enlace, para realizar darnos tu opinión de Natura:<BR>";
         $email_message .= "<BR>";
-        $email_message .= "<b>Enlace:  </b><a href='http://anapoimanatura.com/comentarios/comentar.php?tk=$tkn'> COMENTAR </a> <BR>";
+        $email_message .= "<b>Enlace:  </b><a href='http://186.147.34.63/comentarios/comentar.php?tk=$tkn'> COMENTAR </a> <BR>";
         $email_message .= '</td>';
         $email_message .= '</tr>';
         $email_message .= '</tbody>';
@@ -524,18 +524,18 @@ function RegisterNewUser($auth,$r){
                 
                 $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
                 $email_message .= '<center>';
-                $email_message .= '<img src="http://anapoimanatura.com/img/logo.png" />';
+                $email_message .= '<img src="http://186.147.34.63/images/home/logo.png" />';
                 $email_message .= '</center>';
                 $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
                 $email_message .= '<tbody>';
                 $email_message .= '<tr style="border-bottom: 1px solid #eee;">';
-                $email_message .= '<th style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
+                $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
                 $email_message .= "<b>Hola $nombre, <br>Te has registrado en el Portal Natura</b>";
-                $email_message .= '</th>';
+                $email_message .= '</td>';
                 $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
                 $email_message .= "Debes activar tu cuenta utilizando el siguiente enlace:<BR>";
                 $email_message .= "<BR>";
-                $email_message .= "<b>Enlace:  </b><a href='http://localhost/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
+                $email_message .= "<b>Enlace:  </b><a href='http://186.147.34.63/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
                 $email_message .= '</td>';
                 $email_message .= '</tr>';
                 $email_message .= '</tbody>';
@@ -571,18 +571,18 @@ function ResendActivationEmail($auth,$r){
         
         $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
         $email_message .= '<center>';
-        $email_message .= '<img src="http://anapoimanatura.com/img/logo.png" />';
+        $email_message .= '<img src="http://186.147.34.63/images/home/logo.png" />';
         $email_message .= '</center>';
         $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
         $email_message .= '<tbody>';
         $email_message .= '<tr style="border-bottom: 1px solid #eee;">';
-        $email_message .= '<th style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
+        $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
         $email_message .= "<b>Hola $nombre, <br>Te has registrado en el Portal Natura</b>";
-        $email_message .= '</th>';
+        $email_message .= '</td>';
         $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
         $email_message .= "Debes activar tu cuenta utilizando el siguiente enlace:<BR>";
         $email_message .= "<BR>";
-        $email_message .= "<b>Enlace:  </b><a href='http://localhost/login/activate.php?tk=$token[0]'> Activar mi cuenta </a> <BR>";
+        $email_message .= "<b>Enlace:  </b><a href='http://186.147.34.63/login/activate.php?tk=$token[0]'> Activar mi cuenta </a> <BR>";
         $email_message .= '</td>';
         $email_message .= '</tr>';
         $email_message .= '</tbody>';
@@ -707,7 +707,7 @@ function newUser_a($auth,$data){
                     
                     $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
                     $email_message .= '<center>';
-                    $email_message .= '<img src="http://anapoimanatura.com/img/logo.png" />';
+                    $email_message .= '<img src="http://186.147.34.63/images/home/logo.png" />';
                     $email_message .= '</center>';
                     $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
                     $email_message .= '<tbody>';
@@ -718,7 +718,7 @@ function newUser_a($auth,$data){
                     $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
                     $email_message .= "Debes activar tu cuenta utilizando el siguiente enlace:<BR>";
                     $email_message .= "<BR>";
-                    $email_message .= "<b>Enlace:  </b><a href='http://localhost/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
+                    $email_message .= "<b>Enlace:  </b><a href='http://186.147.34.63/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
                     $email_message .= "<br>Te hemos asignado esta contraseña para iniciar sesion:<BR>";
                     $email_message .= "<BR>";
                     $email_message .= "<b>Contraseña:  </b>$clave1 <BR>";
@@ -797,7 +797,7 @@ function updUser_a($auth,$data){
                     
                     $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
                     $email_message .= '<center>';
-                    $email_message .= '<img src="http://anapoimanatura.com/img/logo.png" />';
+                    $email_message .= '<img src="http://186.147.34.63/images/home/logo.png" />';
                     $email_message .= '</center>';
                     $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
                     $email_message .= '<tbody>';
@@ -808,7 +808,7 @@ function updUser_a($auth,$data){
                     $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
                     $email_message .= "Debes activar tu cuenta utilizando el siguiente enlace:<BR>";
                     $email_message .= "<BR>";
-                    $email_message .= "<b>Enlace:  </b><a href='http://localhost/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
+                    $email_message .= "<b>Enlace:  </b><a href='http://186.147.34.63/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
                     $email_message .= "<br>Te hemos asignado esta contraseña para iniciar sesion:<BR>";
                     $email_message .= "<BR>";
                     $email_message .= "<b>Contraseña:  </b>$c1 <BR>";

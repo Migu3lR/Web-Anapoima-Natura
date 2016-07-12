@@ -21,10 +21,10 @@ if (!url) url = "/";
 				if($cookies.get("x")===undefined){
 					// Find tomorrow's date.
 					var expireDate = new Date();
-					expireDate.setTime(expireDate.getTime() + (60*1000*2) - (0*60*60*1000));
+					expireDate.setTime(expireDate.getTime() + (60*1000*2));
 					// Setting a cookie
 					
-					$cookies.put("x",$scope.user.rol, {'path':'/'});
+					$cookies.put("x",$scope.user.rol, {'path':'/', 'expire':expireDate});
 					
 					store.remove("url");
 					$window.location = url;

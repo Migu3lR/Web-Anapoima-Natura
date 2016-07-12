@@ -12,8 +12,7 @@
 	<script src="/js/angular-hmac-sha512.js"></script>
 	<script src="/js/angular-jwt.js"></script>
 	<script src="/js/angular-storage.js"></script>
-	<script src="/js/cookies.js"></script>
-
+  <script src="/js/cookies.js"></script>
 		
 </head>
 <body ng-controller="control" ng-cloak>
@@ -125,17 +124,15 @@
     </div>
     </div>
 
-    <!-- original content goes in this container -->
-    <div class="off-canvas-content" data-off-canvas-content> 
-	
-	
-	
+<!-- original content goes in this container -->
+<div class="off-canvas-content" data-off-canvas-content> 
 	
 	<div id="inicio" style="height:5em"></div>
-	<div style="max-width:900px">		
-		<link href="bookAdmin.php?controller=pjFront&action=pjActionLoadCss&cid=1" type="text/css" rel="stylesheet" />		
-		<script type="text/javascript" src="bookAdmin.php?controller=pjFront&action=pjActionLoad&cid=1"></script>	
-	</div>
+  	
+    <iframe id="search" src="search.php" width="100%" frameborder="0"></iframe>
+    
+  
+	
 		
 	<footer>
 		<div class="row text-center small-up-1 medium-up-3 large-up-3">
@@ -151,7 +148,7 @@
 		</div>
 	</footer>
 	
-	<div id="separator"></div>
+	
   <!-- close wrapper, no more content after this -->
     </div>
   </div>
@@ -161,6 +158,13 @@
 <script src="/js/vendor/what-input.min.js"></script>
 <script src="/js/Foundation.js"></script>
 <script src="js/controller.Booking.js"> </script>
+
+ <script language="javascript" type="text/javascript">
+  
+  document.getElementById('search').style.height = (document.body.scrollHeight)+'px';
+  
+  
+  </script>
 	    
 </body>
 </html>
