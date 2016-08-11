@@ -31,7 +31,7 @@ var access_forbidden = function (){
 	if (token) store.remove("token");
 	var url = store.get("url") || null;
 	if (url) store.remove("url");
-	$window.location = '/login/'
+	$window.location = '/login/';
 }
 
 var url = function (){ store.set('url', $location.absUrl());}
@@ -101,6 +101,7 @@ var inicio = 0
 
 var updateTable = function(data){
 	$scope.usuarios = data;
+	
 	return;
 }
 
@@ -473,7 +474,7 @@ if (delUser){
 			break;
 	}	
 	});
-} else $scope.diag.close();
+}// else $scope.diag.close();
 
 }
 
@@ -489,7 +490,7 @@ $scope.newUser = function (correo,nombre,nacimiento,telefono,pais,ciudad,rol){
 	var c1 = $crypthmac.encrypt(correo,"NtraSfe");
 	c1 = c1.substring(0, 8);
 	var c2 =  $crypthmac.encrypt(c1,"NtraSfe");
-	 console.log(c1);
+	// console.log(c1);
 	var request = $http({
 		method: "post",
 		url: "../api/index.php",
@@ -549,7 +550,7 @@ $scope.updateUser = function (id_cln,correo,nombre,nacimiento,telefono,pais,ciud
 	var c1 = $crypthmac.encrypt(correo,"NtraSfe");
 	c1 = c1.substring(0, 8);
 	var c2 =  $crypthmac.encrypt(c1,"NtraSfe");
-	console.log(c1);
+	//console.log(c1);
 	var request = $http({
 		method: "post",
 		url: "../api/index.php",
@@ -596,6 +597,120 @@ $scope.updateUser = function (id_cln,correo,nombre,nacimiento,telefono,pais,ciud
 	
 }
 
+var listado = [];
+
+$scope.selAll = true;
+
+$scope.listClnts = function(sel,id_cln){
+	if(sel){
+		if (listado.indexOf(id_cln) == -1) listado.push(id_cln);		
+	} else {
+		if (listado.indexOf(id_cln) >= 0) listado.splice(listado.indexOf(id_cln), 1);
+	}
+	
+	if (listado.length > 0) $scope.selAll = false;
+	else $scope.selAll = true;
+	 
+	//console.log(listado);
+}
+
+$scope.multi_modif = function(sel,act){
+	var estado = 'A';
+	if (!act) estado = 'I';
+	
+	if (sel){
+		listado = [];
+		angular.forEach($scope.usuarios, function(user, i) {
+			listado[i] = user.id_cln;
+		});
+	}
+	
+	multi_request(estado);
+}
+
+var multi_request =function(estado){
+	c1 = [];
+	c2 = [];
+	angular.forEach(listado, function(id, i) {
+		c = $crypthmac.encrypt(id,"NtraSfe");
+		c1[i] = c.substring(0, 8);
+		c2[i] = $crypthmac.encrypt(c1[i],"NtraSfe");
+	});
+	
+	var request = $http({
+		method: "post",
+		url: "../api/index.php",
+		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		skipAuthorization: false,
+		data: {
+			action	: 'modifClntes_a',
+			id_cln  : listado,
+			c1 : c1,
+			c2 : c2,
+			estado : estado
+		}
+	});
+	
+	request.success(function (res) {
+
+	if(res.response.token !== undefined) store.set('token', res.response.token);
+	switch (res.code) {
+		case response_ok:
+			getUsers();
+			alert("Usuarios actualizados exitosamente!");
+			$window.location.reload();			
+			break;
+		case user_unauthorized:
+			$scope.goLogin();
+			break;
+		case access_forbidden:
+			access_forbidden();
+			break;
+		default:
+			alert("Error al actualizar los usuarios, intentelo nuevamente.");
+			break;
+	}	
+	});
+}
+
+$scope.multi_del =function(){
+	
+	var delUser = confirm('¿Estas seguro que deseas eliminar los usuarios seleccionados?');
+
+	if (delUser){
+		var request = $http({
+			method: "post",
+			url: "../api/index.php",
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			skipAuthorization: false,
+			data: {
+				action	: 'delClntes_a',
+				id_cln  : listado
+			}
+		});
+		
+		request.success(function (res) {
+
+		if(res.response.token !== undefined) store.set('token', res.response.token);
+		switch (res.code) {
+			case response_ok:
+				getUsers();
+				alert("Usuario eliminado exitosamente!");
+				$window.location.reload();			
+				break;
+			case user_unauthorized:
+				$scope.goLogin();
+				break;
+			case access_forbidden:
+				access_forbidden();
+				break;
+			default:
+				alert("Error al eliminar usuario, intentelo nuevamente.");
+				break;
+		}	
+		});
+	} 
+} 
 
 }
 });

@@ -200,7 +200,14 @@ $scope.msg = "";
 		else $scope.valid.claveIn = true;
 
 		if($scope.valid.correoIn && $scope.valid.claveIn){
+			var token = store.get("token") || null;
+			if (token) store.remove("token");
 			
+			var x = $cookies.get("x") || null;
+			if (x !== null){
+				$cookies.remove("x", { path: '/' });
+				$window.location.reload();	
+			}
 			var data = {
 				action	: 'login',
 				correo   : correoIn,

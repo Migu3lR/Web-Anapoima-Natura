@@ -77,14 +77,14 @@
       <div class="off-canvas position-right" id="offCanvasRight" data-off-canvas data-position="right">
         <ul class="vertical dropdown menu" data-dropdown-menu>
           <?php if($rol==='1') { ?>
-            <li><a href="/userProfile">Portal de Usuario</a></li>
+            <li><a href="/userProfile">Perfil de Usuario</a></li>
             <li><a href="/userAdmin">Gestion de Usuarios</a></li>
             <li><a href="/booking/bookAdmin.php">Gestion de Reservas</a></li>
             <li><a href="/comentAdmin">Gestion de Comentarios</a></li>
-            <li><a href="/promocodesAPP">Códigos Promocionales</a></li>
+            <li><a href="/promosAdmin">Códigos Promocionales</a></li>
             <li><a href="#" ng-click="goLogout()">CERRAR SESIÓN</a></li>
           <?php } if($rol==='0') { ?>
-            <li><a href="/userProfile">Portal de Usuario</a></li>
+            <li><a href="/userProfile">Perfil de Usuario</a></li>
             <li><a href="#" ng-click="goLogout()">CERRAR SESIÓN</a></li>
           <?php } ?>
         </ul>
@@ -120,17 +120,17 @@
                 <?php if($rol === '1') { ?>
                 <a href="#">ADMINISTRACIÓN</a>
                 <ul class="submenu menu vertical" data-submenu>
-                    <li><a href="/userProfile">Portal de Usuario</a></li>
+                    <li><a href="/userProfile">Perfil de Usuario</a></li>
                     <li><a href="/userAdmin">Gestion de Usuarios</a></li>
                     <li><a href="/booking/bookAdmin.php">Gestion de Reservas</a></li>
                     <li><a href="/comentAdmin">Gestion de Comentarios</a></li>
-                    <li><a href="/promocodesAPP">Códigos Promocionales</a></li>
+                    <li><a href="/promosAdmin">Códigos Promocionales</a></li>
                     <li><a href="#" ng-click="goLogout()">CERRAR SESIÓN</a></li>
                 </ul>
                 <?php } if($rol === '0') { ?>
                 <a ng-show="user.rol==0" href="#">MI CUENTA</a>
                 <ul ng-show="user.rol==0" class="submenu menu vertical" data-submenu>
-                  <li><a href="/userProfile">Portal de Usuario</a></li>
+                  <li><a href="/userProfile">Perfil de Usuario</a></li>
                   <li><a href="#" ng-click="goLogout()">CERRAR SESIÓN</a></li>
                 </ul>
                 <?php } ?>

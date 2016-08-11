@@ -6,7 +6,7 @@ ul.general_stats{
 ul.general_stats a.star{
     margin-left: 2em;
 }
-table { 
+table.listado { 
     width: auto;
     background-color: #eee;
     border: 1px solid #666666;
@@ -17,11 +17,11 @@ table {
     text-align: center;
 }
 
-thead {
+.listado thead {
     background-color: #ccc;
 }
 
-th{
+.listado th{
     text-align: center;
 }
 
@@ -31,15 +31,15 @@ th{
     width: 20rem;
     text-align: center;
 }
-#cliente{
+#codigo{
     min-width: 10rem;
     width: 20rem;
 }
-#correo{
+#descrip{
     min-width: 16rem;
     width: 20rem;    
 }
-#rate{
+#descuento{
     min-width: 5rem;
     width: 10rem;
     text-align: center;
@@ -49,13 +49,14 @@ th{
     width: 11rem;
     text-align: center;
 }
-#frecuencia{
+#tipo{
     min-width: 7rem;
     width: 8rem;
     text-align: center;
 }
-#fuente{
-    min-width: 9rem;
-    width: 9rem;
-    text-align: center;
+
+.ngdialog.ngdialog-theme-default {
+    padding-bottom: 16px;
+    padding-top: 16px;
+ 
 }

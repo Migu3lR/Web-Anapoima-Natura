@@ -178,7 +178,15 @@ function new_request($r){
         'getUsers_a',
         'delUser_a',
         'newUser_a',
-        'updUser_a'
+        'updUser_a',
+        'getUsersPromos_a',
+        'getPromos_a',
+        'getPromo_Users_a',
+        'newPromo_a',
+        'updPromo_a',
+        'delPromo_a',
+        'modifClntes_a',
+        'delClntes_a'
     );
     
     if (isset($r->action)) call_resquest($r,!in_array($r->action, $AuthNotRequired),in_array($r->action, $AdminRequired));
@@ -831,5 +839,218 @@ function updUser_a($auth,$data){
     $response = array();
     SendResponse($code,$response);
 }
+
+function getUsersPromos_a($auth,$r){
+    
+	$sql  = "SELECT id_cln,crreo as correo,nmbre as nombre FROM clntes WHERE estdo_cln = 'A' and fuente='R'";
+    $users = jsonQuery($sql);
+    
+    $response = array("users" => $users);
+    SendResponse(response_ok,$response);
+}
+
+function getPromos_a($auth,$r){
+    
+	$sql  = "SELECT p.*, estdo as estado, asgn as tipo FROM promocodes p";
+    $promos = jsonQuery($sql);
+    
+    $response = array("promos" => $promos);
+    SendResponse(response_ok,$response);
+}
+
+function getPromo_Users_a($auth,$r){
+    
+    
+	$sql  = "SELECT DISTINCT id_cln, crreo as correo, nmbre as nombre FROM clntes c ";
+    $sql .= "JOIN assignm a ON (c.id_cln = a.id_user) ";
+    $sql .= "WHERE estdo_cln = 'A' and fuente='R' AND id_code = '".$r->cdgo ."'";
+    $users = jsonQuery($sql);
+    
+    
+    
+    $response = array("users" => $users);
+    SendResponse(response_ok,$response);
+    
+}
+
+function newPromo_a($auth,$r){
+    $dscr = $r->dscr;
+    $asgn = $r->asgn;
+    $dscn = $r->dscn;
+    $fmin = $r->fmin;
+    $fmax = $r->fmax;
+    $list = $r->clnt;
+     
+    $sql = "SELECT max(ID) FROM promocodes";
+	$res = getRowSQL($sql);
+	$l = $asgn[0];
+	if ($asgn == "Masivo") $l = "T";
+	
+    $cdgo = "COD-".$l.(intval($res[0])+1);
+	   
+    $cmd = "INSERT INTO promocodes (cdgo, dscr, asgn, dscn, fmin, fmax)
+        VALUES ('$cdgo','$dscr','$asgn',$dscn,'$fmin','$fmax')";
+    
+    $code = executeSQL($cmd);
+    if ($code === response_ok) {
+        foreach ($list as $clnt){
+            $cmd = "INSERT INTO assignm (id_code, id_user) VALUES ('" . $cdgo . "'," . $clnt->id_cln . ")";
+            $code = executeSQL($cmd);
+        }       
+    }
+    $response = array();
+    SendResponse($code,$response);
+        
+        
+}
+
+function updPromo_a($auth,$r){
+    
+    $cdgo = $r->cdgo;
+    $fmin = $r->fmin;
+    $fmax = $r->fmax;
+    $dscr = $r->descrip;
+    $asgn = $r->tipo;
+    $estd = $r->estado;
+    $dscn = $r->descuento;
+    $list = $r->lista;
+     
+    $cmd = "UPDATE promocodes SET dscr = '$dscr', asgn = '$asgn', dscn = $dscn, 
+            fmin = '$fmin', fmax = '$fmax', estdo = $estd WHERE cdgo = '$cdgo'";
+    
+    $code = executeSQL($cmd);
+    if ($code === response_ok) {
+        $cmd = "DELETE FROM assignm WHERE id_code = '$cdgo'";
+                
+        $code = executeSQL($cmd); 
+        if ($code === response_ok) {
+            foreach ($list as $clnt){
+                $cmd = "INSERT INTO assignm (id_code, id_user) VALUES ('" . $cdgo . "'," . $clnt->id_cln . ")";
+                $code = executeSQL($cmd);
+            }       
+        }
+    }
+    $response = array();
+    SendResponse($code,$response);
+   
+}
+
+function delPromo_a($auth,$r){
+    
+    $cdgo = $r->id_code;
+     
+    $cmd = "DELETE FROM promocodes WHERE cdgo = '$cdgo'";
+    
+    $code = executeSQL($cmd);
+    
+    if ($code === response_ok) {
+        $cmd = "DELETE FROM assignm WHERE id_code = '$cdgo'";
+        $code = executeSQL($cmd);
+    }            
+    
+    $response = array();
+    SendResponse($code,$response);
+   
+}
+
+function modifClntes_a($auth,$data){
+    $clntes = $data->id_cln;
+    $c_1 = $data->c1;
+    $c_2 = $data->c2;
+    $estado = $data->estado;
+    
+    $code = response_ok;
+    foreach ($clntes as $i => $id_cln){
+        $cmd = "select * from scrty where id_cln = $id_cln";
+        $rslt = jsonQuery($cmd);
+        
+        $sql  = "SELECT fuente,crreo as correo,nmbre as nombre FROM clntes WHERE id_cln=$id_cln";
+        $u = jsonQuery($sql);
+        $fuente = $u[0]['fuente'];
+        $nombre = $u[0]['nombre'];
+        $correo = $u[0]['correo'];
+        $c1 = $c_1[$i];
+        $c2 = $c_2[$i];
+        if (empty($rslt) && $fuente=='R' && $estado=='A') $estado = 'P'; 
+        
+        if ($estado == 'I'){
+            $cmd  = "UPDATE clntes SET ";
+            $cmd .= "estdo_cln='".$estado."' ";
+            $cmd .= "WHERE id_cln=".$id_cln;
+            $code += executeSQL($cmd);
+        } else {
+            $cmd  = "UPDATE clntes SET ";
+            $cmd .= "estdo_cln='".$estado."' ";
+            $cmd .= "WHERE id_cln=".$id_cln;
+            $cmd .= " AND fuente='R'";
+            $code += executeSQL($cmd);
+        }
+        
+        if($code === response_ok && empty($rslt) && $fuente=='R' && $estado=='P'){
+            $cmd = "INSERT INTO scrty (id_cln, pass) VALUES ($id_cln, '$c2')";
+            $code += executeSQL($cmd);
+            
+            if ($code === response_ok){
+                
+                $tkn = sha1(date("Y-m-d H:i:s"));
+                $fechaCreacion = date("Y-m-d");
+                $fechaCierre = '2099-12-31';
+                $uso = "R";
+                /////////////////////////////////
+                $cmd = "INSERT INTO tokens (tokenid, token, fecha_creacion, fecha_cierre, uso, correo)
+                        VALUES (NULL, '$tkn', '$fechaCreacion', '$fechaCierre', '$uso', '$correo')";
+                $code += executeSQL($cmd);
+            
+                if ($code === response_ok) {
+                    $to = $correo;
+                    $from = "reservas@anapoimanatura.com";
+                    $subject = "Activa tu cuenta en Natura - anapoimanatura.com";
+                    
+                    $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
+                    $email_message .= '<center>';
+                    $email_message .= '<img src="http://186.147.34.63/images/home/logo.png" />';
+                    $email_message .= '</center>';
+                    $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
+                    $email_message .= '<tbody>';
+                    $email_message .= '<tr style="border-bottom: 1px solid #eee;" >';
+                    $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
+                    $email_message .= "<b>Hola $nombre, <br>Te has registrado en el Portal Natura</b>";
+                    $email_message .= '</td>';
+                    $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
+                    $email_message .= "Debes activar tu cuenta utilizando el siguiente enlace:<BR>";
+                    $email_message .= "<BR>";
+                    $email_message .= "<b>Enlace:  </b><a href='http://186.147.34.63/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
+                    $email_message .= "<br>Te hemos asignado esta contraseña para iniciar sesion:<BR>";
+                    $email_message .= "<BR>";
+                    $email_message .= "<b>Contraseña:  </b>$c1 <BR>";
+                    $email_message .= '</td>';
+                    $email_message .= '</tr>';
+                    $email_message .= '</tbody>';
+                    $email_message .= '</table>';
+                    $email_message .= '</div>';
+                    
+                    sendMail($to,$from,$subject,$email_message);
+                        
+                }
+            }
+        }
+    }
+    $response = array();
+    SendResponse($code,$response);
+    
+}
+
+function delClntes_a($auth,$data){
+    $clntes = $data->id_cln;
+    
+    $code = response_ok;
+    foreach ($clntes as $id_cln){
+        $cmd  = "DELETE from clntes WHERE id_cln=".$id_cln;
+        $code += executeSQL($cmd);
+    }
+    $response = array();
+    SendResponse($code,$response);
+}
+
 
 ?>

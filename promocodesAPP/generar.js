@@ -25,7 +25,7 @@ angular.module("app",[])
 	$scope.change=function(){
 		$scope.list = [];
 		$scope.filtered = [];
-		if ($scope.asgn == "Masivo") {
+  		if ($scope.asgn == "Masivo") {
 			$scope.mostrar = true;
 		} else {
 			$scope.mostrar = false;
