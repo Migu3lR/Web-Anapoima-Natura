@@ -2,7 +2,7 @@ app = angular.module("app",['angular-hmac-sha512','ngAnimate','angular-jwt', 'an
 app.controller("control",function($scope,$crypthmac,$window,$http,jwtHelper,store,$cookies){
 
 var url = store.get("url") || null;
-if (!url) url = "/";
+if (!url) url = "/desarrollo/";
 
 //Usuario Autorizado?
 	//obtenemos el token en localStorage
@@ -224,7 +224,7 @@ $scope.msg = "";
 app.controller("logout",function($scope,$crypthmac,$window,$http,jwtHelper,store,$cookies){
 	
 	var url = store.get("url") || null;
-	if (!url) url = "/";
+	if (!url) url = "/desarrollo/";
 	//obtenemos el token en localStorage
 		var token = store.get("token") || null;
 		if (token) store.remove("token");

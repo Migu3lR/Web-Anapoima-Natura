@@ -4,8 +4,8 @@ app.controller("control",function($scope,$window,$http,$interval,jwtHelper,store
 
 var url = function (){ store.set('url', $location.absUrl());}
 
-$scope.goLogin = function(){ url(); $window.location = '/login/'; }
-$scope.goLogout = function(){ url(); $window.location = '/login/logout.php'; }
+$scope.goLogin = function(){ url(); $window.location = '../login/'; }
+$scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; }
 
 //Usuario Autorizado?
 	//obtenemos el token en localStorage
@@ -25,7 +25,7 @@ $scope.goLogout = function(){ url(); $window.location = '/login/logout.php'; }
 					var expireDate = new Date();
 					expireDate.setTime(expireDate.getTime() + (60*1000*2) - (0*60*60*1000));
 					// Setting a cookie
-					$cookies.put("x",$scope.user.rol, {'path':'/'});
+					$cookies.put("x",$scope.user.rol, {'path':'../'});
 					
 				}
 				return true;

@@ -18,8 +18,8 @@ var response_ok = 0;
 	
 var url = function (){ store.set('url', $location.absUrl());}
 
-$scope.goLogin = function(){ url(); $window.location = '/login/'; }
-$scope.goLogout = function(){ url(); $window.location = '/login/logout.php'; }
+$scope.goLogin = function(){ url(); $window.location = '../login/'; }
+$scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; }
 
 //Usuario Autorizado?
 	//obtenemos el token en localStorage

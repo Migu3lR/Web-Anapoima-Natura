@@ -24,11 +24,11 @@
 						<div class="large-12 columns"><div class="callout small">
 							<div class="row">
 								<div class="left">
-									<img class="avatar" src="/images/comentarios/user.png">
+									<img class="avatar" src="../images/comentarios/user.png">
 								</div>
 								<div class="left">
 									<h5>{{post.nombre}}</h5>
-									<p class="puntaje" ng-if="post.rate != 0"><img ng-src="/images/comentarios/star{{post.rate}}.png"/></p>
+									<p class="puntaje" ng-if="post.rate != 0"><img ng-src="../images/comentarios/star{{post.rate}}.png"></p>
 									<p class="fecha">{{post.fecha}}</p>
 								</div>
 							</div>

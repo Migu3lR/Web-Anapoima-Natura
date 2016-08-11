@@ -375,12 +375,13 @@
 	</div>
 
 	<?php $_GET['section']='footer'; require('../layout.php'); ?>
-	<script src="/js/vendor/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/vendor/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 	  $(document).ready(function(){
 		$("a[rel^='prettyPhoto']").prettyPhoto({
 		social_tools: '',
 		overlay_gallery: false
+		})
 	});
 	</script>		
 	<script src="js/controller.Galeria.js"> </script>

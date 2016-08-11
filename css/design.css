@@ -12,16 +12,16 @@ div.slide_description {
 	/*background-color:rgba(0,0,0,0.8);*/
 }
 #Slider .item.slide_0 div.background {
-    background-image: url('..//images/home/slide0.jpg');
+    background-image: url('../images/home/slide0.jpg');
 }
 #Slider .item.slide_1 div.background {
-    background-image: url('..//images/home/slide1.jpg');
+    background-image: url('../images/home/slide1.jpg');
 }
 #Slider .item.slide_2 div.background {
-    background-image: url('..//images/home/slide2.jpg');
+    background-image: url('../images/home/slide2.jpg');
 }
 #Slider .item.slide_3 div.background {
-    background-image: url('..//images/home/slide3.jpg');
+    background-image: url('../images/home/slide3.jpg');
 }
 #Slider .container h1,
 #Slider .container h2,
@@ -87,10 +87,10 @@ div.slide_description {
 
 /* Hospedaje - Servicios*/
 #servicios{
-	background-image: url('..//images/home/servicios.jpg');
+	background-image: url('../images/home/servicios.jpg');
 }
 #hospedaje{
-	background-image: url('..//images/home/hospedaje.jpg');
+	background-image: url('../images/home/hospedaje.jpg');
 }
 #servicios p.serv {
 	text-align: center;
@@ -123,7 +123,7 @@ div.slide_description {
 #hospedaje .smk_accordion .accordion_in.acc_active.acc_1 > .acc_head,
 #hospedaje .smk_accordion .accordion_in.acc_active.acc_2 > .acc_head,
 #hospedaje .smk_accordion .accordion_in.acc_active.acc_3 > .acc_head {
-	background-image: url("..//images/home/persona.png");
+	background-image: url("../images/home/persona.png");
 	background-position: right 55px top 1px !important;
     background-size: auto 47px;
 }
@@ -236,7 +236,7 @@ div.slide_description {
     margin: 0 auto;
     /*height: 3em;*/
     vertical-align: middle;
-	font-size
+	/*font-size*/
 }
 
 #servicios #foot p{
@@ -278,7 +278,7 @@ div#reservation{
 }
 div#puntajes {
 	background-color: #F8A51C;
-    background-image: url('..//images/home/puntajes.jpg');
+    background-image: url('../images/home/puntajes.jpg');
 	background-size: contain;
 	background-position: bottom;
 	background-repeat: no-repeat;
@@ -311,7 +311,7 @@ div#puntajes {
 /*  Contacto  */
 div#contacts{
 	background-color: #008da1;
-	background-image: url('..//images/home/contacto.jpg');
+	background-image: url('../images/home/contacto.jpg');
 	background-size: 100%;
     background-repeat: no-repeat;
     background-position: bottom;

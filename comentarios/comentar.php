@@ -33,13 +33,13 @@ if (!isset($_GET['tk'])) header("Location: index.php");
 							<div class="rate">
 							<span>Calificanos: </span>
 							<span class="rating">
-								<input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1" ng-model="rate" value="5"/>
+								<input type="radio" class="rating-input" id="rating-input-1-5" name="rating-input-1" ng-model="rate" value="5" />
 								<label for="rating-input-1-5" class="rating-star"></label>
-								<input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1" ng-model="rate" value="4"/>
+								<input type="radio" class="rating-input" id="rating-input-1-4" name="rating-input-1" ng-model="rate" value="4" />
 								<label for="rating-input-1-4" class="rating-star"></label>
-								<input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1" ng-model="rate" value="3"/>
+								<input type="radio" class="rating-input" id="rating-input-1-3" name="rating-input-1" ng-model="rate" value="3" />
 								<label for="rating-input-1-3" class="rating-star"></label>
-								<input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1" ng-model="rate" value="2"/>
+								<input type="radio" class="rating-input" id="rating-input-1-2" name="rating-input-1" ng-model="rate" value="2" />
 								<label for="rating-input-1-2" class="rating-star"></label>
 								<input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1" ng-model="rate" value="1" />
 								<label for="rating-input-1-1" class="rating-star"></label>
