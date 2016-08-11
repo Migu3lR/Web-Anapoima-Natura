@@ -12,7 +12,7 @@
 		$from = $_POST['from'];
 		$to = $_POST['to'];
 		
-		$book_url = '/booking/#!/Rooms/date_from:' . $from . '/date_to:' . $to . '/adults:' . $adultos . '/children:' . $ninos;
+		$book_url = '/desarrollo/booking/#!/Rooms/date_from:' . $from . '/date_to:' . $to . '/adults:' . $adultos . '/children:' . $ninos;
 		
 		header("Location: " . $book_url);
 		exit();
@@ -20,14 +20,14 @@
 } ?>
 
 <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="/css/jquery-ui.css">
-<link rel="stylesheet" href="/css/structure_layout.css">
+<link rel="stylesheet" href="/desarrollo/css/jquery-ui.css">
+<link rel="stylesheet" href="/desarrollo/css/structure_layout.css">
 <!-- AngularJS Framework -->
-	<script src="/js/angular.min.js"></script>	
-	<script src="/js/angular-hmac-sha512.js"></script>
-	<script src="/js/angular-jwt.js"></script>
-	<script src="/js/angular-storage.js"></script>
-	<script src="/js/cookies.js"></script>
+	<script src="/desarrollo/js/angular.min.js"></script>	
+	<script src="/desarrollo/js/angular-hmac-sha512.js"></script>
+	<script src="/desarrollo/js/angular-jwt.js"></script>
+	<script src="/desarrollo/js/angular-storage.js"></script>
+	<script src="/desarrollo/js/cookies.js"></script>
 
 <?php } ?>
 
@@ -63,12 +63,12 @@
     <!-- off-canvas left menu -->
     <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
       <ul class="vertical dropdown menu" data-dropdown-menu>
-        <li><a id="item1" link href="/index.php#inicio">INICIO</a></li>
-        <li><a id="item2" link href="/index.php#hospedaje">HOSPEDAJE</a></li>
-        <li><a id="item3" link href="/index.php#reservas">RESERVAS</a></li>
-        <li><a id="item4" link href="/index.php#servicios">SERVICIOS</a></li>
-        <li><a id="item5" link href="/index.php#galeria">GALERÍA</a></li>
-        <li><a id="item6" link href="/index.php#contacto">CONTACTO</a></li>
+        <li><a id="item1" link href="/desarrollo/index.php#inicio">INICIO</a></li>
+        <li><a id="item2" link href="/desarrollo/index.php#hospedaje">HOSPEDAJE</a></li>
+        <li><a id="item3" link href="/desarrollo/index.php#reservas">RESERVAS</a></li>
+        <li><a id="item4" link href="/desarrollo/index.php#servicios">SERVICIOS</a></li>
+        <li><a id="item5" link href="/desarrollo/index.php#galeria">GALERÍA</a></li>
+        <li><a id="item6" link href="/desarrollo/index.php#contacto">CONTACTO</a></li>
       </ul>
     </div>
 
@@ -77,14 +77,14 @@
       <div class="off-canvas position-right" id="offCanvasRight" data-off-canvas data-position="right">
         <ul class="vertical dropdown menu" data-dropdown-menu>
           <?php if($rol==='1') { ?>
-            <li><a href="/userProfile">Perfil de Usuario</a></li>
-            <li><a href="/userAdmin">Gestion de Usuarios</a></li>
-            <li><a href="/booking/bookAdmin.php">Gestion de Reservas</a></li>
-            <li><a href="/comentAdmin">Gestion de Comentarios</a></li>
-            <li><a href="/promosAdmin">Códigos Promocionales</a></li>
+            <li><a href="/desarrollo/userProfile">Perfil de Usuario</a></li>
+            <li><a href="/desarrollo/userAdmin">Gestion de Usuarios</a></li>
+            <li><a href="/desarrollo/booking/bookAdmin.php">Gestion de Reservas</a></li>
+            <li><a href="/desarrollo/comentAdmin">Gestion de Comentarios</a></li>
+            <li><a href="/desarrollo/promosAdmin">Códigos Promocionales</a></li>
             <li><a href="#" ng-click="goLogout()">CERRAR SESIÓN</a></li>
           <?php } if($rol==='0') { ?>
-            <li><a href="/userProfile">Perfil de Usuario</a></li>
+            <li><a href="/desarrollo/userProfile">Perfil de Usuario</a></li>
             <li><a href="#" ng-click="goLogout()">CERRAR SESIÓN</a></li>
           <?php } ?>
         </ul>
@@ -98,7 +98,7 @@
         <ul class="menu">
           <li class="menu-text">
             <div class="logo-container" >
-			  <a href="/"><img src="/images/home/logo.png" alt="Natura Anapoima"> </a>
+			  <a href="/desarrollo/"><img src="/desarrollo/images/home/logo.png" alt="Natura Anapoima"> </a>
 			</div>
           </li>
         </ul>
@@ -109,28 +109,28 @@
 		<?php if(!$isAuth) echo '<p><a href="#" ng-click="goLogin()">Inicia sesión en Natura!</a></p>'; ?>
 		</div>
         <ul class="menu" data-responsive-menu="drilldown medium-dropdown">
-            <li><a link id="item1" href="/index.php#inicio">INICIO</a></li>
-            <li><a link id="item2" href="/index.php#hospedaje">HOSPEDAJE</a></li>
-            <li><a link id="item3" href="/index.php#reservas">RESERVAS</a></li>
-            <li><a link id="item4" href="/index.php#servicios">SERVICIOS</a></li>
-            <li><a link id="item5" href="/index.php#galeria">GALERÍA</a></li>
-            <li><a link id="item6" href="/index.php#contacto">CONTACTO</a></li>
+            <li><a link id="item1" href="/desarrollo/index.php#inicio">INICIO</a></li>
+            <li><a link id="item2" href="/desarrollo/index.php#hospedaje">HOSPEDAJE</a></li>
+            <li><a link id="item3" href="/desarrollo/index.php#reservas">RESERVAS</a></li>
+            <li><a link id="item4" href="/desarrollo/index.php#servicios">SERVICIOS</a></li>
+            <li><a link id="item5" href="/desarrollo/index.php#galeria">GALERÍA</a></li>
+            <li><a link id="item6" href="/desarrollo/index.php#contacto">CONTACTO</a></li>
             <?php if($isAuth) { //////////////////$isAuth ?>
             <li class="has-submenu">
                 <?php if($rol === '1') { ?>
                 <a href="#">ADMINISTRACIÓN</a>
                 <ul class="submenu menu vertical" data-submenu>
-                    <li><a href="/userProfile">Perfil de Usuario</a></li>
-                    <li><a href="/userAdmin">Gestion de Usuarios</a></li>
-                    <li><a href="/booking/bookAdmin.php">Gestion de Reservas</a></li>
-                    <li><a href="/comentAdmin">Gestion de Comentarios</a></li>
-                    <li><a href="/promosAdmin">Códigos Promocionales</a></li>
+                    <li><a href="/desarrollo/userProfile">Perfil de Usuario</a></li>
+                    <li><a href="/desarrollo/userAdmin">Gestion de Usuarios</a></li>
+                    <li><a href="/desarrollo/booking/bookAdmin.php">Gestion de Reservas</a></li>
+                    <li><a href="/desarrollo/comentAdmin">Gestion de Comentarios</a></li>
+                    <li><a href="/desarrollo/promosAdmin">Códigos Promocionales</a></li>
                     <li><a href="#" ng-click="goLogout()">CERRAR SESIÓN</a></li>
                 </ul>
                 <?php } if($rol === '0') { ?>
                 <a ng-show="user.rol==0" href="#">MI CUENTA</a>
                 <ul ng-show="user.rol==0" class="submenu menu vertical" data-submenu>
-                  <li><a href="/userProfile">Perfil de Usuario</a></li>
+                  <li><a href="/desarrollo/userProfile">Perfil de Usuario</a></li>
                   <li><a href="#" ng-click="goLogout()">CERRAR SESIÓN</a></li>
                 </ul>
                 <?php } ?>
@@ -183,10 +183,10 @@
 		</div>
 		
 		<div  class="field">
-			<input type="text" id="from" name="from"  placeholder="Llegada" required autocomplete="off"/>
+			<input type="text" id="from" name="from"  placeholder="Llegada" required autocomplete="off" />
 		</div>
 		<div class="field">
-			<input type="text" id="to" name="to" placeholder="Salida" required autocomplete="off"/>
+			<input type="text" id="to" name="to" placeholder="Salida" required autocomplete="off" />
 		</div>
 		<div class="search">
 		<button type="submit" class="promo_button button" name="buscar" />Reservar</button>
@@ -219,11 +219,11 @@
   </div>
 </div>
 
-<script src="/js/vendor/jquery.min.js"></script>
-<script src="/js/vendor/jquery-ui.js"></script>	
-<script src="/js/vendor/what-input.min.js"></script>
-<script src="/js/Foundation.js"></script>
-<script src="/js/initialize.DatePicker.js"></script>
+<script src="/desarrollo/js/vendor/jquery.min.js"></script>
+<script src="/desarrollo/js/vendor/jquery-ui.js"></script>	
+<script src="/desarrollo/js/vendor/what-input.min.js"></script>
+<script src="/desarrollo/js/Foundation.js"></script>
+<script src="/desarrollo/js/initialize.DatePicker.js"></script>
 
 <?php } ?>
 
@@ -234,26 +234,26 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- jQuery UI -->
-    <link href="/css/jquery-ui.css" rel="stylesheet" media="screen">
+    <link href="/desarrollo/css/jquery-ui.css" rel="stylesheet" media="screen">
     <!-- Bootstrap -->
-    <link href="/adminResources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/desarrollo/adminResources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- styles -->
-    <link href="/adminResources/css/styles.css" rel="stylesheet">
+    <link href="/desarrollo/adminResources/css/styles.css" rel="stylesheet">
 	
-	  <link href="/adminResources/css/angular-chart.css" rel="stylesheet">
-    <link rel="stylesheet" href="/adminResources/css/ngDialog.css"></script>
-    <link rel="stylesheet" href="/adminResources/css/ngDialog-theme-default.css"></script>
+	  <link href="/desarrollo/adminResources/css/angular-chart.css" rel="stylesheet">
+    <link rel="stylesheet" href="/desarrollo/adminResources/css/ngDialog.css"></script>
+    <link rel="stylesheet" href="/desarrollo/adminResources/css/ngDialog-theme-default.css"></script>
 	
-	<script src="/js/jinqjs.js"></script>
-	<script src="/js/moment.js"></script>
-	<script src="/js/angular.min.js"></script>
-	<script src="/js/ngDialog.js"></script>     
-	<script src="/js/Chart.js"></script>
-	<script src="/js/angular-moment.js"></script>
-	<script src="/js/angular-chart.js"></script>
-	<script src="/js/angular-jwt.js"></script>
-	<script src="/js/angular-storage.js"></script>
-	<script src="/js/cookies.js"></script>
+	<script src="/desarrollo/js/jinqjs.js"></script>
+	<script src="/desarrollo/js/moment.js"></script>
+	<script src="/desarrollo/js/angular.min.js"></script>
+	<script src="/desarrollo/js/ngDialog.js"></script>     
+	<script src="/desarrollo/js/Chart.js"></script>
+	<script src="/desarrollo/js/angular-moment.js"></script>
+	<script src="/desarrollo/js/angular-chart.js"></script>
+	<script src="/desarrollo/js/angular-jwt.js"></script>
+	<script src="/desarrollo/js/angular-storage.js"></script>
+	<script src="/desarrollo/js/cookies.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -264,9 +264,9 @@
 
 <?php if(isset($_GET['section']) && $_GET['section']=='endAdmin'){ ?>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/js/vendor/jquery.min.js"></script>
+    <script src="/desarrollo/js/vendor/jquery.min.js"></script>
 	<!-- jQuery UI -->
-    <script src="/js/vendor/jquery-ui.js"></script>
+    <script src="/desarrollo/js/vendor/jquery-ui.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/adminResources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/desarrollo/adminResources/bootstrap/js/bootstrap.min.js"></script>
 <?php } ?>

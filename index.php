@@ -578,10 +578,10 @@
 	
 	<?php $_GET['section']='footer'; require('layout.php'); ?>
 	
-	<script src="/js/initialize.Home.js"></script>
+	<script src="../js/initialize.Home.js"></script>
 	<script src='http://maps.google.com/maps/api/js?sensor=false&callback=initMap'> </script>
-	<script src="/js/scroll.js"> </script>
-	<script src="/js/controller.Home.js"> </script>
+	<script src="../js/scroll.js"> </script>
+	<script src="../js/controller.Home.js"> </script>
 		
   </body>
 </html>

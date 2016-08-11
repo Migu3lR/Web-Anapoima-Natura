@@ -2,7 +2,7 @@
 <html ng-app="app">
   <head>
 	<?php $_GET['section']='initAdmin'; require('../layout.php'); ?>
-	<script src="/js/angular-hmac-sha512.js"></script>
+	<script src="../js/angular-hmac-sha512.js"></script>
 	<link href="css/structure.css" rel="stylesheet">
 	<link href="css/design.css" rel="stylesheet">
   </head>
@@ -24,7 +24,7 @@
 	                      <li class="dropdown">
 	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opciones<b class="caret"></b></a>
 	                        <ul class="dropdown-menu animated fadeInUp">
-	                          <li><a href="/index.php">Salir</a></li>
+	                          <li><a href="../index.php">Salir</a></li>
 	                        </ul>
 	                      </li>
 	                    </ul>
@@ -108,10 +108,10 @@
 									<td id="fecha" >{{promo.fmax}}</td>
 									<td id="accion">
 										<span><a class="registro" href="#" ng-click="editar(promo)">
-										<img src="/adminResources/editar.png" alt="Editar información de Promoción">
+										<img src="../adminResources/editar.png" alt="Editar información de Promoción">
 										</a></span>
 										<span><a class="registro" href="#" ng-click="deletePromo(promo.cdgo)">
-										<img src="/adminResources/borrar.png" alt="Eliminar promoción">
+										<img src="../adminResources/borrar.png" alt="Eliminar promoción">
 										</a></span>
 									</td>
 								</tr>
@@ -136,13 +136,13 @@
 						<label>Código Promocional:</label> {{editModeData.cdgo}}
 						<br>
 						<label>Descripción:</label> <input type="text" max-length="50" ng-model="initial.descrip" required>
-						<a href="#" ng-click="initial.descrip=editModeData.dscr"><img src="/adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a>
+						<a href="#" ng-click="initial.descrip=editModeData.dscr"><img src="../adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a>
 						<br>
 						<label>Inicio de la Promoción:</label> <input type="text" ng-model="initial.fmin"  required>
-						<a href="#" ng-click="initial.fmin=editModeData.fmin"><img src="/adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a>
+						<a href="#" ng-click="initial.fmin=editModeData.fmin"><img src="../adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a>
 						<br>
 						<label>Fin de la Promoción:</label> <input type="text" ng-model="initial.fmax"  required>
-						<a href="#" ng-click="initial.fmax=editModeData.fmax"><img src="/adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a>
+						<a href="#" ng-click="initial.fmax=editModeData.fmax"><img src="../adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a>
 						<br><br>
 						<label>Tipo de Asignación:</label>
 						<table width="300px">

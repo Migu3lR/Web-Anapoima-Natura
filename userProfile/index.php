@@ -5,9 +5,9 @@
     
 	<?php $_GET['section']='initSite'; require('../layout.php'); ?>
   
-  <script src="/js/ng-file-upload-shim.min.js"></script>
-  <script src="/js/ng-file-upload.min.js"></script>
-  <script src="/js/ng-img-crop.js"></script>
+  <script src="../js/ng-file-upload-shim.min.js"></script>
+  <script src="../js/ng-file-upload.min.js"></script>
+  <script src="../js/ng-img-crop.js"></script>
         
   <link rel="stylesheet" href="css/structure.css">
 	<link rel="stylesheet" href="css/design.css">
@@ -30,7 +30,7 @@
 					
 					<div class="row" >
 						<div class="medium-4 small-12 columns text-center">
-							<img class="avatar" ng-src="/avtr_uploads/{{userinfo.avatar}}">
+							<img class="avatar" ng-src="../avtr_uploads/{{userinfo.avatar}}">
               <div class="user_name"> <h5>{{userinfo.nmbre | limitTo : 20}}</h5> </div>
               <a href="editProfile.php" class="button"> Editar Perfil </a>
               <select ng-model="opcion">
@@ -110,7 +110,7 @@
                   </tr>
                   <tr ng-if="coment.puntaje>0">
                     <td class="title">Puntaje otorgado</td>
-                    <td><img ng-src="/images/comentarios/star{{coment.puntaje}}.png"/></td>
+                    <td><img ng-src="../images/comentarios/star{{coment.puntaje}}.png"../></td>
                   </tr>
                   <tr>
                     <td class="title">Comentario</td>
@@ -150,8 +150,8 @@
   </div>
 </div>
 
-<script src="/js/vendor/jquery.min.js"></script>
-<script src="/js/Foundation.js"></script>
+<script src="../js/vendor/jquery.min.js"></script>
+<script src="../js/Foundation.js"></script>
 <script src="js/controller.UserProfile.js"> </script>
 </body>
 </html>

@@ -31,13 +31,13 @@ var access_forbidden = function (){
 	if (token) store.remove("token");
 	var url = store.get("url") || null;
 	if (url) store.remove("url");
-	$window.location = '/login/'
+	$window.location = '../login/'
 }
 
 var url = function (){ store.set('url', $location.absUrl());}
 
-$scope.goLogin = function(){ url(); $window.location = '/login/'; }
-$scope.goLogout = function(){ url(); $window.location = '/login/logout.php'; }
+$scope.goLogin = function(){ url(); $window.location = '../login/'; }
+$scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; }
 
 //Usuario Autorizado?
 	//obtenemos el token en localStorage

@@ -2,7 +2,7 @@
 <html ng-app="app">
   <head>
 	<?php $_GET['section']='initAdmin'; require('../layout.php'); ?>
-	<script src="/js/angular-hmac-sha512.js"></script>
+	<script src="../js/angular-hmac-sha512.js"></script>
 	<link href="css/structure.css" rel="stylesheet">
 	<link href="css/design.css" rel="stylesheet">
   </head>
@@ -25,7 +25,7 @@
 	                      <li class="dropdown">
 	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opciones<b class="caret"></b></a>
 	                        <ul class="dropdown-menu animated fadeInUp">
-	                          <li><a href="/index.php">Salir</a></li>
+	                          <li><a href="../index.php">Salir</a></li>
 	                        </ul>
 	                      </li>
 	                    </ul>

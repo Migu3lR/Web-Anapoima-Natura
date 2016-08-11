@@ -5,9 +5,9 @@
     
 	<?php $_GET['section']='initSite'; require('../layout.php'); ?>
 
-  <script src="/js/ng-file-upload-shim.min.js"></script>
-  <script src="/js/ng-file-upload.min.js"></script>
-  <script src="/js/ng-img-crop.js"></script>
+  <script src="../js/ng-file-upload-shim.min.js"></script>
+  <script src="../js/ng-file-upload.min.js"></script>
+  <script src="../js/ng-img-crop.js"></script>
         
   <link rel="stylesheet" href="css/structure.css">
 	<link rel="stylesheet" href="css/design.css">
@@ -162,8 +162,8 @@
   </div>
 </div>
 
-<script src="/js/vendor/jquery.min.js"></script>
-<script src="/js/Foundation.js"></script>
+<script src="../js/vendor/jquery.min.js"></script>
+<script src="../js/Foundation.js"></script>
 <script src="js/controller.UserProfile.js"> </script>
 </body>
 </html>

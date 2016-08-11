@@ -85,7 +85,7 @@
 							
 							<div class="foot">
 								<a href="../galeria/#casas"><img src="../images/detalles/verfotos.png"></a>
-                                <span>¡REALICE SU RESERVA! <a href="../reservas/" class="more_button button">INGRESAR</a></span>
+                                <span>¡REALICE SU RESERVA! <a href="../booking/" class="more_button button">INGRESAR</a></span>
 							</div>
 							</div>
 						</div>
@@ -153,7 +153,7 @@
 							
 							<div class="foot">
 								<a href="../galeria/#apartamentos"><img src="../images/detalles/verfotos.png"></a>
-								<span>¡REALICE SU RESERVA! <a href="../reservas/" class="more_button button">INGRESAR</a></span>
+								<span>¡REALICE SU RESERVA! <a href="../booking/" class="more_button button">INGRESAR</a></span>
 							</div>
 							</div>
 						</div>
@@ -242,7 +242,7 @@
 							
 							<div class="foot">
 								<a href="../galeria/#villas"><img src="../images/detalles/verfotos.png"></a>
-								<span>¡REALICE SU RESERVA! <a href="../reservas/" class="more_button button">INGRESAR</a></span>
+								<span>¡REALICE SU RESERVA! <a href="../booking/" class="more_button button">INGRESAR</a></span>
 							</div>
 							</div>
 						</div>
@@ -308,7 +308,7 @@
 							
 							<div class="foot">
 								<a href="../galeria/#apartaestudios"><img src="../images/detalles/verfotos.png"></a>
-								<span>¡REALICE SU RESERVA! <a href="../reservas/" class="more_button button">INGRESAR</a></span>
+								<span>¡REALICE SU RESERVA! <a href="../booking/" class="more_button button">INGRESAR</a></span>
 							</div>
 							</div>
 						</div>

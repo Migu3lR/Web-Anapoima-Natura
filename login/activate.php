@@ -8,7 +8,7 @@ if (!isset($_GET['tk'])) header("Location: index.php");
 	
     <?php $_GET['section']='initSite'; require('../layout.php'); ?> 
 	
-	<script src="/js/angular-animate.js"></script>	
+	<script src="../js/angular-animate.js"></script>	
 	<script src="js/controller.Login.js"></script>
 
 </head>

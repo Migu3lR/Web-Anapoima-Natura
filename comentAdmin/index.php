@@ -24,7 +24,7 @@
 	                      <li class="dropdown">
 	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opciones<b class="caret"></b></a>
 	                        <ul class="dropdown-menu animated fadeInUp">
-	                          <li><a href="/desarrollo/index.php">Salir</a></li>
+	                          <li><a href="../index.php">Salir</a></li>
 	                        </ul>
 	                      </li>
 	                    </ul>
@@ -115,15 +115,15 @@
 				  			</div>
 				  			<div class="content-box-large box-with-header">
 				  				<ul class="general_stats">
-								  <li><img src="/desarrollo/images/comentarios/star5.png">
+								  <li><img src="../images/comentarios/star5.png">
 								  <a class="star" href="#" ng-click="goto_filter('rate',5)">{{stats.rate5}}</a></li>
-								  <li><img src="/desarrollo/images/comentarios/star4.png">
+								  <li><img src="../images/comentarios/star4.png">
 								  <a class="star" href="#" ng-click="goto_filter('rate',4)">{{stats.rate4}}</a></li>
-								  <li><img src="/desarrollo/images/comentarios/star3.png">
+								  <li><img src="../images/comentarios/star3.png">
 								  <a class="star" href="#" ng-click="goto_filter('rate',3)">{{stats.rate3}}</a></li>
-								  <li><img src="/desarrollo/images/comentarios/star2.png">
+								  <li><img src="../images/comentarios/star2.png">
 								  <a class="star" href="#" ng-click="goto_filter('rate',2)">{{stats.rate2}}</a></li>
-								  <li><img src="/desarrollo/images/comentarios/star1.png">
+								  <li><img src="../images/comentarios/star1.png">
 								  <a class="star" href="#" ng-click="goto_filter('rate',1)">{{stats.rate1}}</a></li>
 								</ul>
 							</div>

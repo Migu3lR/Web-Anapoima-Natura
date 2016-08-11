@@ -346,15 +346,15 @@ $scope.editar = function(data){
 	html += '<br><br>';
 	
 	html += 'Nombre del usuario: <input type="text" max-length="50" ng-model="initial.nombre" required>';
-	html += '<a href="#" ng-click="initial.nombre='+"'"+data.nombre+"'"+'"><img src="/adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a><br>';
+	html += '<a href="#" ng-click="initial.nombre='+"'"+data.nombre+"'"+'"><img src="../adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a><br>';
 	html += 'Fecha de Nacimiento: <input type="text" ng-model="initial.nacimiento">';
-	html += '<a href="#" ng-click="initial.nacimiento='+"'"+data.nacimiento+"'"+'"><img src="/adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a><br>';
+	html += '<a href="#" ng-click="initial.nacimiento='+"'"+data.nacimiento+"'"+'"><img src="../adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a><br>';
 	html += 'Teléfono: <input type="text" max-length="10" ng-model="initial.telefono">';
-	html += '<a href="#" ng-click="initial.telefono='+"'"+data.telefono+"'"+'"><img src="/adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a><br>';
+	html += '<a href="#" ng-click="initial.telefono='+"'"+data.telefono+"'"+'"><img src="../adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a><br>';
 	html += 'País: <input type="text" max-length="20" ng-model="initial.pais" >';
-	html += '<a href="#" ng-click="initial.pais='+"'"+data.pais+"'"+'"><img src="/adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a><br>';
+	html += '<a href="#" ng-click="initial.pais='+"'"+data.pais+"'"+'"><img src="../adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a><br>';
 	html += 'Ciudad: <input type="text" max-length="20" ng-model="initial.ciudad" >';
-	html += '<a href="#" ng-click="initial.ciudad='+"'"+data.ciudad+"'"+'"><img src="/adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a><br><br>';
+	html += '<a href="#" ng-click="initial.ciudad='+"'"+data.ciudad+"'"+'"><img src="../adminResources/rollback.png" style="margin-left:1rem" title="Restablecer"></a><br><br>';
 	
 	html += 'Rol: <select ng-model="initial.rol" autocomplete="off" required>';
 	html += '<option ng-repeat="rol in roles" value="{{rol.rol}}" ng-if="initial.rol != rol.rol" >{{rol.descRol}}</option>';

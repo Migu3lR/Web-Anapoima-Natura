@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="css/structure.css">
 	<link rel="stylesheet" href="css/design.css">
 	
-	<script src="/js/angular-animate.js"></script>	
+	<script src="../js/angular-animate.js"></script>	
 	
 </head>
 <body ng-controller="control">
@@ -167,8 +167,8 @@
     </div>
 </div>
 
-	<script src="/js/vendor/jquery.min.js"></script>
-	<script src="/js/Foundation.js"></script>
+	<script src="../js/vendor/jquery.min.js"></script>
+	<script src="../js/Foundation.js"></script>
 	
 	<script src="js/controller.Login.js"></script>
 		
