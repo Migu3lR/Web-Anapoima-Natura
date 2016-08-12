@@ -1,19 +1,5 @@
 <?php if(isset($_GET['section']) && $_GET['section']=='initSite'){ ?> 
 
-<?php if(isset($_POST['buscar'])){
-	if(isset($_POST['adultos']) && isset($_POST['ninos']) && isset($_POST['from']) && isset($_POST['to'])){
-		$adultos = $_POST['adultos'];
-		$ninos = $_POST['ninos'];
-		$from = $_POST['from'];
-		$to = $_POST['to'];
-		
-		$book_url = '/desarrollo/booking/#!/Rooms/date_from:' . $from . '/date_to:' . $to . '/adults:' . $adultos . '/children:' . $ninos;
-		
-		header("Location: " . $book_url);
-		exit();
-	}
-} ?>
-
 <!doctype html>
 <html class="no-js" lang="en" ng-app="app">
 <head>
@@ -152,7 +138,7 @@
 <?php if(isset($_GET['section']) && $_GET['section']=='reservation'){ ?>
 <div id="reservation" class="stick">
 	
-	<form name="registro" accept-charset="UTF-8" method="post" action="index.php">
+	<form name="registro" accept-charset="UTF-8" method="post" action="/desarrollo/booking/bar.php">
 		<div class="field">
 			<select name="adultos" required autocomplete="off">
 				<option value="" disabled selected hidden>Adultos</option>
