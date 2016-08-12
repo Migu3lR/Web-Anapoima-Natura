@@ -1,9 +1,4 @@
-
-<!doctype html>
-<html class="no-js" lang="en" ng-app="app">
-  <head>
-    
-	<?php $_GET['section']='initSite'; require('../layout.php'); ?>
+<?php $_GET['section']='initSite'; require('../layout.php'); ?>
   
   <script src="../js/ng-file-upload-shim.min.js"></script>
   <script src="../js/ng-file-upload.min.js"></script>

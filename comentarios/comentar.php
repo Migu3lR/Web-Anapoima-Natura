@@ -1,11 +1,11 @@
 <?php
-if (!isset($_GET['tk'])) header("Location: index.php");
+if (!isset($_GET['tk'])){
+	header("Location: index.php");
+	exit();	
+} 
+
 ?>
 
-<!doctype html>
-<html class="no-js" lang="en" ng-app="app">
-  <head>
-  
 	<?php $_GET['section']='initSite'; require('../layout.php'); ?>
 	<!-- Natura Wireframe -->
 	<link rel="stylesheet" href="css/structure.css">

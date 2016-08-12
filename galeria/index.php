@@ -1,7 +1,4 @@
-<!doctype html>
-<html class="no-js" lang="en" ng-app="app">
-  <head>
-    <?php $_GET['section']='initSite'; require('../layout.php'); ?>
+<?php $_GET['section']='initSite'; require('../layout.php'); ?>
 	
 	<!-- Resources -->
 	<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
