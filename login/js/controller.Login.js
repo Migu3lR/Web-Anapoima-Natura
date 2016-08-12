@@ -152,7 +152,7 @@ $scope.msg = "";
 		var mas3menos20 = new RegExp("^[a-zA-Z \-]{3,20}$");
 		var num = new RegExp("^[0-9]+$");
 		var mail = new RegExp("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$");
-		console.log(fecha);
+		
 		if (nombre == undefined || nombre.length == 0) $scope.valid.nombre = false;
 		else $scope.valid.nombre = mas5menos20.test(nombre);
 		$scope.valid.correo = mail.test(correo);

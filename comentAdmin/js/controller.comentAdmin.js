@@ -52,12 +52,14 @@ $scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; }
 			} 
 			else {
 				$scope.user = jwtHelper.decodeToken(token);
+				
 				if($scope.user.rol == 1) return true;
 				else return false;
 			}
 		} else return false;
 	}
 	$scope.isAuth = auth();
+	
 
 if (!$scope.isAuth) access_forbidden();
 else{
