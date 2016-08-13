@@ -1,4 +1,6 @@
 <?php
+
+//Se definen los codigos de respuesta de Servidor para los request de la pagina
 $er = 0;
 define('db_isdown', 521);
 define('db_unknown_error', 520);
@@ -17,24 +19,31 @@ define('pass_changed', 203);
 define('user_unauthorized', 401);
 define('response_ok', 0);
 
+//Parametros para configuracion de conexion a Base de Datos
 if (!defined("HB_HOST")) define("HB_HOST", "localhost");
 if (!defined("HB_USER")) define("HB_USER", "hbzzadmin");
 if (!defined("HB_PASS")) define("HB_PASS", "C@c6w217DS");
 if (!defined("HB_DB")) define("HB_DB", "naturabase_desarrollo");
 
+//Funcion para envio de correos
+//Uso: sendMail(Correo destino, Correo origen, Asunto, Mensaje)
 function sendMail($to,$from,$subject,$body){
-    
+    //Se parametrizan los Headers
     $headers = "From: $from\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-    $result = mail($to, $subject, $body, $headers);
+    $result = mail($to, $subject, $body, $headers); // Se envia correo con comando Mail de PHP
     
+    //Se retorna codigo de error
     if ($result) return response_ok;
     else return error_send_mail;
     
 }
 
+//Funcion para abrir conexion con la base de datos
 function connectDB(){
+    //Usando los parametros establecidos para conexion a la BD
+    
  $sql = mysqli_connect(HB_HOST, HB_USER, HB_PASS, HB_DB);
  if(!$sql){
 	$er = db_isdown;
@@ -43,6 +52,8 @@ function connectDB(){
  return $sql;
 }
 
+//Funcion para extraccion de Data de la BD para resultados de una sola Fila
+//Uso: getRowSQL(Sentencia SQL Select)
 function getRowSQL($sql){
 	$conexion = connectDB();
 	$er = response_ok;
@@ -55,6 +66,8 @@ function getRowSQL($sql){
 	
 }
 
+//Funcion para ejecucion de sentencias en BD
+//Uso executeSQL(Sentencia SQL Update o Insert)
 function executeSQL($sql){
     $conexion = connectDB();
     $er = response_ok;
@@ -64,6 +77,8 @@ function executeSQL($sql){
     return $er;
 }
 
+//Funvion para extraccion de data de la BD en formato JSON para Angular
+//Uso: jsonQuery(Sentencia SQL Select)
 function jsonQuery($sql){
     $conexion = connectDB();
     mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
