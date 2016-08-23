@@ -530,7 +530,7 @@ function NewTokenforComment($auth,$r){
         
         $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
         $email_message .= '<center>';
-        $email_message .= '<img src="http://localhost/desarrollo/images/home/logo.png" />';
+        $email_message .= '<img src="http://anapoimanatura.com/desarrollo/images/home/logo.png" />';
         $email_message .= '</center>';
         $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
         $email_message .= '<tbody>';
@@ -541,7 +541,7 @@ function NewTokenforComment($auth,$r){
         $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
         $email_message .= "Utiliza el siguiente enlace, para realizar darnos tu opinión de Natura:<BR>";
         $email_message .= "<BR>";
-        $email_message .= "<b>Enlace:  </b><a href='http://localhost/desarrollo/comentarios/comentar.php?tk=$tkn'> COMENTAR </a> <BR>";
+        $email_message .= "<b>Enlace:  </b><a href='http://anapoimanatura.com/desarrollo/comentarios/comentar.php?tk=$tkn'> COMENTAR </a> <BR>";
         $email_message .= '</td>';
         $email_message .= '</tr>';
         $email_message .= '</tbody>';
@@ -638,7 +638,7 @@ function RegisterNewUser($auth,$r){
 // Controlador: /login/js/controller.Login.js
 //---------------------------------------------
 // Autenticacion:   No requerida 
-// Objetivo:        Crear nuevo comentario en la base de datos, teniendo en cuenta los requisitos de seguridad
+// Objetivo:        Registrar nuevo usuario en la base de datos
     
     $code = response_ok;
     
@@ -651,15 +651,18 @@ function RegisterNewUser($auth,$r){
     $documento = $r->documento;
     $nacionalidad = $r->nacionalidad;
     $municipio = $r->municipio;
-    
+
+    //Se consulta si el usuario a crear, existe previamente en la base de datos (El correo es la llave de la tabla de clientes)
     $cmd = "Select id_cln, fuente, estdo_cln FROM clntes where crreo='$correo'";
     $rslt = jsonQuery($cmd);
     
     if (empty($rslt)){
+        //Si el usuario no existe, se genera query para insertar el nuevo usuario el base de datos, en estado Pendiente por activacion
         $cmd = "INSERT INTO clntes (id_cln, crreo, nmbre, fcha_ncmnto, tpo_numdoc, id_numdoc, tlfno, ncnldad,cdad,fuente,estdo_cln)
                 VALUES (NULL, '$correo','$nombre','$fecha',$tipo,$documento,$telefono,'$nacionalidad','$municipio','R','P')";
         
     } elseif($rslt[0]['fuente'] != 'R'){
+        //Si el usario existe pero la fuente de la informacion no es Registro (Comentarios, Reservas...), Actualizamos los datos del usuario
         $cmd = "UPDATE clntes SET nmbre='$nombre', 
                 fcha_ncmnto='$fecha', 
                 tlfno=$telefono, 
@@ -669,36 +672,38 @@ function RegisterNewUser($auth,$r){
                 estdo_cln='P'
                 WHERE id_cln=".$rslt[0]['id_cln'];
     } else {
+        //Si el usuario ya existe y la fuente de la informacion es Registro...
         $response = array();
-        $code = user_conflict;
-        SendResponse($code,$response,false);
+        $code = user_conflict; //Se genera codigo de error
+        SendResponse($code,$response,false); //Se envia respuesta a Front-End, colocando false en parametro 3, para que no se envie token de seguridad.
     }
     
-    $code = executeSQL($cmd);
+    $code = executeSQL($cmd); // si no ocurrio error, se ejecuta la consulta resultante llamando executeSQL, y se captura codigo de respuesta
     
-    if ($code === response_ok){
-        
+    if ($code === response_ok){ //Si no ocurre error...
+        //Se crea query para insertar en la base de datos la contraseña de usuario.
         $cmd = "INSERT INTO scrty (id_cln, pass) select id_cln, '$clave' from clntes where crreo='$correo' and estdo_cln='P'";
-        $code = executeSQL($cmd);
+        $code = executeSQL($cmd); //Se ejecuta query llamando a la funcion executeSQL y se captura codigo de error
     
-        if ($code === response_ok){
-            $tkn = sha1(date("Y-m-d H:i:s"));
-            $fechaCreacion = date("Y-m-d");
-            $fechaCierre = '2099-12-31';
-            $uso = "R";
-            /////////////////////////////////
+        if ($code === response_ok){//Si no hubo error...
+            $tkn = sha1(date("Y-m-d H:i:s")); //Se genera Token a partir de encriptar con SHA1 timestamp actual
+            $fechaCreacion = date("Y-m-d"); //Variable fechaCreacion para almacenar fecha de creacion de usuario en BD
+            $fechaCierre = '2099-12-31'; //Variable fechaCierre para almacenar fecha de cierre (max Calendario)
+            $uso = "R"; //Se define uso como 'R' para registro a traves de login
+            
+            //Se crea query para insertar nuevo token en la BD con los datos anteriores
             $cmd = "INSERT INTO tokens (tokenid, token, fecha_creacion, fecha_cierre, uso, correo)
                     VALUES (NULL, '$tkn', '$fechaCreacion', '$fechaCierre', '$uso', '$correo')";
-            $code = executeSQL($cmd);
+            $code = executeSQL($cmd); //Se ejecuta query llamando a la funcion executeSQL y se captura codigo de error
         
-            if ($code === response_ok) {
+            if ($code === response_ok) {// Si no ocurre error, se envia correo electronico al usuario con Token para activar la cuenta
                 $to = $correo;
                 $from = "reservas@anapoimanatura.com";
                 $subject = "Activa tu cuenta en Natura - anapoimanatura.com";
                 
                 $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
                 $email_message .= '<center>';
-                $email_message .= '<img src="http://localhost/desarrollo/images/home/logo.png" />';
+                $email_message .= '<img src="http://anapoimanatura.com/desarrollo/images/home/logo.png" />';
                 $email_message .= '</center>';
                 $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
                 $email_message .= '<tbody>';
@@ -709,19 +714,18 @@ function RegisterNewUser($auth,$r){
                 $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
                 $email_message .= "Debes activar tu cuenta utilizando el siguiente enlace:<BR>";
                 $email_message .= "<BR>";
-                $email_message .= "<b>Enlace:  </b><a href='http://localhost/desarrollo/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
+                $email_message .= "<b>Enlace:  </b><a href='http://anapoimanatura.com/desarrollo/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
                 $email_message .= '</td>';
                 $email_message .= '</tr>';
                 $email_message .= '</tbody>';
                 $email_message .= '</table>';
                 $email_message .= '</div>';
                 
-                sendMail($to,$from,$subject,$email_message);
+                sendMail($to,$from,$subject,$email_message); //Se envia correo llamando a la funcion sendMail
                 
-                $code = user_created;
+                $code = user_created; //Codigo de respuesta, usuario creado
                 $response = array();
-                SendResponse($code,$response,false);
-                    
+                SendResponse($code,$response,false); //Se responde a Front-End llamando a la funcion SendResponse
                 }
             }
         }
@@ -730,22 +734,30 @@ function RegisterNewUser($auth,$r){
 }
 
 function ResendActivationEmail($auth,$r){
+// Metodo ResendActivationEmail invocado desde 
+// Vista:       /login/index.php
+// Controlador: /login/js/controller.Login.js
+//---------------------------------------------
+// Autenticacion:   No requerida 
+// Objetivo:        Reenviar correo de activacion de cuenta de usuario
+
     $code = response_ok;
     
-    $nombre = $r->nombre;
-    $correo = $r->correo;
+    $nombre = $r->nombre; //Se recibe campo de nombre
+    $correo = $r->correo; //Se recibe campo de correo
     
+    //Se genera consulta para saber si el usuario que envia la solicitud tiene un Token pendiente por utilizar
     $cmd = "select token from tokens where correo='$correo' and uso='R' and estado='A'";
     $token = getRowSQL($cmd);
-
-    if ($token != null) {
+    
+    if ($token != null) { //Si existe un token para el usuario se reenvia
         $to = $correo;
         $from = "reservas@anapoimanatura.com";
         $subject = "Activa tu cuenta en Natura - anapoimanatura.com";
         
         $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
         $email_message .= '<center>';
-        $email_message .= '<img src="http://localhost/desarrollo/images/home/logo.png" />';
+        $email_message .= '<img src="http://anapoimanatura.com/desarrollo/images/home/logo.png" />';
         $email_message .= '</center>';
         $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
         $email_message .= '<tbody>';
@@ -756,64 +768,80 @@ function ResendActivationEmail($auth,$r){
         $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
         $email_message .= "Debes activar tu cuenta utilizando el siguiente enlace:<BR>";
         $email_message .= "<BR>";
-        $email_message .= "<b>Enlace:  </b><a href='http://localhost/desarrollo/login/activate.php?tk=$token[0]'> Activar mi cuenta </a> <BR>";
+        $email_message .= "<b>Enlace:  </b><a href='http://anapoimanatura.com/desarrollo/login/activate.php?tk=$token[0]'> Activar mi cuenta </a> <BR>";
         $email_message .= '</td>';
         $email_message .= '</tr>';
         $email_message .= '</tbody>';
         $email_message .= '</table>';
         $email_message .= '</div>';
         
-        $code = sendMail($to,$from,$subject,$email_message);
+        $code = sendMail($to,$from,$subject,$email_message); // Se envia correo electronico llamando a la funcion sendMail
         
         $response = array();
-        SendResponse($code,$response,false);    
-    } else{
-        $code = access_forbidden;
+        SendResponse($code,$response,false); // Se envia respuesta llamando a la funcion SendResponse 
+    } else{ //Si no hay ningun codigo pendiente por enviar para este usuario...
+        $code = access_forbidden; // se genera codigo de error
         $response = array();
-        SendResponse($code,$response,false);
+        SendResponse($code,$response,false); //Se envia respuesta llamando a la funcion SendResponse, indicando en el parametro 3 false para que no se envie token de seguridad.
     }
 }
 
 function activateUser($auth,$r){
-    $token = $r->token;
-    
-    $cmd = "select tokenid, correo from tokens where token='$token' and uso='R' and estado='A'";
-    $sel = getRowSQL($cmd);
+// Metodo activateUser invocado desde 
+// Vista:       /login/activate.php
+// Controlador: /login/js/controller.Login.js
+//---------------------------------------------
+// Autenticacion:   No requerida 
+// Objetivo:        Realizar activacion de cuenta de usario a partir de token de seguridad
 
-    if ($sel != null) {
-        $correo = $sel[1];
-        $tokenid = $sel[0];
+    $token = $r->token; //Se recibe campo token en la solicitud
+    
+    //Se consulta en base de datos si el token es valido para activar una cuenta de usuario
+    $cmd = "select tokenid, correo from tokens where token='$token' and uso='R' and estado='A'";
+    $sel = getRowSQL($cmd); //Se invoca funcion getRowSQL para capturar respuesta de base de datos de un solo registro.
+
+    if ($sel != null) { //Si el token existe, se realiza proceso de activacion previa validacion de lo datos...
+        $correo = $sel[1]; //Se captura correo del cliente para el que fue asignado el token
+        $tokenid = $sel[0]; //Se captura ID del token recibido
         
+        //Se valida que el cliente al que pertenece el token, perteneza a una cuenta en estado Pendiente y su fuente sea Registro
         $cmd = "select crreo from clntes where crreo='$correo' and fuente='R' and estdo_cln='P'";
         $sel = getRowSQL($cmd);
         
-        if ($sel != null) {
-            $cmd = "UPDATE clntes SET estdo_cln='A' WHERE crreo='$correo'";
-            $code = executeSQL($cmd);
-            if ($code === response_ok){
-                $cmd = "UPDATE tokens SET estado='I' WHERE tokenid=$tokenid";
-                $code = executeSQL($cmd);    
+        if ($sel != null) { //Si el cliente se encuentra pendiente de activacion, activamos la cuenta de usuario
+            $cmd = "UPDATE clntes SET estdo_cln='A' WHERE crreo='$correo'"; //Se genera SQL para modificar el estado del Cliente a Activo
+            $code = executeSQL($cmd); //Ejecutamos la consulta anterior llamando a la funcion executeSQL
+            if ($code === response_ok){ //Si no ocurrio ningun error, inactivamos el token para que no pueda ser utilizado posteriormente
+                $cmd = "UPDATE tokens SET estado='I' WHERE tokenid=$tokenid"; //SQL para inactivar token
+                $code = executeSQL($cmd);    //Se ejecuta la inactivacion del token, y se captura codigo de respuesta
                 $response = array();
-                SendResponse($code,$response);
-            } else {
+                SendResponse($code,$response); //Se envia respuesta Front-End
+            } else {    //Si ocurrio algun error en la Activacion de la cuenta de usuario...
                 $response = array();
-                SendResponse($code,$response);
+                SendResponse($code,$response); //Se envia Codigo de error a Front-End
             }
-        } else {
-            $code = user_already_active;
+        } else { //Si el cliente al que se le asigno el token recibido ya se encuentra activo...
+            $code = user_already_active; //Se genera codigo de respuesta de Usuario ya activo
             $response = array();
-            SendResponse($code,$response);
+            SendResponse($code,$response); // Se envia respuesta a Front-End
         }
-    } else {
-        $code = token_invalid;
+    } else { //Si el token recibido no existe o no se encuentra activo...
+        $code = token_invalid; //Se genera codigo de error de Token Invalido
         $response = array();
-        SendResponse($code,$response);
+        SendResponse($code,$response); //Se envia error a Front-End
     }
 }
 
 
 function getUsers_a($auth,$r){
+// Metodo getUsers_a invocado desde 
+// Vista:       /userAdmin/gestion.php
+// Controlador: /userAdmin/js/controller.userAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Capturar listado de usuarios en base de datos
     
+    //Se genera consulta para listar clientes en base de datos
 	$sql  = "SELECT c.id_cln as id_cln,c.crreo as correo,c.nmbre as nombre,c.fcha_ncmnto as nacimiento,c.tlfno as telefono,";
     $sql .= "c.ncnldad as pais,c.cdad as ciudad,c.fcha_ingrso as creacion,c.estdo_cln as estado,c.fuente as fuente,";
     $sql .= "r.rol as rol, SUBSTRING(b.ultimaReserva FROM 1 FOR 10) as ultimaReserva FROM clntes c "; 
@@ -821,27 +849,42 @@ function getUsers_a($auth,$r){
     $sql .= "left outer join (select c_email, max(created) ultimaReserva ";
     $sql .= "from bk_hotel_booking_bookings book ";
     $sql .= "where status = 'confirmed' group by 1) b on (c.crreo = b.c_email)";
-    $users = jsonQuery($sql);
+    $users = jsonQuery($sql); //Se ejecuta consulta llamando a la funcion jsonQuery para obtener los datos en formato JSON 
     
-    $response = array("users" => $users);
-    SendResponse(response_ok,$response);
+    $response = array("users" => $users); //Se genera respuesta estructurada para Front-End
+    SendResponse(response_ok,$response); //Se envia respuesta llamando a SendResponse
 }
 
 function delUser_a($auth,$data){
-    $cmd  = "DELETE from clntes WHERE id_cln=".$data->id_cln;
+// Metodo getUsers_a invocado desde 
+// Vista:       /userAdmin/gestion.php
+// Controlador: /userAdmin/js/controller.userAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Eliminar usuario de la base de datos
+
+    $cmd  = "DELETE from clntes WHERE id_cln=".$data->id_cln; //SQL para eliminar usuario recibido en la solicitud
     
-    $code = executeSQL($cmd);
+    $code = executeSQL($cmd);//Se ejecuta SQL para eliminar el usuario llamando a la funcion executeSQL
     
     $response = array();
-    SendResponse($code,$response);
+    SendResponse($code,$response);//Enviamos respuesta a Front-End con el codigo de respuesta
 }
 
 function newUser_a($auth,$data){
+// Metodo newUser_a invocado desde 
+// Vista:       /userAdmin/gestion.php
+// Controlador: /userAdmin/js/controller.userAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Crear nuevo usuario en base de datos
+    
+    //Consultamos en la base de datos si el usuario enviado en la solicitud existe previamente
     $cmd = "Select id_cln, fuente, estdo_cln FROM clntes where crreo='".$data->correo."'";
-    $rslt = jsonQuery($cmd);
+    $rslt = jsonQuery($cmd); //Se captura el resultado de la consulta llamando a la funcion jsonQuery
     $code = user_conflict;
-    if (empty($rslt)){
-        ///////lo de arriba apra agregar validacion de si el usuario existe
+    if (empty($rslt)){ //Si el usuario no existe...
+        //Se genera SQL para insertar al cliente en la base de datos
         $cmd  = "INSERT into clntes ";
         $cmd .= "(id_cln,crreo,nmbre,fcha_ncmnto,tpo_numdoc,id_numdoc,tlfno,ncnldad,cdad,fuente,estdo_cln) VALUES (";
         $cmd .= "null,'".$data->correo."', ";
@@ -854,34 +897,35 @@ function newUser_a($auth,$data){
         $cmd .= "'".$data->fuente."', ";
         $cmd .= "'".$data->estado."')";
         
-        $code = executeSQL($cmd);
-        if ($code === response_ok){
-            $clave2 = $data->c2;
-            $clave1 = $data->c1;
-            $correo = $data->correo;
+        $code = executeSQL($cmd); //Se ejecuta el SQL 
+        if ($code === response_ok){ //Si no hubo error al crear el usuario...
+            $clave2 = $data->c2; //Se captura contraseña encriptada enviada en la solicitud
+            $clave1 = $data->c1; //Se captura contraseña de usuario enviada en la solicitud
+            $correo = $data->correo; //Se captura correo electronico enviado en la solicitud
+
+            //Se genera SQL para insertar contraseña de usuario a la base de datos
             $cmd = "INSERT INTO scrty (id_cln, pass) select id_cln, '$clave2' from clntes where crreo='$correo' and estdo_cln in ('P','A')";
-            $code = executeSQL($cmd);
+            $code = executeSQL($cmd); //Se ejecuta el SQL
             
-            if ($code === response_ok){
-                
-                $nombre = $data->nombre;
-                $tkn = sha1(date("Y-m-d H:i:s"));
-                $fechaCreacion = date("Y-m-d");
+            if ($code === response_ok){ //Si no hubo error al insertar la contraseña del usuario
+                $nombre = $data->nombre; //Se captura nombre de usuario enviado en la solicitud
+                $tkn = sha1(date("Y-m-d H:i:s")); //Se genera token encriptar con SHA1 el timestamp actual
+                $fechaCreacion = date("Y-m-d"); 
                 $fechaCierre = '2099-12-31';
-                $uso = "R";
-                /////////////////////////////////
+                $uso = "R"; //Se define uso en 'R' para crear token de Registro
+                //Se genera SQL para crear nuevo token de seguridad
                 $cmd = "INSERT INTO tokens (tokenid, token, fecha_creacion, fecha_cierre, uso, correo)
                         VALUES (NULL, '$tkn', '$fechaCreacion', '$fechaCierre', '$uso', '$correo')";
-                $code = executeSQL($cmd);
+                $code = executeSQL($cmd); //ejecutamos SQL 
             
-                if ($code === response_ok) {
+                if ($code === response_ok) { //Si el token se creo correctamente, enviamos correo al usuario con su contraseña y token
                     $to = $correo;
                     $from = "reservas@anapoimanatura.com";
                     $subject = "Activa tu cuenta en Natura - anapoimanatura.com";
                     
                     $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
                     $email_message .= '<center>';
-                    $email_message .= '<img src="http://localhost/desarrollo/images/home/logo.png" />';
+                    $email_message .= '<img src="http://anapoimanatura.com/desarrollo/images/home/logo.png" />';
                     $email_message .= '</center>';
                     $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
                     $email_message .= '<tbody>';
@@ -892,7 +936,7 @@ function newUser_a($auth,$data){
                     $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
                     $email_message .= "Debes activar tu cuenta utilizando el siguiente enlace:<BR>";
                     $email_message .= "<BR>";
-                    $email_message .= "<b>Enlace:  </b><a href='http://localhost/desarrollo/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
+                    $email_message .= "<b>Enlace:  </b><a href='http://anapoimanatura.com/desarrollo/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
                     $email_message .= "<br>Te hemos asignado esta contraseña para iniciar sesion:<BR>";
                     $email_message .= "<BR>";
                     $email_message .= "<b>Contraseña:  </b>$clave1 <BR>";
@@ -902,11 +946,11 @@ function newUser_a($auth,$data){
                     $email_message .= '</table>';
                     $email_message .= '</div>';
                     
-                    sendMail($to,$from,$subject,$email_message);
+                    sendMail($to,$from,$subject,$email_message);// Se envia correo electronico al usuario
                     
-                    $code = user_created;
+                    $code = user_created; //Se genera codigo de respuesta de Usuario Creado
                     $response = array();
-                    SendResponse($code,$response);
+                    SendResponse($code,$response); // Se envia codigo de respusta a Front-End
                         
                 }
             }
@@ -914,21 +958,31 @@ function newUser_a($auth,$data){
     }
     
     $response = array();
-    SendResponse($code,$response);
+    SendResponse($code,$response); //Si ocurrio algun error se envia respuesta a Front-End
 }
 
 function updUser_a($auth,$data){
-    $id_cln = $data->id_cln;
-    $c1 = $data->c1;
-    $c2 = $data->c2;
-    $estado = $data->estado;
-    $fuente = $data->fuente;
-    $correo = $data->correo;
+// Metodo updUser_a invocado desde 
+// Vista:       /userAdmin/gestion.php
+// Controlador: /userAdmin/js/controller.userAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Actualizar datos de usuario
     
+    $id_cln = $data->id_cln;    //ID de usuario recibido en la solicitud
+    $c1 = $data->c1;            //Se captura contraseña de usuario recibida en la solicitud
+    $c2 = $data->c2;            //Se captura contraseña encriptada recibida en la solicitud
+    $estado = $data->estado;    //Estado de cuenta de usuario recibido en la solicitud
+    $fuente = $data->fuente;    //Fuente de la informacion recibido en la solicitd
+    $correo = $data->correo;    //Correo electronico de usuario recibido en la solicitud
+    
+    //Se consulta en base de datos si el usuario de la solicitud ya tiene alguna contraseña guardada
     $cmd = "select * from scrty where id_cln = $id_cln";
-    $rslt = jsonQuery($cmd);
+    $rslt = jsonQuery($cmd); //Ejecutamos la consulta
+    //Si el usuario no tiene una contraseña, la fuente recibida es Registro y el estado recibido es Activo
+    //Se cambia la variable estado a Pendiente, ya que el usuario debe activar su cuenta primero
     if (empty($rslt) && $fuente=='R' && $estado=='A') $estado = 'P';
-    
+    //Se genera SQL para actualizar los datos de usuario
     $cmd  = "UPDATE clntes SET ";
     $cmd .= "nmbre='".$data->nombre."', ";
     $cmd .= "fcha_ncmnto='".$data->nacimiento."', ";
@@ -940,38 +994,43 @@ function updUser_a($auth,$data){
     $cmd .= "fuente='".$data->fuente."' ";
     $cmd .= "WHERE id_cln=".$data->id_cln;
     
-    $code = executeSQL($cmd);
-    if ($code === response_ok){
+    $code = executeSQL($cmd); //Se ejecuta SQL
+    if ($code === response_ok){ //Si no hay error en la ejecucion
+    //Actualizamos el rol del Cliente segun la solicitud realizada con el siguiente SQL
         $cmd  = "UPDATE rol_clntes SET ";
         $cmd .= "rol=".$data->rol." ";
         $cmd .= "WHERE id_cln=".$data->id_cln;
         
-        $code = executeSQL($cmd);
-        
+        $code = executeSQL($cmd); //Ejecutamos actualizacion de rol
+        //Consultamos si no hubo error en la anterior ejecucion, si el usuario no tiene contraseña
+        //y si la fuente es Registro y el estado de la cuenta es Pendiente
+        //Si asi es, se crea la contraseña para el usuario
         if($code === response_ok && empty($rslt) && $fuente=='R' && $estado=='P'){
+            //SQL para insertar la contraseña de usuario
             $cmd = "INSERT INTO scrty (id_cln, pass) select id_cln, '$c2' from clntes where crreo='$correo' and estdo_cln in ('P')";
-            $code = executeSQL($cmd);
+            $code = executeSQL($cmd); //Ejecutamos SQL
             
-            if ($code === response_ok){
+            if ($code === response_ok){ // Si no hubo ningun error
                 
-                $nombre = $data->nombre;
-                $tkn = sha1(date("Y-m-d H:i:s"));
-                $fechaCreacion = date("Y-m-d");
+                $nombre = $data->nombre; //Se captura nombre de usuario de la solicitud
+                $tkn = sha1(date("Y-m-d H:i:s")); //Se genera token encriptando con sha1 el timestamp actual
+                $fechaCreacion = date("Y-m-d"); //
                 $fechaCierre = '2099-12-31';
-                $uso = "R";
-                /////////////////////////////////
+                $uso = "R"; //Variable $uso en "R" para usuarios de registro 
+                
+                //SQL para insertar token a la base de datos
                 $cmd = "INSERT INTO tokens (tokenid, token, fecha_creacion, fecha_cierre, uso, correo)
                         VALUES (NULL, '$tkn', '$fechaCreacion', '$fechaCierre', '$uso', '$correo')";
-                $code = executeSQL($cmd);
+                $code = executeSQL($cmd); //Se ejecuta con executeSQL
             
-                if ($code === response_ok) {
+                if ($code === response_ok) { //Si no ocurre error
                     $to = $correo;
                     $from = "reservas@anapoimanatura.com";
                     $subject = "Activa tu cuenta en Natura - anapoimanatura.com";
                     
                     $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
                     $email_message .= '<center>';
-                    $email_message .= '<img src="http://localhost/desarrollo/images/home/logo.png" />';
+                    $email_message .= '<img src="http://anapoimanatura.com/desarrollo/images/home/logo.png" />';
                     $email_message .= '</center>';
                     $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
                     $email_message .= '<tbody>';
@@ -982,7 +1041,7 @@ function updUser_a($auth,$data){
                     $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
                     $email_message .= "Debes activar tu cuenta utilizando el siguiente enlace:<BR>";
                     $email_message .= "<BR>";
-                    $email_message .= "<b>Enlace:  </b><a href='http://localhost/desarrollo/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
+                    $email_message .= "<b>Enlace:  </b><a href='http://anapoimanatura.com/desarrollo/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
                     $email_message .= "<br>Te hemos asignado esta contraseña para iniciar sesion:<BR>";
                     $email_message .= "<BR>";
                     $email_message .= "<b>Contraseña:  </b>$c1 <BR>";
@@ -992,10 +1051,10 @@ function updUser_a($auth,$data){
                     $email_message .= '</table>';
                     $email_message .= '</div>';
                     
-                    sendMail($to,$from,$subject,$email_message);
+                    sendMail($to,$from,$subject,$email_message); //Se envia correo electronico al cliente
                     
                     $response = array();
-                    SendResponse($code,$response);
+                    SendResponse($code,$response); //Se envia respuesta a Front-End con SendResponse
                         
                 }
             }
@@ -1003,91 +1062,125 @@ function updUser_a($auth,$data){
     }
             
     $response = array();
-    SendResponse($code,$response);
+    SendResponse($code,$response); //Si ocurrio algun error se envia respuesta a Front-End
 }
 
 function getUsersPromos_a($auth,$r){
-    
+// Metodo getUsersPromos_a invocado desde 
+// Vista:       /promosAdmin/index.php
+// Controlador: /promosAdmin/js/controller.promosAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Listar usuarios en base de datos registrados y con cuenta activa
+
+    //SQL para consultar en base de datos el listado de clientes
 	$sql  = "SELECT id_cln,crreo as correo,nmbre as nombre FROM clntes WHERE estdo_cln = 'A' and fuente='R'";
-    $users = jsonQuery($sql);
+    $users = jsonQuery($sql); //Se ejecuta consulta y se captura resultado en JSON
     
-    $response = array("users" => $users);
-    SendResponse(response_ok,$response);
+    $response = array("users" => $users); //Se genera respuesta estructurada para Front-End 
+    SendResponse(response_ok,$response); //Se envia respuesta
 }
 
 function getPromos_a($auth,$r){
+// Metodo getPromos_a invocado desde 
+// Vista:       /promosAdmin/gestion.php
+// Controlador: /promosAdmin/js/controller.promosAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Listar promociones en base de datos
     
+    //SQL para consultar en base de datos el listado de codigos promocionales
 	$sql  = "SELECT p.*, estdo as estado, asgn as tipo FROM promocodes p";
-    $promos = jsonQuery($sql);
+    $promos = jsonQuery($sql); //Se ejecuta consulta y se captura resultado en JSON
     
-    $response = array("promos" => $promos);
-    SendResponse(response_ok,$response);
+    $response = array("promos" => $promos); //Se genera respuesta estructurada
+    SendResponse(response_ok,$response); //Se envia respuesta a Front-End
 }
 
 function getPromo_Users_a($auth,$r){
+// Metodo getPromo_Users_a invocado desde 
+// Vista:       /promosAdmin/gestion.php
+// Controlador: /promosAdmin/js/controller.promosAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Consulta de usuarios relacionados con promocion solicitada
     
-    
+    //SQL para consultar en base de datos el listado de usuarios enlazados a la promocion
 	$sql  = "SELECT DISTINCT id_cln, crreo as correo, nmbre as nombre FROM clntes c ";
     $sql .= "JOIN assignm a ON (c.id_cln = a.id_user) ";
     $sql .= "WHERE estdo_cln = 'A' and fuente='R' AND id_code = '".$r->cdgo ."'";
-    $users = jsonQuery($sql);
-    
-    
+    $users = jsonQuery($sql); //Se ejecuta consulta    
     
     $response = array("users" => $users);
-    SendResponse(response_ok,$response);
+    SendResponse(response_ok,$response); //Se envia respuesta a Front-End
     
 }
 
 function newPromo_a($auth,$r){
-    $dscr = $r->dscr;
-    $asgn = $r->asgn;
-    $dscn = $r->dscn;
-    $fmin = $r->fmin;
-    $fmax = $r->fmax;
-    $list = $r->clnt;
+// Metodo newPromo_a invocado desde 
+// Vista:       /promosAdmin/gestion.php
+// Controlador: /promosAdmin/js/controller.promosAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Creacion de nuevas promociones
+    
+    $dscr = $r->dscr; //Descripcion de promocion recibida en solicitud
+    $asgn = $r->asgn; //Tipo de promocion recibida en solicitud
+    $dscn = $r->dscn; //Porcentaje Descuento recibida en solicitud
+    $fmin = $r->fmin; //Fecha inicio de promocion recibida en solicitud
+    $fmax = $r->fmax; //Fecha fin de promocion recibida en solicitud
+    $list = $r->clnt; //Listado de clientes para enlazar a promocion recibida en solicitud
      
+    //Se genera nombre automatico de Codigo Promocional
     $sql = "SELECT max(ID) FROM promocodes";
 	$res = getRowSQL($sql);
 	$l = $asgn[0];
 	if ($asgn == "Masivo") $l = "T";
-	
-    $cdgo = "COD-".$l.(intval($res[0])+1);
+	$cdgo = "COD-".$l.(intval($res[0])+1);
 	   
+    //Se inserta en la base de datos la nueva promocion
     $cmd = "INSERT INTO promocodes (cdgo, dscr, asgn, dscn, fmin, fmax)
         VALUES ('$cdgo','$dscr','$asgn',$dscn,'$fmin','$fmax')";
-    
     $code = executeSQL($cmd);
+    //Si no ocurrio error en la insercion...
     if ($code === response_ok) {
+        //Se almacena en base de datos, usuarios relacionados a la promocion
         foreach ($list as $clnt){
             $cmd = "INSERT INTO assignm (id_code, id_user) VALUES ('" . $cdgo . "'," . $clnt->id_cln . ")";
             $code = executeSQL($cmd);
         }       
     }
+    //Si ocurrio algun error se envia respuesta a Front-End
     $response = array();
     SendResponse($code,$response);
-        
         
 }
 
 function updPromo_a($auth,$r){
+// Metodo updPromo_a invocado desde 
+// Vista:       /promosAdmin/gestion.php
+// Controlador: /promosAdmin/js/controller.promosAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Actualizacion de promociones
     
-    $cdgo = $r->cdgo;
-    $fmin = $r->fmin;
-    $fmax = $r->fmax;
-    $dscr = $r->descrip;
-    $asgn = $r->tipo;
-    $estd = $r->estado;
-    $dscn = $r->descuento;
-    $list = $r->lista;
+    $cdgo = $r->cdgo; //Nombre de codigo promocional recibido en solicitud
+    $fmin = $r->fmin; //Fecha de inicio del codigo promocional recibido en solicitud
+    $fmax = $r->fmax; //Fecha de cierre del codigo promocional recibido en solicitud
+    $dscr = $r->descrip; //Descripcion del codigo promocional recibido en solicitud
+    $asgn = $r->tipo; //Tipo de codigo promocional recibido en solicitud
+    $estd = $r->estado; //Estado de codigo promocional recibido en solicitud
+    $dscn = $r->descuento; //Porcentaje descuento de codigo promocional recibido en solicitud
+    $list = $r->lista; //Listado de clientes relacionados al codigo promocional recibido en solicitud
      
+    //Se actualiza los datos de la promocion segun solicitud
     $cmd = "UPDATE promocodes SET dscr = '$dscr', asgn = '$asgn', dscn = $dscn, 
-            fmin = '$fmin', fmax = '$fmax', estdo = $estd WHERE cdgo = '$cdgo'";
-    
+            fmin = '$fmin', fmax = '$fmax', estdo = $estd WHERE cdgo = '$cdgo'";    
     $code = executeSQL($cmd);
-    if ($code === response_ok) {
-        $cmd = "DELETE FROM assignm WHERE id_code = '$cdgo'";
-                
+
+    if ($code === response_ok) {//Si no ocurre error...
+        //Se actualiza listado de clientes enlazados a la promocion
+        $cmd = "DELETE FROM assignm WHERE id_code = '$cdgo'";                
         $code = executeSQL($cmd); 
         if ($code === response_ok) {
             foreach ($list as $clnt){
@@ -1097,39 +1190,53 @@ function updPromo_a($auth,$r){
         }
     }
     $response = array();
-    SendResponse($code,$response);
+    SendResponse($code,$response); //Se envia respuesta del servidor
    
 }
 
 function delPromo_a($auth,$r){
+// Metodo delPromo_a invocado desde 
+// Vista:       /promosAdmin/gestion.php
+// Controlador: /promosAdmin/js/controller.promosAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Eliminar promociones
     
-    $cdgo = $r->id_code;
-     
+    $cdgo = $r->id_code; //Nombre del codigo promocional recibido en la solicitud
+
+    //Se elimina de la base de datos el codigo solicitado    
     $cmd = "DELETE FROM promocodes WHERE cdgo = '$cdgo'";
-    
     $code = executeSQL($cmd);
     
     if ($code === response_ok) {
+        //Se elimina listado de clientes enlazados a la promocion eliminada
         $cmd = "DELETE FROM assignm WHERE id_code = '$cdgo'";
         $code = executeSQL($cmd);
     }            
     
     $response = array();
-    SendResponse($code,$response);
-   
+    SendResponse($code,$response); //Se envia respuesta del servidor
 }
 
 function modifClntes_a($auth,$data){
-    $clntes = $data->id_cln;
-    $c_1 = $data->c1;
-    $c_2 = $data->c2;
-    $estado = $data->estado;
+// Metodo modifClntes_a invocado desde 
+// Vista:       /userAdmin/gestion.php
+// Controlador: /userAdmin/js/controller.userAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Modificar informacion de usuario de la base de datos
+
+    $clntes = $data->id_cln; //id del usuario a modificar recibido en la solicitud
+    $c_1 = $data->c1; //Contraseña recibido en la solicitud
+    $c_2 = $data->c2; //Contraseña encriptada recibido en la solicitud
+    $estado = $data->estado; //Estado de la cuenta de usuario recibido en la solicitud
     
     $code = response_ok;
     foreach ($clntes as $i => $id_cln){
-        $cmd = "select * from scrty where id_cln = $id_cln";
+        $cmd = "select * from scrty where id_cln = $id_cln"; //Se consulta si el usuario tiene una contraseña asignada
         $rslt = jsonQuery($cmd);
         
+        /Se consulta estado actual de fuente de informacion, correo y nombre del usuario en base de datos
         $sql  = "SELECT fuente,crreo as correo,nmbre as nombre FROM clntes WHERE id_cln=$id_cln";
         $u = jsonQuery($sql);
         $fuente = $u[0]['fuente'];
@@ -1137,44 +1244,49 @@ function modifClntes_a($auth,$data){
         $correo = $u[0]['correo'];
         $c1 = $c_1[$i];
         $c2 = $c_2[$i];
+
+        //Si el usuario no tiene una contraseña asignada, se encuentra registrado y con estado de cuenta Activo
+        //Se cambia el estado a Pendiente
         if (empty($rslt) && $fuente=='R' && $estado=='A') $estado = 'P'; 
         
-        if ($estado == 'I'){
+        if ($estado == 'I'){ //Si el estado recibido es inactivo
             $cmd  = "UPDATE clntes SET ";
             $cmd .= "estdo_cln='".$estado."' ";
             $cmd .= "WHERE id_cln=".$id_cln;
-            $code += executeSQL($cmd);
+            $code += executeSQL($cmd); //Se cambia el estado del cliente a inactivo
         } else {
             $cmd  = "UPDATE clntes SET ";
             $cmd .= "estdo_cln='".$estado."' ";
             $cmd .= "WHERE id_cln=".$id_cln;
             $cmd .= " AND fuente='R'";
-            $code += executeSQL($cmd);
+            $code += executeSQL($cmd); //Si no es inactivo, se actualiza el estado solo si la fuente de informacion es Registro
         }
         
+        //Si no han ocurrido errores y el usuario no tiene contraseña y la fuente es Registro y el estado Pendiente...
         if($code === response_ok && empty($rslt) && $fuente=='R' && $estado=='P'){
             $cmd = "INSERT INTO scrty (id_cln, pass) VALUES ($id_cln, '$c2')";
-            $code += executeSQL($cmd);
+            $code += executeSQL($cmd); //Se almacena la contraseña recibida para el usuario
             
-            if ($code === response_ok){
+            if ($code === response_ok){ ///Si no ocurre error...
                 
-                $tkn = sha1(date("Y-m-d H:i:s"));
+                $tkn = sha1(date("Y-m-d H:i:s")); //Se genera token de seguridad
                 $fechaCreacion = date("Y-m-d");
                 $fechaCierre = '2099-12-31';
-                $uso = "R";
-                /////////////////////////////////
+                $uso = "R"; //Con R para usuario de Registro
+                
+                ///Almacenamos token en base de datos
                 $cmd = "INSERT INTO tokens (tokenid, token, fecha_creacion, fecha_cierre, uso, correo)
                         VALUES (NULL, '$tkn', '$fechaCreacion', '$fechaCierre', '$uso', '$correo')";
                 $code += executeSQL($cmd);
             
-                if ($code === response_ok) {
+                if ($code === response_ok) { //Si no ocurre error ...
                     $to = $correo;
                     $from = "reservas@anapoimanatura.com";
                     $subject = "Activa tu cuenta en Natura - anapoimanatura.com";
                     
                     $email_message = '<div style="max-width:600px; min-width:450px; margin: 10px auto;">';
                     $email_message .= '<center>';
-                    $email_message .= '<img src="http://localhost/desarrollo/images/home/logo.png" />';
+                    $email_message .= '<img src="http://anapoimanatura.com/desarrollo/images/home/logo.png" />';
                     $email_message .= '</center>';
                     $email_message .= '<table style="width:100%; border-collapse:collapse; border-spacing:0; font:15px/1.5em Helvetica,Arial,sans-serif; color:#5D4C37; border:1px solid #ccc; box-shadow:0 0 1px #ccc;">';
                     $email_message .= '<tbody>';
@@ -1185,7 +1297,7 @@ function modifClntes_a($auth,$data){
                     $email_message .= '<td style="max-width:30%; vertical-align:top; padding:8px; text-align:left;">';
                     $email_message .= "Debes activar tu cuenta utilizando el siguiente enlace:<BR>";
                     $email_message .= "<BR>";
-                    $email_message .= "<b>Enlace:  </b><a href='http://localhost/desarrollo/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
+                    $email_message .= "<b>Enlace:  </b><a href='http://anapoimanatura.com/desarrollo/login/activate.php?tk=$tkn'> Activar mi cuenta </a> <BR>";
                     $email_message .= "<br>Te hemos asignado esta contraseña para iniciar sesion:<BR>";
                     $email_message .= "<BR>";
                     $email_message .= "<b>Contraseña:  </b>$c1 <BR>";
@@ -1195,27 +1307,36 @@ function modifClntes_a($auth,$data){
                     $email_message .= '</table>';
                     $email_message .= '</div>';
                     
-                    sendMail($to,$from,$subject,$email_message);
+                    sendMail($to,$from,$subject,$email_message); // se envia correo electronico con token y contraseña al cliente
                         
                 }
             }
         }
     }
     $response = array();
-    SendResponse($code,$response);
+    SendResponse($code,$response); ///Se envia codigo de respuesta a Front-End
     
 }
 
 function delClntes_a($auth,$data){
-    $clntes = $data->id_cln;
+// Metodo delClntes_a invocado desde 
+// Vista:       /userAdmin/gestion.php
+// Controlador: /userAdmin/js/controller.userAdmin.js
+//---------------------------------------------
+// Autenticacion:   Requerida como Administrador 
+// Objetivo:        Eliminar clientes de la base de datos
+
+    $clntes = $data->id_cln; //Se captura id del cliente de la solicitud
     
     $code = response_ok;
     foreach ($clntes as $id_cln){
+
+        //Se eliminan clientes solicitados
         $cmd  = "DELETE from clntes WHERE id_cln=".$id_cln;
         $code += executeSQL($cmd);
     }
     $response = array();
-    SendResponse($code,$response);
+    SendResponse($code,$response); //Se envia codigo de respuesta del servidor
 }
 
 
