@@ -1,7 +1,8 @@
-/*  Angular Framework  */
+//Se inicializa controlador para los sitios index.php, editProfile.php
 app = angular.module("app",['angular-hmac-sha512','angular-jwt', 'angular-storage','ngCookies','ngFileUpload', 'ngImgCrop']);
 app.controller("control",function($scope,$crypthmac,$window,$http,$interval,jwtHelper,store,$cookies,$location,Upload, $timeout){
 
+//Variables de codigos de error en Back-End(Ver /api/index.php)
 var db_isdown = 521;
 var db_unknown_error = 520;
 var access_forbidden = 500;
@@ -19,19 +20,20 @@ var FileErrorFormat = 1003;
 var ErrorOnUpload = 1004;
 var response_ok = 0;
 
-
+//Funcion para definir accion ante acceso denegado
 var access_forbidden = function (){
 	var token = store.get("token") || null;
-	if (token) store.remove("token");
+	if (token) store.remove("token"); //Si el usuario que intenta acceder se encuentra logeado con un token en el WebStorage, se elimina el token
 	var url = store.get("url") || null;
-	if (url) store.remove("url");
-	$window.location = '../login/'
+	if (url) store.remove("url"); //Tambien se elmina url de retorno si se encuentra almacenada
+	$window.location = '../login/'; //Se envia al usuario a login
 }
 
+//Al acceder a este sitio se almacena url de retorno, en caso de salida retornable
 var url = function (){ store.set('url', $location.absUrl());}
 
-$scope.goLogin = function(){ url(); $window.location = '../login/'; }
-$scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; }
+$scope.goLogin = function(){ url(); $window.location = '../login/'; } //Al llamar esta funcion nos envia a login
+$scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; } //Al llamar a esta funcion nos envia a logout
 
 //Usuario Autorizado?
 	//obtenemos el token en localStorage
@@ -60,7 +62,7 @@ $scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; }
 	}
 	$scope.isAuth = auth();
 
-if (!$scope.isAuth) access_forbidden();
+if (!$scope.isAuth) access_forbidden(); // Si el usuario no esta autorizado correctamente se llama a Acceso Denegado.
 else{
 
 var roles = [{rol: 0, descRol: 'Cliente'},
@@ -107,7 +109,6 @@ $scope.book_status ={confirmed: 'Confirmada',
 	});
 	
 
-/////*******************//////*****************************///////	
 var opciones = [{opcion: 0, descOpcion: 'Panel Principal'}
                 ,{opcion: 1, descOpcion: 'Ver mis Reservas'}
 				,{opcion: 2, descOpcion: 'Ver mis Comentarios'}
@@ -116,6 +117,7 @@ var opciones = [{opcion: 0, descOpcion: 'Panel Principal'}
 $scope.opciones = opciones;
 
 var sql = function(data){
+//Funcion para envio de distintas solicitudes a Back-End
 	var request = $http({
 		method: "post",
 		url: "../api/index.php",
@@ -152,6 +154,7 @@ var sql = function(data){
 	});
 }
 
+//Funcion para editar info personal de usuario desde formulario
 $scope.editPersonal = function (nombre,telefono,pais,ciudad,nacimiento){
 	if (telefono==undefined) telefono = $scope.userinfo.tlfno;
 	if (telefono==null) telefono = 0;
@@ -168,10 +171,10 @@ $scope.editPersonal = function (nombre,telefono,pais,ciudad,nacimiento){
 		nacimiento: nacimiento,
 		action:'editUser_personal'
 	};
-	sql(datos);	
+	sql(datos);	//Se envía solicitud a Back-End llamando a la funcion sql()
 }
 
-/////*******************//////*****************************///////	
+//Funcion para carga de foto de perfil de usuario	
 
 $scope.upload = function (dataUrl, name) {
 	$scope.errorMsg = undefined;
@@ -226,12 +229,13 @@ $scope.upload = function (dataUrl, name) {
 	});
 }
 
-/////*******************//////*****************************///////
+//Parametros para validacion de formulario
 $scope.valid = {
 	nueva : true, 
 	confirmacion : true, 
 	anterior : true
 };
+//Funcion para editar contraseña de usuario
 $scope.editPwd = function(anterior,confirmacion,nueva){
 	///Validacion de campos
 	if (anterior == undefined || anterior ==null) $scope.valid.anterior = false;

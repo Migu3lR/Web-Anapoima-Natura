@@ -1,7 +1,8 @@
-/*  Angular Framework  */
+//Se inicializa controlador para los sitios index.php
 app = angular.module("app",['angular-jwt', 'angular-storage','ngCookies']);
 app.controller("control",function($scope,$window,$http,$interval,jwtHelper,store,$cookies,$location){
 
+//Variables de codigos de error en Back-End(Ver /api/index.php)
 var db_isdown = 521;
 var db_unknown_error = 520;
 var access_forbidden = 500;
@@ -15,11 +16,12 @@ var user_accepted = 202;
 var pass_changed = 203;
 var user_unauthorized = 401;
 var response_ok = 0;
-	
+
+//Al acceder a este sitio se almacena url de retorno, en caso de salida retornable
 var url = function (){ store.set('url', $location.absUrl());}
 
-$scope.goLogin = function(){ url(); $window.location = '../login/'; }
-$scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; }
+$scope.goLogin = function(){ url(); $window.location = '../login/'; } //Al llamar esta funcion nos envia a login
+$scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; } //Al llamar a esta funcion nos envia a logout
 
 //Usuario Autorizado?
 	//obtenemos el token en localStorage

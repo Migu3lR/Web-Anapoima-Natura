@@ -1,7 +1,8 @@
-/*  Angular Framework  */
+//Se inicializa controlador para los sitios index.php, comentar.php
 app = angular.module("app",['angular-jwt', 'angular-storage','ngCookies']);
 app.controller("control",function($scope,$window,$http,$interval,jwtHelper,store,$cookies,$location){
 
+//Variables de codigos de error en Back-End(Ver /api/index.php)
 var db_isdown = 521;
 var db_unknown_error = 520;
 var access_forbidden = 500;
@@ -15,11 +16,12 @@ var user_accepted = 202;
 var pass_changed = 203;
 var user_unauthorized = 401;
 var response_ok = 0;
-	
+
+//Al acceder a este sitio se almacena url de retorno, en caso de salida retornable	
 var url = function (){ store.set('url', $location.absUrl());}
 
-$scope.goLogin = function(){ url(); $window.location = '../login/'; }
-$scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; }
+$scope.goLogin = function(){ url(); $window.location = '../login/'; } //Al llamar esta funcion nos envia a login
+$scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; } //Al llamar a esta funcion nos envia a logout
 
 //Usuario Autorizado?
 	//obtenemos el token en localStorage
@@ -47,18 +49,20 @@ $scope.goLogout = function(){ url(); $window.location = '../login/logout.php'; }
 	}
 	$scope.isAuth = auth();
 
+//Funcion para definir accion ante acceso denegado
 var access_forbidden = function (){
 	var token = store.get("token") || null;
-	if (token) store.remove("token");
+	if (token) store.remove("token"); //Tambien se elmina url de retorno si se encuentra almacenada
 	$scope.goLogin();
 }
 	
-	
+	//Variables para paginar listado de comentarios
 	$scope.Math = window.Math;
 	$scope.paginacion = 10;
 	$scope.paginas = 0;
 	$scope.pag = 1;
 	
+	//Se consulta listado de comentarios a la API en Back-End 
 	var request = $http({
 		method: "post",
 		url: "../api/index.php",
@@ -76,6 +80,7 @@ var access_forbidden = function (){
 		switch (res.code) {
 			case response_ok:
 				$scope.posts=res.response.comments;
+				//Si se consigue listado de comentarios, se pagina resultado (10 en 10)
 				if ($scope.posts.length > 0){
 					$scope.paginas = 1;
 					if ($scope.posts.length > $scope.paginacion){
@@ -95,13 +100,14 @@ var access_forbidden = function (){
 		}
 	});
 	
+	//Funcion changePage llamada cuando se cambia de pagina de comentarios
 	$scope.changePag = function(i){
 		$scope.pag = i;
 		//console.log($scope.pag);
 	}
 	
 	$scope.newPost = function(nombre,email,mensaje,rate,token){
-		
+	//Funcion newPost llamada para insertar un nuevo comentario en la BD	
 		if(rate == undefined) rate = 0;
 			
 		var request = $http({
@@ -126,8 +132,9 @@ var access_forbidden = function (){
 			
 			switch (res.code) {
 				case response_ok:
+					//Si el comentario se cargo correctamente, se actualiza la pagina
 					alert("¡Gracias por tu comentario!");
-					$window.location="../comentarios/";
+ 					$window.location="../comentarios/";
 					break;
 				case token_invalid:
 					alert("Ha utilizado un token invalido para comentar, comuniquese con el Servicio de Natura.");

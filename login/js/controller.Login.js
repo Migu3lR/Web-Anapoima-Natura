@@ -1,6 +1,8 @@
+//Se inicializa controlador para los sitios index.php
 app = angular.module("app",['angular-hmac-sha512','ngAnimate','angular-jwt', 'angular-storage','ngCookies']);
 app.controller("control",function($scope,$crypthmac,$window,$http,jwtHelper,store,$cookies){
 
+//Al acceder a este sitio se almacena url de retorno, en caso de salida retornable
 var url = store.get("url") || null;
 if (!url) url = "/desarrollo/";
 
@@ -34,7 +36,8 @@ if (!url) url = "/desarrollo/";
 		} else return false;
 	}
 	$scope.isAuth = auth();
-	
+
+//Variables de codigos de error en Back-End(Ver /api/index.php)	
 var db_isdown = 521;
 var db_unknown_error = 520;
 var access_forbidden = 500;
@@ -52,11 +55,12 @@ var user_unauthorized = 401;
 var response_ok = 0;
 $scope.form = true;
 
+//Variable flag para mostrar mensaje de error
 $scope.showError = false;
 $scope.eIn = false;
 $scope.eUp = false;
 
-
+//Variable para validacion de campos de registro
 $scope.valid = {
 	nombre : true, 
 	correo : true, 
@@ -75,21 +79,26 @@ var dir = "";
 $scope.resp = 0;
 $scope.msg = "";
 	
+	//Esta funcion recibe las solicitudes para el backend 
+	//para los registros de usuario e inicio de sesion
 	var sql = function(dataCode,dir){
                 $scope.showError = false;
 		var request = $http({
 			method: "post",
 			url: "../api/index.php",
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-			skipAuthorization: true,
+			skipAuthorization: true, //en true para que no se envie token de seguridad
 			data: dataCode
 		});
 
 		/* Check whether the HTTP Request is successful or not. */
 		request.success(function (res) {
 			if(res.code !== undefined && res.response.token !== undefined){
+				//Si se reciben token de seguridad y backend responde user_accepted (cuando se hace login)
+				//se almacena el token de seguridad recibido
 				if(res.code == user_accepted) store.set('token', res.response.token);
 			}
+			//Switch para los codigos de respuesta que se pueden recibir
 			switch (res.code) {
 				case db_isdown:
 					$scope.msg = "Ha ocurrido un error inesperado, por favor vuelve a intentarlo";
@@ -146,8 +155,11 @@ $scope.msg = "";
 		});
 	}
 	
+	//Funcion para realizar solicitud de registro de usuario
 	$scope.signup = function (nombre, correo, correoCnf, clave, claveCnf, fecha, telefono,nacionalidad,municipio){
-        $scope.eUp = false;
+        $scope.eUp = false; //Variable control de pantalla en vista Registro(false)/Login(true)
+
+		//Variables para validacion de campos de texto de por tipo de dato y tamaño
 		var mas5menos20 = new RegExp("^[a-zA-Z \-]{5,20}$");
 		var mas3menos20 = new RegExp("^[a-zA-Z \-]{3,20}$");
 		var num = new RegExp("^[0-9]+$");
@@ -173,6 +185,7 @@ $scope.msg = "";
 		if (municipio == undefined || municipio.length == 0) $scope.valid.municipio = false;
 		else $scope.valid.municipio = mas3menos20.test(municipio);
 		
+		//Si todos los datos son validos se organizan datos para envío
 		if ($scope.valid.nombre && $scope.valid.correo && $scope.valid.correoCnf && $scope.valid.clave && $scope.valid.claveCnf && $scope.valid.telefono && $scope.valid.nacionalidad && $scope.valid.municipio){
 			var data = {
 				action	: 'RegisterNewUser',
@@ -186,34 +199,41 @@ $scope.msg = "";
 				nacionalidad:nacionalidad,
 				municipio: municipio
 			};
-			
-			data.clave = $crypthmac.encrypt(data.clave,"NtraSfe");
-			sql(data,"newUser");
-            $scope.eUp = true;
+			//Se encripta contraseña antes del envío
+			data.clave = $crypthmac.encrypt(data.clave,"NtraSfe"); 
+			sql(data,"newUser"); //Se envia request a la funcion sql
+            $scope.eUp = true; //Variable control de pantalla en vista Registro(false)/Login(true)
 		}
 	}
+
+	//Funcion signin para recibir solicitud de inicio de sesion
 	$scope.signin = function (correoIn, claveIn){
         $scope.eIn = false;
+		//Se validan los datos recibidos
 		if ( correoIn == undefined || correoIn.length == 0) $scope.valid.correoIn = false;
 		else $scope.valid.correoIn = true;
 		if ( claveIn == undefined || claveIn.length == 0) $scope.valid.claveIn = false;
 		else $scope.valid.claveIn = true;
-
+		
+		//Si la validacion de datos fue correcta...
 		if($scope.valid.correoIn && $scope.valid.claveIn){
 			var token = store.get("token") || null;
-			if (token) store.remove("token");
+			if (token) store.remove("token"); //Si hay un token de seguridad en memoria se limpia
 			
 			var x = $cookies.get("x") || null;
 			if (x !== null){
 				$cookies.remove("x", { path: '/' });
 				$window.location.reload();	
 			}
+			//Se organizan datos a enviar para solicitud de login
 			var data = {
 				action	: 'login',
 				correo   : correoIn,
 				clave    : claveIn
 			};
+			//Se encripta la contraseña a enviar
 			data.clave = $crypthmac.encrypt(data.clave,"NtraSfe")
+			//Se envia solicitud de login a la funcion sql
 			sql(data,"loginUser");
             $scope.eIn = true;
 		}
@@ -221,20 +241,22 @@ $scope.msg = "";
 	
 });
 
+//Controlador para la vista logout.php
 app.controller("logout",function($scope,$crypthmac,$window,$http,jwtHelper,store,$cookies){
-	
+	//Se valida que exista una url de retorno, si no se deja url de inicio
 	var url = store.get("url") || null;
 	if (!url) url = "/desarrollo/";
 	//obtenemos el token en localStorage
 		var token = store.get("token") || null;
-		if (token) store.remove("token");
+		if (token) store.remove("token"); //Si hay un token se limpia
 		
 		var x = $cookies.get("x") || null;
-		if (x !== null){
+		//Se consulta cookie 'x' quue almacena tipo de usuario logueado
+		if (x !== null){//Si la variable esta definida se limpia y se actualiza.
 			$cookies.remove("x", { path: '/' });
 			$window.location.reload();	
 		} 
-		else{
+		else{//Si no esta definido se limpia url de retorno y se redirige a esta url
 			store.remove("url");
 			$window.location = url;	
 		}		
@@ -243,6 +265,7 @@ app.controller("logout",function($scope,$crypthmac,$window,$http,jwtHelper,store
 		
 });
 
+//Controlador para la vista activate.php
 app.controller("activate",function($scope,$crypthmac,$window,$http,jwtHelper,store,$cookies){
 var db_isdown = 521;
 var db_unknown_error = 520;
@@ -260,6 +283,7 @@ var pass_changed = 203;
 var user_unauthorized = 401;
 var response_ok = 0;
 
+	//Esta funcion recibe las solicitudes de activacion de cuenta de usuario
 	var sql = function(dataCode){
 		var request = $http({
 			method: "post",
@@ -305,6 +329,7 @@ var response_ok = 0;
 		});
 	}
 	
+	//esta Funcion prepara la solicitud a backend de activacion de usuario con el token recibido por metodo GET
 	$scope.sendToken = function(token){
 		var data = {
 			action	: 'activateUser',
@@ -326,7 +351,7 @@ app.config(["$httpProvider", "jwtInterceptorProvider",  function ($httpProvider,
     $httpProvider.interceptors.push('jwtInterceptor');
 }]);
 
-
+//JS para efectos graficos en el formulario de registro
 $('.form').find('input, textarea').on('keyup blur focus', function (e) {
   
   var $this = $(this),

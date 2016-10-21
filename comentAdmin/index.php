@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="app">
   <head>
-	<?php $_GET['section']='initAdmin'; require('../layout.php'); ?>
+	<?php $_GET['section']='initAdmin'; require('../layout.php'); ?> <!-- Se invoca initAdmin del layout general -->
 	<link href="css/structure.css" rel="stylesheet">
 	<link href="css/design.css" rel="stylesheet">
   </head>
-  <body ng-controller="control" ng-cloak ng-show="user.rol == 1">
+  <body ng-controller="control" ng-cloak ng-show="user.rol == 1"> <!-- Se invoca controlador y se valida que el usuario sea administrador -->
 
   	<div class="header">
 	     <div class="container">
@@ -16,6 +16,7 @@
 	                 <h1><a href="index.html">Sistema de Comentarios</a></h1>
 	              </div>
 	           </div>
+						 <!-- Menu superior -->
 	           <div class="col-md-5"><div class="row"><div class="col-lg-12"></div></div></div>
 	           <div class="col-md-2">
 	              <div class="navbar navbar-inverse" role="banner">
@@ -34,7 +35,7 @@
 	        </div>
 	     </div>
 	</div>
-
+		<!-- Menu  navegacion izquierda -->
     <div class="page-content">
     	<div class="row">
 		  <div class="col-md-2">
@@ -48,6 +49,8 @@
                 </ul>
              </div>
 		  </div>
+
+			<!-- Este div contiene la seccion de gestion -->
 		  <div class="col-md-10">
 		  	<div class="row">
 		  		<div class="col-md-2">
@@ -57,6 +60,7 @@
 						</div>
 		  				<div class="panel-body">
 		  					<ul class="general_stats">
+								<!-- Se invocan funciones goto_filter, definidas dentro del controlador -->
 								  <li>Pendientes <a href="#" ng-click="goto_filter('estado','P')">{{stats.pendiente}}</a></li>
 								  <li>Aprobados <a href="#" ng-click="goto_filter('estado','A')">{{stats.aprobado}}</a></li>
 								  <li>Rechazados <a href="#" ng-click="goto_filter('estado','R')">{{stats.rechazado}}</a></li>
@@ -75,6 +79,7 @@
 			  					<div class="panel-title">Enviar Solicitud para Comentar</div>
 				  			</div>
 				  			<div class="content-box-large box-with-header">
+								<!-- Se invoca funcion newToken al enviar formulario, definido dentro del controlador -->
 				  				<form accept-charset="UTF-8" ng-submit="newToken(nombre,correo)">
 									<fieldset>
 										<div class="form-group">
@@ -135,8 +140,8 @@
 	  </div>
     </div>
 
-	<?php $_GET['section']='endAdmin'; require('../layout.php'); ?>    
-	<script src="js/controller.comentAdmin.js"></script>
+	<?php $_GET['section']='endAdmin'; require('../layout.php'); ?>    <!-- Se invoca endAdmin del layout general -->
+	<script src="js/controller.comentAdmin.js"></script> <!-- Controlador para la vista -->
 	
   </body>
 </html>

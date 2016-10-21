@@ -1,11 +1,12 @@
-/*  Angular Framework  */
+//Se inicializa controlador para los sitios index.php
 app = angular.module("app",['angular-jwt', 'angular-storage','ngCookies']);
 app.controller("control",function($scope,$window,$http,$interval,jwtHelper,store,$cookies,$location){
 
+//Al acceder a este sitio se almacena url de retorno, en caso de salida retornable
 var url = function (){ store.set('url', $location.absUrl());}
 
-$scope.goLogin = function(){ url(); $window.location = 'login/'; }
-$scope.goLogout = function(){ url(); $window.location = 'login/logout.php'; }
+$scope.goLogin = function(){ url(); $window.location = 'login/'; } //Al llamar esta funcion nos envia a login
+$scope.goLogout = function(){ url(); $window.location = 'login/logout.php'; } //Al llamar a esta funcion nos envia a logout
 
 //Usuario Autorizado?
 	//obtenemos el token en localStorage
@@ -33,7 +34,8 @@ $scope.goLogout = function(){ url(); $window.location = 'login/logout.php'; }
 		} else return false;
 	}
 	$scope.isAuth = auth();
-			
+	
+	//Funcion sendMail para envio de correo electronico de contacto
 	$scope.sendMail = function(nombre,email,body){
 		
 		var request = $http({
@@ -49,6 +51,7 @@ $scope.goLogout = function(){ url(); $window.location = 'login/logout.php'; }
 		
 		request.success(function (data) {	
 			if(data == 1) {
+				//Si se envió correo correctamente se recarga la página
 				alert(nombre + ", gracias por contactarse con nosotros. Pronto contestaremos su mensaje.");
 				$window.location.reload();
 			}

@@ -1,3 +1,4 @@
+//Funcion fechaFormat para dar formato necesarioa a la fecha
 function fechaFormat(fecha){
 	var Dia = fecha.getDate();
 	if(Dia < 10) Dia = ("0" + Dia).slice(-2);
@@ -6,6 +7,8 @@ function fechaFormat(fecha){
 	var Ano = fecha.getFullYear();
 	return Dia + "-" + Mes + "-" + Ano;
 }
+
+//Esta funcion suma un dia mas a la fecha obtenida
 function DiaMas1(fecha){
 	return fechaFormat(new Date(fecha.getTime() + 24 * 60 * 60 * 1000));
 } 
@@ -17,6 +20,7 @@ $(function() {
 	document.getElementById("from").value = hoy;
 	document.getElementById("to").value = manana;
 	
+		//Se define parametros para fecha inicio en barra de reservas
     $( "#from" ).datepicker({
       changeMonth: true,  
       changeYear:true, 
@@ -34,6 +38,7 @@ $(function() {
 		  $( "#to" ).datepicker( "option", "minDate", min );
       }
     });
+		//Se define parametros para fecha final en barra de reservas
     $( "#to" ).datepicker({      
       changeMonth: true,   
       changeYear:true,

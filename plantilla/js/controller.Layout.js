@@ -1,4 +1,4 @@
-/*  Angular Framework  */
+//Controlador para la vista index.php
 app = angular.module("app",['angular-jwt', 'angular-storage','ngCookies']);
 app.controller("control",function($scope,$window,$http,$interval,jwtHelper,store,$cookies,$location){
 

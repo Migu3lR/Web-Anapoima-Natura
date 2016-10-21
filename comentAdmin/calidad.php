@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="app">
   <head>
-	<?php $_GET['section']='initAdmin'; require('../layout.php'); ?>
+	<?php $_GET['section']='initAdmin'; require('../layout.php'); ?> <!-- Se invoca initAdmin del layout general -->
 	<link href="css/structure.css" rel="stylesheet">
 	<link href="css/design.css" rel="stylesheet">
   </head>
-  <body ng-controller="control" ng-cloak ng-show="user.rol == 1">
+  <body ng-controller="control" ng-cloak ng-show="user.rol == 1"> <!-- Se invoca controlador y se valida que el usuario sea administrador --> 
   	<div class="header">
 	     <div class="container">
 	        <div class="row">
@@ -15,6 +15,7 @@
 	                 <h1><a href="index.html">Sistema de Comentarios</a></h1>
 	              </div>
 	           </div>
+						  <!-- Menu superior -->
 	           <div class="col-md-5"><div class="row"><div class="col-lg-12"></div></div></div>
 	           <div class="col-md-2">
 	              <div class="navbar navbar-inverse" role="banner">
@@ -33,7 +34,7 @@
 	        </div>
 	     </div>
 	</div>
-
+		<!-- Menu  navegacion izquierda -->
     <div class="page-content">
     	<div class="row">
 		  <div class="col-md-2">
@@ -47,6 +48,8 @@
                 </ul>
              </div>
 		  </div>
+			
+			 <!-- Este div contiene la seccion de calidad -->
 			<div class="col-md-10">
 			<div class="row">
 			<div class="col-md-12">
@@ -55,6 +58,7 @@
 				<div class="panel-title">Gestion de la Calidad</div>
 			</div>
 		  	<div class="panel-body">
+				<!-- El grafico es embebido en la pagina por medio de este canvas -->
 				<canvas id="line" class="chart chart-line" chart-data="data"
 				chart-labels="labels" chart-legend="true" chart-series="series"
 				chart-click="onClick" >
@@ -67,8 +71,8 @@
 	  </div>
     </div>
 
-    <?php $_GET['section']='endAdmin'; require('../layout.php'); ?>    
-	<script src="js/controller.comentAdmin.js"></script>
+    <?php $_GET['section']='endAdmin'; require('../layout.php'); ?>  <!-- Se invoca endAdmin del layout general -->    
+	<script src="js/controller.comentAdmin.js"></script> <!-- Controlador para la vista -->
 	
   </body>
 </html>
