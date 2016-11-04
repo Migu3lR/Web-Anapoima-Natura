@@ -5,7 +5,9 @@
 	<link href="css/structure.css" rel="stylesheet">
 	<link href="css/design.css" rel="stylesheet">
   </head>
-  <body ng-controller="control" ng-cloak ng-show="user.rol == 1"> <!-- Se invoca controlador y se valida que el usuario sea administrador --> 
+  <body ng-controller="control" ng-cloak ng-show="user.rol == 1"> <!-- Se invoca controlador y se valida que el usuario sea administrador -->
+
+	<!-- Seccion de encabezado -->
   	<div class="header">
 	     <div class="container">
 	        <div class="row">
@@ -44,11 +46,11 @@
                     <li><a href="index.php"><i class="glyphicon glyphicon-home"></i> Escritorio</a></li>
                     <li><a href="gestion.php"><i class="glyphicon glyphicon-calendar"></i> Gestion</a></li>
                     <li class="current"><a href="calidad.php"><i class="glyphicon glyphicon-stats"></i> Calidad</a></li>
-                    
+
                 </ul>
              </div>
 		  </div>
-			
+
 			 <!-- Este div contiene la seccion de calidad -->
 			<div class="col-md-10">
 			<div class="row">
@@ -62,17 +64,17 @@
 				<canvas id="line" class="chart chart-line" chart-data="data"
 				chart-labels="labels" chart-legend="true" chart-series="series"
 				chart-click="onClick" >
-				</canvas> 
+				</canvas>
 			</div>
 		  	</div>
-		  	</div>	
-		  	</div>	  
+		  	</div>
+		  	</div>
 		</div>
 	  </div>
     </div>
 
-    <?php $_GET['section']='endAdmin'; require('../layout.php'); ?>  <!-- Se invoca endAdmin del layout general -->    
+    <?php $_GET['section']='endAdmin'; require('../layout.php'); ?>  <!-- Se invoca endAdmin del layout general -->
 	<script src="js/controller.comentAdmin.js"></script> <!-- Controlador para la vista -->
-	
+
   </body>
 </html>

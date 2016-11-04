@@ -39,8 +39,14 @@ app.controller("control", function ($scope, $rootScope, $window, $http, $interva
 	//Al acceder a este sitio se almacena url de retorno, en caso de salida retornable
 	var url = function () { store.set('url', $location.absUrl()); }
 
-	$scope.goLogin = function () { url(); $window.location = '../login/'; } //Al llamar esta funcion nos envia a login
-	$scope.goLogout = function () { url(); $window.location = '../login/logout.php'; } //Al llamar a esta funcion nos envia a logout
+	$scope.goLogin = function () {
+		url();
+		$window.location = '../login/';
+	} //Al llamar esta funcion nos envia a login
+	$scope.goLogout = function () {
+		url();
+		$window.location = '../login/logout.php';
+	} //Al llamar a esta funcion nos envia a logout
 
 	//Usuario Autorizado?
 	//obtenemos el token en localStorage
@@ -52,8 +58,7 @@ app.controller("control", function ($scope, $rootScope, $window, $http, $interva
 			if (jwtHelper.isTokenExpired(token)) {
 				store.remove("token");
 				return false;
-			}
-			else {
+			} else {
 				$scope.user = jwtHelper.decodeToken(token);
 				if ($scope.user.rol == 1) return true; //Se consula si el usuario tiene permisos de Administrador para poder continuar
 				else return false;
@@ -91,19 +96,22 @@ app.controller("control", function ($scope, $rootScope, $window, $http, $interva
 
 		//variable con la descripcion de los posibles estados de promociones en Base de datos para mostrar en gestion.php
 		var estados = [{ estado: 1, descEstado: 'Aprobado' },
-		{ estado: 0, descEstado: 'Por aprobar' }];
+		{ estado: 0, descEstado: 'Por aprobar' }
+		];
 		$scope.estados = estados;
 
 		//variable con la descripcion de los posibles descuentos en Base de datos para mostrar en gestion.php
 		var descuentos = [{ descuento: 5, descDescuento: '5%' },
 		{ descuento: 10, descDescuento: '10%' },
-		{ descuento: 15, descDescuento: '15%' }];
+		{ descuento: 15, descDescuento: '15%' }
+		];
 		$scope.descuentos = descuentos;
 
 		//variable con la descripcion de los posibles tipos de promociones en Base de datos para mostrar en gestion.php
 		var tipos = [{ tipo: 'Multiple', descTipo: 'Multiple' },
 		{ tipo: 'Masivo', descTipo: 'Masivo' },
-		{ tipo: 'Unico', descTipo: 'Unico' }];
+		{ tipo: 'Unico', descTipo: 'Unico' }
+		];
 		$scope.tipos = tipos;
 		$scope.promos = []; //Variable para enviar los datos de los promociones a la vista en gestion.php
 		var inicio = 0
@@ -147,10 +155,9 @@ app.controller("control", function ($scope, $rootScope, $window, $http, $interva
 
 					return (fechaFilter && codigoFilter && descripFilter && tipoFilter && descuentoFilter && estadoFilter);
 				})
-				.leftJoin(estados).on('estado')//Enlazamos las descripciones de estados
-				.leftJoin(tipos).on('tipo')//Enlazamos las descripciones de tipos
-				.select(
-				);
+				.leftJoin(estados).on('estado') //Enlazamos las descripciones de estados
+				.leftJoin(tipos).on('tipo') //Enlazamos las descripciones de tipos
+				.select();
 
 			//Se inicializan valores de los KPI
 			$scope.stats = {
@@ -588,4 +595,3 @@ app.config(["$httpProvider", "jwtInterceptorProvider", function ($httpProvider, 
 	};
 	$httpProvider.interceptors.push('jwtInterceptor');
 }]);
-

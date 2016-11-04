@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html ng-app="app">
   <head>
+  <!-- Se llama a initAdmin del layout general -->
 	<?php $_GET['section']='initAdmin'; require('../layout.php'); ?>
-	<script src="../js/angular-hmac-sha512.js"></script>
+	<script src="../js/angular-hmac-sha512.js"></script> <!-- libreria para encriptacion sha512 -->
+
 	<link href="css/structure.css" rel="stylesheet">
 	<link href="css/design.css" rel="stylesheet">
   </head>
-  <body ng-controller="control" ng-cloak ng-show="user.rol == 1">
+  <body ng-controller="control" ng-cloak ng-show="user.rol == 1"> <!-- Se invoca controlador y se valida que el usuario sea administrador -->
+  <!-- Seccion del encabezado -->
   	<div class="header">
 	     <div class="container">
 	        <div class="row">
@@ -16,6 +19,7 @@
 	                 <h1><a href="index.html">Sistema de Promociones</a></h1>
 	              </div>
 	           </div>
+			   <!-- menu superior -->
 	           <div class="col-md-5"><div class="row"><div class="col-lg-12"></div></div></div>
 	           <div class="col-md-2">
 	              <div class="navbar navbar-inverse" role="banner">
@@ -35,7 +39,7 @@
 	     </div>
 	</div>
 
-
+	<!-- Menu navegacion izquierda -->
     <div class="page-content">
     	<div class="row">
 			<div class="col-md-2">
@@ -47,6 +51,8 @@
 					</ul>
 				</div>
 			</div>
+
+			<!-- Este div contiene la seccion de gestion -->
 			<div class="col-md-10">
 				<div class="row">
 					<div class="col-md-12">
@@ -55,9 +61,10 @@
 								<div class="panel-title">Gestion de Códigos Promocionales</div>
 							</div>
 					<div class="panel-body" ng-if="!editMode">
-
+					<!-- En este div contenemos la grilla de los datos de usuario -->
+						<!-- Se invocan funciones add_filter y editar, definidas dentro del controlador -->
 						<table class="listado">
-								<thead>
+								<thead><!-- Aqui se contienen los filtros superiores -->
 									<tr>
 								<th id="fecha">Fecha de Inicio<br>
 									<input type="text" ng-model="filtro_fecha" ng-change="add_filter('fecha',filtro_fecha)" >
@@ -97,7 +104,7 @@
 								<th id="accion">Acción<br></th>
 								</tr>
 								</thead>
-								<tbody>							
+								<tbody>	<!-- Aqui se contiene la tabla de datos -->
 								<tr ng-repeat="promo in promos track by $index">
 									<td id="fecha" >{{promo.fmin}}</td>
 									<td id="codigo">{{promo.cdgo}}</td>
@@ -118,12 +125,13 @@
 							</tbody>
 						</table>
 					</div>
-					
-					
+
+					<!-- Cuando se encuentra en modo de edicion se muestra este div -->
 					<div class="panel-body" ng-if="editMode">
-						
+						<!-- se inicializan los campos del formulario-->
+						<!-- al enviar el formulario se llama a la funcion updatePromo -->
 						<form accept-charset='UTF-8' ng-init='
-							initial.fmin=editModeData.fmin;	
+							initial.fmin=editModeData.fmin;
 							initial.fmax=editModeData.fmax;
 							initial.codigo=editModeData.cdgo;
 							initial.descrip=editModeData.dscr;
@@ -132,7 +140,7 @@
 							initial.descuento=editModeData.dscn;
 							updateScope(initial.tipo);
 						' ng-submit='updatePromo(editModeData.cdgo,initial.fmin,initial.fmax,initial.descrip,initial.tipo,initial.estado,initial.descuento,list)'>
-						
+
 						<label>Código Promocional:</label> {{editModeData.cdgo}}
 						<br>
 						<label>Descripción:</label> <input type="text" max-length="50" ng-model="initial.descrip" required>
@@ -172,7 +180,7 @@
 							<option ng-repeat="descuento in descuentos" value="{{descuento.descuento}}" ng-if="initial.descuento != descuento.descuento" >{{descuento.descDescuento}}</option>
 							<option ng-repeat="descuento in descuentos" value="{{descuento.descuento}}" ng-if="initial.descuento == descuento.descuento" selected="selected">{{descuento.descDescuento}}</option>
 						</select><br>
-						
+
 						<div class="row" ng-if="!mostrar">
 						<div class="col-md-6"><fieldset><div class="form-group">
 						<label>Busque los clientes a quienes les asignará el código (Nombre o Correo)</label>
@@ -189,30 +197,30 @@
 						</div></fieldset></div>
 						</div>
 						<br>
-						
+
 						<label>Estado de la Promoción</label>
 						<select ng-model="initial.estado" autocomplete="off" required>
 							<option ng-repeat="estado in estados" value="{{estado.estado}}" ng-if="initial.estado != estado.estado" >{{estado.descEstado}}</option>
 							<option ng-repeat="estado in estados" value="{{estado.estado}}" ng-if="initial.estado == estado.estado" selected="selected">{{estado.descEstado}}</option>
 						</select>
 						<br> <br>
-					
+
 						<input type="submit" value="Guardar cambios">
 						<input type="button" ng-click="Cancel_EditMode()" value="Cancelar">
 						</form>
-						
-						
+
+
 						<div style="clear:both"></div>
-					
+
 					</div>
 					</div>
 					</div>
-				</div>	
-			</div>	  
+				</div>
+			</div>
 		</div>
 	</div>
-
-<?php $_GET['section']='endAdmin'; require('../layout.php'); ?>    
-<script src="js/controller.promosAdmin.js"></script>
+<!-- Se llama a endAdmin del layout general -->
+<?php $_GET['section']='endAdmin'; require('../layout.php'); ?>
+<script src="js/controller.promosAdmin.js"></script> <!-- Controlador para la vista -->
   </body>
 </html>

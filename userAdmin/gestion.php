@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
+<!-- Se llama a initAdmin del layout general -->
 	<?php $_GET['section']='initAdmin'; require('../layout.php'); ?>
-	<script src="../js/angular-hmac-sha512.js"></script>
+	<script src="../js/angular-hmac-sha512.js"></script><!-- libreria para encriptacion sha512 -->
 	<link href="css/structure.css" rel="stylesheet">
 	<link href="css/design.css" rel="stylesheet">
 </head>
-<body ng-controller="control" ng-cloak ng-show="user.rol == 1">
+<body ng-controller="control" ng-cloak ng-show="user.rol == 1"><!-- Se invoca controlador y se valida que el usuario sea administrador -->
+<!-- Seccion del encabezado -->
   	<div class="header">
 	     <div class="container">
 	        <div class="row">
@@ -16,6 +18,7 @@
 	                 <h1><a href="index.html">Sistema de Usuarios</a></h1>
 	              </div>
 	           </div>
+			   <!-- menu superior -->
 	           <div class="col-md-5"><div class="row"><div class="col-lg-12"></div></div></div>
 	           <div class="col-md-2">
 	              <div class="navbar navbar-inverse" role="banner">
@@ -35,6 +38,7 @@
 	     </div>
 	</div>
 
+	<!-- Menu navegacion izquierda -->
     <div class="page-content">
     	<div class="row">
 			<div class="col-md-2">
@@ -46,6 +50,7 @@
 					</ul>
 				</div>
 			</div>
+			<!-- Este div contiene la seccion de gestion -->
 			<div class="col-md-10">
 				<div class="row">
 					<div class="col-md-12">
@@ -54,6 +59,7 @@
 								<div class="panel-title">Gestion de Usuarios</div>
 							</div>
 							<div class="panel-body">
+							<!-- Se presentan botones con acciones rapidas usando las funciones multi_modif y multi_del definidas en el controlador -->
 								<div style="float:right">
 								<input type="button" ng-disabled="selAll" ng-click="multi_modif(false,true)" value="Activar seleccionados">
 								<input type="button" ng-click="multi_modif(true,true)" value="Activar todos">
@@ -63,8 +69,10 @@
 								<input type="button" ng-disabled="selAll" ng-click="multi_del()" value="Eliminar seleccionados">
 								</div>
 								<br><br>
+							<!-- En este div contenemos la grilla de los datos de usuario -->
+							<!-- Se invocan funciones add_filter y editar, definidas dentro del controlador -->
 							<table>
-								<thead>
+								<thead><!-- Aqui se contienen los filtros superiores -->
 									<tr>
 										<th></th>
 										<th id="fecha">Fecha de registro<br>
@@ -126,7 +134,7 @@
 										<th id="accion">Acción<br></th>
 									</tr>
 								</thead>
-								<tbody>							
+								<tbody> <!-- Aqui se contiene la tabla de datos -->
 									<tr ng-repeat="user in usuarios track by $index" >
 										<td><input type="checkbox" ng-model="sel" ng-change="listClnts(sel,'{{user.id_cln}}')"></td>
 										<td id="fecha">{{user.creacion}}</td>
@@ -147,17 +155,17 @@
 									</tr>
 								</tbody>
 							</table>
-							
+
 							</div>
 						</div>
 					</div>
-				</div>	
-			</div>	  
+				</div>
+			</div>
 		</div>
 	</div>
-
-	<?php $_GET['section']='endAdmin'; require('../layout.php'); ?>    
-	<script src="js/controller.userAdmin.js"></script>
+<!-- Se llama a endAdmin del layout general -->
+	<?php $_GET['section']='endAdmin'; require('../layout.php'); ?>
+	<script src="js/controller.userAdmin.js"></script> <!-- Controlador para la vista -->
 
 </body>
 </html>

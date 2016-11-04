@@ -1,15 +1,18 @@
+<!-- Se llama initSite del layout general -->
 <?php $_GET['section']='initSite'; require('../layout.php'); ?>
-	
-	<!-- Resources -->
+
+	<!-- Estilos para la galeria popup -->
 	<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
-	
-	<!-- Natura Wireframe -->
+
+	<!-- Estilos del sitio -->
 	<link rel="stylesheet" href="css/structure.css">
 	<link rel="stylesheet" href="css/design.css">
-	
+
   </head>
 <body ng-controller="control" ng-cloak>
+<!-- Se llama a header del layout general -->
 <?php $_GET['section']='header'; require('../layout.php'); ?>
+<!-- Se llama a reservation del layout general -->
 <?php $_GET['section']='reservation'; require('../layout.php'); ?>
 	<div id="inicio" style="height:3em"></div>
 	<div id="galerias">
@@ -148,7 +151,7 @@
 						<img class="thumbnail" src="../images/galeria/400X249/COMUN/COMUN (35).jpg"></a>
 						</div>
 					</div>
-						
+
 					<div class="row">
 						<div class="column">
 							<div class="seccion sec_2">
@@ -186,15 +189,15 @@
 						<img class="thumbnail" src="../images/galeria/400X249/CAPILLA/CAPILLA (7).jpg"></a>
 
 						</div>
-						
+
 					</div>
-					
-					
+
+
 					<div class="row">
 						<div class="column">
 							<div class="seccion sec_3">
 							<h5>CASAS</h5>
-							</div>	
+							</div>
 						</div>
 					</div>
 					<div class="row small-up-2 medium-up-3 large-up-3">
@@ -231,7 +234,7 @@
 						<img class="thumbnail" src="../images/galeria/400X249/CASA/CASA (8).jpg"></a>
 						</div>
 					</div>
-					
+
 					<div class="row">
 						<div class="column">
 							<div class="seccion sec_4">
@@ -289,7 +292,7 @@
 						<img class="thumbnail" src="../images/galeria/400X249/APARTAMENTO/APARTAMENTO (12).jpg"></a>
 						</div>
 					</div>
-					
+
 					<div class="row">
 						<div class="column">
 							<div class="seccion sec_5">
@@ -326,13 +329,13 @@
 						<a href="../images/galeria/850X530/VILLA/VILLA (7).jpg" rel="prettyPhoto[Villas]">
 						<img class="thumbnail" src="../images/galeria/400X249/VILLA/VILLA (7).jpg"></a>
 						</div>
-					</div>		
-						
+					</div>
+
 					<div class="row">
 						<div class="column">
 							<div class="seccion sec_6">
 							<h5>APARTAESTUDIOS</h5>
-							</div>	
+							</div>
 						</div>
 					</div>
 					<div class="row small-up-2 medium-up-3 large-up-3">
@@ -365,13 +368,15 @@
 						<img class="thumbnail" src="../images/galeria/400X249/APARTAESTUDIO/APARTAESTUDIO (7).jpg"></a>
 						</div>
 					</div>
-				</div>	
+				</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+<!-- se llama footer de layout general -->
 	<?php $_GET['section']='footer'; require('../layout.php'); ?>
+
+<!-- Javascript funcionamiento de la galeria popup -->
 	<script src="../js/vendor/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 	  $(document).ready(function(){
@@ -380,7 +385,8 @@
 		overlay_gallery: false
 		})
 	});
-	</script>		
+	</script>
+	<!-- Contolador js de la Galeria -->
 	<script src="js/controller.Galeria.js"> </script>
   </body>
 </html>

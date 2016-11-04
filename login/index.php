@@ -1,13 +1,16 @@
-﻿<?php $_GET['section']='initSite'; require('../layout.php'); ?> 
-	
+﻿<!-- Se llama initSite del layout general -->
+<?php $_GET['section']='initSite'; require('../layout.php'); ?>
+
+	<!-- Estilos del sitio -->
 	<link rel="stylesheet" href="css/structure.css">
 	<link rel="stylesheet" href="css/design.css">
-	
-	<script src="../js/angular-animate.js"></script>	
-	
+
+	<script src="../js/angular-animate.js"></script>
+
 </head>
 <body ng-controller="control">
-
+<!-- Se inicializa variable form en false -->
+<!-- para que opr defecto se muestre la pantalla de login al iniciar -->
 <div ng-init="form=false" class="form">
 	<div class="row">
 	<div class="callout small">
@@ -23,6 +26,7 @@
 		</div>
 	</div>
 	</div>
+	<!-- este div contiene el formulario de registro -->
 	<div ng-if="form" class="row sign">
 		<div class="callout small">
 			<div class="row text-center">
@@ -30,6 +34,7 @@
 			</div>
 			<div class="row">
 			<div class="callout small">
+			<!-- al enviar el formulario se llama a la funcion signup -->
 				<form name="registro" accept-charset="UTF-8" ng-submit="signup(nombre, correo, correoCnf, clave, claveCnf, fecha, telefono, nacionalidad, municipio)">
 					<div class="row">
 						<div class="column">
@@ -40,7 +45,7 @@
 							</label>
 							<input ng-model="nombre" type="text" autocomplete="off" required />
 						</div>
-						
+
 					</div>
 					<div class="row small-up-2 medium-up-2 large-up-2">
 						<div class="column">
@@ -92,7 +97,7 @@
 							<input ng-model="telefono" type="text" autocomplete="off" />
 						</div>
 					</div>
-					
+
 					<div class="row small-up-2 medium-up-2 large-up-2">
 						<div class="column">
 							<label ng-class="valid.nacionalidad ? '' : 'error'">Nacionalidad<span class="req">*</span>
@@ -111,18 +116,20 @@
 							<input ng-model="municipio" type="text" autocomplete="off"  required />
 						</div>
 					</div>
-					
+
 					<div class="row text-center">
 						<button type="submit" class="promo_button button" />Unete a Natura</button>
 					</div>
+					<!-- En este div se muestran los mensajes de error -->
 					<div ng-show="showError && eUp" class="row text-center" style="color:red">
 					<p>{{ msg }}</p>
 					</div>
 				</form>
 			</div>
-			</div>			
+			</div>
 		</div>
 	</div>
+	<!-- Este div contiene la seccion de LOGIN, solo se muestra si esta activa -->
 	<div ng-if="!form" class="row sign">
 		<div class="callout small">
 			<div class="row text-center">
@@ -154,6 +161,7 @@
 				  <div class="row text-center">
 						<button type="submit" class="promo_button button" />Entrar</button>
           </div>
+					<!-- En este div se presentan los errores de esta seccion -->
           <div ng-show="showError && eIn" class="row text-center" style="color:red">
 						<p>{{ msg }}</p>
 			    </div>
@@ -163,11 +171,11 @@
 		</div>
     </div>
 </div>
-
+<!--Librerias JS -->
 	<script src="../js/vendor/jquery.min.js"></script>
-	<script src="../js/Foundation.js"></script>
-	
-	<script src="js/controller.Login.js"></script>
-		
+	<script src="../js/Foundation.js"></script> <!-- Core del diseño -->
+
+	<script src="js/controller.Login.js"></script> <!-- Controlador del sitio -->
+
 </body>
 </html>

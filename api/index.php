@@ -1236,7 +1236,7 @@ function modifClntes_a($auth,$data){
         $cmd = "select * from scrty where id_cln = $id_cln"; //Se consulta si el usuario tiene una contraseña asignada
         $rslt = jsonQuery($cmd);
 
-        /Se consulta estado actual de fuente de informacion, correo y nombre del usuario en base de datos
+        //Se consulta estado actual de fuente de informacion, correo y nombre del usuario en base de datos
         $sql  = "SELECT fuente,crreo as correo,nmbre as nombre FROM clntes WHERE id_cln=$id_cln";
         $u = jsonQuery($sql);
         $fuente = $u[0]['fuente'];

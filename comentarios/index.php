@@ -1,12 +1,15 @@
-<?php $_GET['section']='initSite'; require('../layout.php'); ?>	
-	
-	<!-- Natura Wireframe -->
+<!-- Se llama initSite del layout general -->
+<?php $_GET['section']='initSite'; require('../layout.php'); ?>
+
+	<!-- Estilos del sitio -->
 	<link rel="stylesheet" href="css/structure.css">
 	<link rel="stylesheet" href="css/design.css">
-	
+
   </head>
 <body ng-controller="control" ng-cloak>
+<!-- Se llama a header del layout general -->
 <?php $_GET['section']='header'; require('../layout.php'); ?>
+<!-- Se llama a reservation del layout general -->
 <?php $_GET['section']='reservation'; require('../layout.php'); ?>
 	<div id="inicio" style="height:1em"></div>
 	<div id="comentarios">
@@ -16,7 +19,7 @@
 					<div class="row text-center">
 						<h1>Comentarios</h1>
 					</div>
-					
+					<!-- Se muetra listado de comentarios paginado -->
 					<div class="row" ng-repeat="post in posts | limitTo : paginacion : paginacion*(pag-1)" >
 						<div class="large-12 columns"><div class="callout small">
 							<div class="row">
@@ -35,22 +38,23 @@
 							<hr>
 						</div></div>
 					</div>
-					
+
+					<!-- Visualiza Paginacion  -->
 					<div class="row text-center"><div class="large-12 columns"><div class="callout small">
 						<span ng-if="paginas > 1" class="pags" ng-repeat="i in paginas | range">
-						
+
 						<a ng-click="changePag(i)">{{ i }}</a>
 						</span>
-					</div></div></div>										
-					
-					
+					</div></div></div>
+
+
 				</div>
 			</div>
 		</div>
 	</div>
-
+<!-- Se llama a footer del layout general -->
 	<?php $_GET['section']='footer'; require('../layout.php'); ?>
 	<script src="js/controller.Comentarios.js"> </script>
-	
+
   </body>
 </html>

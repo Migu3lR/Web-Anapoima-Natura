@@ -1,18 +1,17 @@
+<!--se llama a initSite del layout general -->
 <?php $_GET['section']='initSite'; require('../layout.php'); ?>
-
+<!-- se invocan librerias para carga de la imagen de perfil de usuario -->
   <script src="../js/ng-file-upload-shim.min.js"></script>
   <script src="../js/ng-file-upload.min.js"></script>
   <script src="../js/ng-img-crop.js"></script>
-        
+
   <link rel="stylesheet" href="css/structure.css">
 	<link rel="stylesheet" href="css/design.css">
-  		
+
   </head>
-<body ng-controller="control" ng-cloak  ng-show="isAuth">
-
+<body ng-controller="control" ng-cloak  ng-show="isAuth"> <!-- se valida que el ingreso sea con un usuario logueado -->
+<!--se llama a header del layout general -->
 <?php $_GET['section']='header'; require('../layout.php'); ?>
-
-
 
 <div id="inicio" style="height:3em"></div>
 	<div id="profile">
@@ -22,16 +21,14 @@
 					<div class="row text-center">
 						<h2>Perfil de Usuario</h2><hr>
 					</div>
-					
+
           <!-- Pestañas con formularios de edicion de perfil -->
           <div class="row collapse">
             <div class="medium-3 columns">
               <ul class="tabs vertical" id="example-vert-tabs" data-tabs>
                 <li class="tabs-title is-active"><a href="#panel1v" aria-selected="true">Datos personales</a></li>
                 <li class="tabs-title"><a href="#panel2v">Cambiar foto de Perfil</a></li>
-                <li class="tabs-title"><a href="#panel3v">Información general</a></li>
-                <li class="tabs-title"><a href="#panel4v">Información Financiera</a></li>
-                <li class="tabs-title"><a href="#panel5v">Opciones de Seguridad</a></li>
+                <li class="tabs-title"><a href="#panel3v">Opciones de Seguridad</a></li>
               </ul>
               <a href="index.php" class="button bt_volver"> Volver al Panel Principal </a>
             </div>
@@ -65,34 +62,28 @@
                   </form>
                 </div>
                 <div class="tabs-panel" id="panel2v">
-                  
+                  <!-- formulario para cambio de imagen de perfil-->
                   <form name="myForm" >
                     <p>Imagen de perfil actual:</p>
                     <img ng-src="../avtr_uploads/{{userinfo.avatar}}">
                     <br><br>
                     <p>Seleccione o arrastre una imagen almacenada en su equipo y subala a su perfil:</p>
-                    
-                    <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
-                        class="cropArea">
-                        <img-crop image="picFile  | ngfDataUrl"                 
+                    <!-- En este div se puede cargar la imagen con drag & drop -->
+                    <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
+                        <img-crop image="picFile  | ngfDataUrl"
                         result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
                         </img-crop>
                     </div>
                     <button ngf-select ng-model="picFile" accept="image/*" class="button secondary">Seleccione una imagen</button>
-                    <button ng-disabled="picFile.name==null" ng-click="upload(croppedDataUrl, userinfo.id_cln)" class="button success">Subir imagen a mi perfil</button> 
-                    <br> 
-                    
+                    <button ng-disabled="picFile.name==null" ng-click="upload(croppedDataUrl, userinfo.id_cln)" class="button success">Subir imagen a mi perfil</button>
+                    <br>
+
                 </form>
-                  
+
                 </div>
                 <div class="tabs-panel" id="panel3v">
-                  <p>Proximamente...</p>
-                </div>
-                <div class="tabs-panel" id="panel4v">
-                  <p>Proximamente...</p>
-                </div>
-                <div class="tabs-panel" id="panel5v">
                   <h4> Cambiar contraseña </h4>
+                  <!-- al enviar este formulario se llama a la funcion editPwd del controlador -->
                   <form accept-charset="UTF-8" ng-submit="editPwd(anterior,confirmacion,nueva)">
                   <table class="editPersonal">
                     <tr>
@@ -129,14 +120,14 @@
               </div>
             </div>
           </div>
-					
+
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
+<!-- seccion pie de pagina -->
 <footer>
 		<div class="row text-center small-up-1 medium-up-3 large-up-3">
 		<div class="column">
@@ -150,16 +141,16 @@
 		</div>
 		</div>
 	</footer>
-	
+
 	<div id="separator"></div>
   <!-- close wrapper, no more content after this -->
     </div>
   </div>
 </div>
-
+<!-- librerias necesarias para diseño -->
 <script src="../js/vendor/jquery.min.js"></script>
 <script src="../js/Foundation.js"></script>
+<!-- controlador de la vista -->
 <script src="js/controller.UserProfile.js"> </script>
 </body>
 </html>
-	

@@ -1,4 +1,7 @@
-<?php if(isset($_GET['section']) && $_GET['section']=='initSite'){ ?> 
+<!-- ESTE PHP ES EL LAYOUT GENERAL -->
+
+<!-- Seccion initSite usada para inicializar una pagina -->
+<?php if(isset($_GET['section']) && $_GET['section']=='initSite'){ ?>
 
 <!doctype html>
 <html class="no-js" lang="en" ng-app="app">
@@ -11,21 +14,22 @@
 <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="/desarrollo/css/jquery-ui.css">
 <link rel="stylesheet" href="/desarrollo/css/structure_layout.css">
-<!-- AngularJS Framework -->
-	<script src="/desarrollo/js/angular.min.js"></script>	
-	<script src="/desarrollo/js/angular-hmac-sha512.js"></script>
-	<script src="/desarrollo/js/angular-jwt.js"></script>
-	<script src="/desarrollo/js/angular-storage.js"></script>
-	<script src="/desarrollo/js/cookies.js"></script>
+
+	<script src="/desarrollo/js/angular.min.js"></script>	<!-- Libreria Angular para controlador -->
+	<script src="/desarrollo/js/angular-hmac-sha512.js"></script> <!-- Libreria para encriptacion sha 512 -->
+	<script src="/desarrollo/js/angular-jwt.js"></script> <!-- Libreria jwt para generacion de token -->
+	<script src="/desarrollo/js/angular-storage.js"></script> <!-- Libreria para manejo de local storage web -->
+	<script src="/desarrollo/js/cookies.js"></script> <!--Libreria para manejo de cookies -->
 
 <?php } ?>
-
-<?php if(isset($_GET['section']) && $_GET['section']=='header'){ 
-  $isAuth = false; 
-  $rol = 0; 
-  if(isset($_COOKIE['x'])) { 
-     $isAuth = true; 
-     $rol = $_COOKIE['x']; 
+<!-- Seccion header contiene encabezado general de la pagina con barra superior de menu -->
+<?php if(isset($_GET['section']) && $_GET['section']=='header'){
+  //Se realiza validacion de si hay una sesion iniciada
+  $isAuth = false;
+  $rol = 0;
+  if(isset($_COOKIE['x'])) {
+     $isAuth = true;
+     $rol = $_COOKIE['x'];
   }
   ?>
 <div  class="off-canvas-wrapper">
@@ -36,10 +40,10 @@
         <button class="menu-icon" type="button" data-open="offCanvasLeft"></button>
         <span class="title-bar-title">NATURA</span>
       </div>
-      <?php 
-      if($isAuth) {//////////////////$isAuth 
+      <?php
+      if($isAuth) {
         echo '<div class="title-bar-right">';
-        echo '<span class="title-bar-title">', (($rol==='1') ? 'Administración' : 'Mi Cuenta'), '</span>'; //////////////////$rol
+        echo '<span class="title-bar-title">', (($rol==='1') ? 'Administración' : 'Mi Cuenta'), '</span>';
         echo '<button class="menu-icon" type="button" data-open="offCanvasRight"></button>';
         echo '</div>';
       } else{
@@ -104,7 +108,7 @@
             <li><a link id="item4" href="/desarrollo/index.php#servicios">SERVICIOS</a></li>
             <li><a link id="item5" href="/desarrollo/index.php#galeria">GALERÍA</a></li>
             <li><a link id="item6" href="/desarrollo/index.php#contacto">CONTACTO</a></li>
-            <?php if($isAuth) { //////////////////$isAuth ?>
+            <?php if($isAuth) {  ?>
             <li class="has-submenu">
                 <?php if($rol === '1') { ?>
                 <a href="#">ADMINISTRACIÓN</a>
@@ -135,9 +139,10 @@
     <div class="off-canvas-content" data-off-canvas-content>
 <?php } ?>
 
+<!-- Seccion reservation contiene barra de reservas -->
 <?php if(isset($_GET['section']) && $_GET['section']=='reservation'){ ?>
 <div id="reservation" class="stick">
-	
+
 	<form name="registro" accept-charset="UTF-8" method="post" action="/desarrollo/booking/bar.php">
 		<div class="field">
 			<select name="adultos" required autocomplete="off">
@@ -170,7 +175,7 @@
 				<option value="10">10</option>
 			</select>
 		</div>
-		
+
 		<div  class="field">
 			<input type="text" id="from" name="from"  placeholder="Llegada" required autocomplete="off" />
 		</div>
@@ -180,13 +185,13 @@
 		<div class="search">
 		<button type="submit" class="promo_button button" name="buscar" />Reservar</button>
 		</div>
-		
+
 	</form>
-	
+
 	</div>
 <?php } ?>
 
-
+<!-- Seccion footer  contiene pie de pagina general -->
 <?php if(isset($_GET['section']) && $_GET['section']=='footer'){ ?>
 <footer>
 		<div class="row text-center small-up-1 medium-up-3 large-up-3">
@@ -201,22 +206,23 @@
 		</div>
 		</div>
 	</footer>
-	
+
 	<div id="separator"></div>
   <!-- close wrapper, no more content after this -->
     </div>
   </div>
 </div>
-
+<!-- librerias para diseño -->
 <script src="/desarrollo/js/vendor/jquery.min.js"></script>
-<script src="/desarrollo/js/vendor/jquery-ui.js"></script>	
+<script src="/desarrollo/js/vendor/jquery-ui.js"></script>
 <script src="/desarrollo/js/vendor/what-input.min.js"></script>
 <script src="/desarrollo/js/Foundation.js"></script>
+<!-- Libreria datepicker -->
 <script src="/desarrollo/js/initialize.DatePicker.js"></script>
 
 <?php } ?>
 
-
+<!-- Seccion initAdmin creada para inicializar sitios de administracion -->
 <?php if(isset($_GET['section']) && $_GET['section']=='initAdmin'){ ?>
   <title>ADMINISTRACION NATURA</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -228,21 +234,20 @@
     <link href="/desarrollo/adminResources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- styles -->
     <link href="/desarrollo/adminResources/css/styles.css" rel="stylesheet">
-	
 	  <link href="/desarrollo/adminResources/css/angular-chart.css" rel="stylesheet">
     <link rel="stylesheet" href="/desarrollo/adminResources/css/ngDialog.css"></script>
     <link rel="stylesheet" href="/desarrollo/adminResources/css/ngDialog-theme-default.css"></script>
-	
-	<script src="/desarrollo/js/jinqjs.js"></script>
-	<script src="/desarrollo/js/moment.js"></script>
-	<script src="/desarrollo/js/angular.min.js"></script>
-	<script src="/desarrollo/js/ngDialog.js"></script>     
-	<script src="/desarrollo/js/Chart.js"></script>
-	<script src="/desarrollo/js/angular-moment.js"></script>
-	<script src="/desarrollo/js/angular-chart.js"></script>
-	<script src="/desarrollo/js/angular-jwt.js"></script>
-	<script src="/desarrollo/js/angular-storage.js"></script>
-	<script src="/desarrollo/js/cookies.js"></script>
+
+	<script src="/desarrollo/js/jinqjs.js"></script> <!-- Libreria consultas sql js -->
+	<script src="/desarrollo/js/moment.js"></script> <!-- Libreria para formeteo de tiempo -->
+	<script src="/desarrollo/js/angular.min.js"></script> <!-- Libreria Core del controlador -->
+	<script src="/desarrollo/js/ngDialog.js"></script> <!-- Libreria para control de cuadros de dialogo -->
+	<script src="/desarrollo/js/Chart.js"></script> <!-- Libreria graficos -->
+	<script src="/desarrollo/js/angular-moment.js"></script> <!-- Libreria angular formato de tiempo -->
+	<script src="/desarrollo/js/angular-chart.js"></script> <!-- Libreria angular de graficos -->
+	<script src="/desarrollo/js/angular-jwt.js"></script> <!-- Libreria de jwt para generacion y manejo de token de seguridad -->
+	<script src="/desarrollo/js/angular-storage.js"></script> <!-- Libreria para manejo de storage web -->
+	<script src="/desarrollo/js/cookies.js"></script> <!-- Libreria par manejo de cookies -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -251,6 +256,7 @@
     <![endif]-->
 <?php } ?>
 
+<!-- Seccion endAdmin contiene libreria necesarias para diseño de paginas de administracion -->
 <?php if(isset($_GET['section']) && $_GET['section']=='endAdmin'){ ?>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/desarrollo/js/vendor/jquery.min.js"></script>

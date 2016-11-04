@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html ng-app="app">
   <head>
+	<!-- Se llama a initAdmin del layout general -->
 	<?php $_GET['section']='initAdmin'; require('../layout.php'); ?> <!-- Se invoca initAdmin del layout general -->
 	<link href="css/structure.css" rel="stylesheet">
 	<link href="css/design.css" rel="stylesheet">
   </head>
   <body ng-controller="control" ng-cloak ng-show="user.rol == 1"> <!-- Se invoca controlador y se valida que el usuario sea administrador -->
-
+		<!-- Seccion de encabezado -->
   	<div class="header">
 	     <div class="container">
 	        <div class="row">
@@ -45,7 +46,7 @@
                     <li class="current"><a href="index.php"><i class="glyphicon glyphicon-home"></i> Escritorio</a></li>
                     <li><a href="gestion.php"><i class="glyphicon glyphicon-calendar"></i> Gestion</a></li>
                     <li><a href="calidad.php"><i class="glyphicon glyphicon-stats"></i> Calidad</a></li>
-                    
+
                 </ul>
              </div>
 		  </div>
@@ -67,7 +68,7 @@
 								  <li>Publicados <a href="#" ng-click="goto_filter('publicar','S')">{{stats.publicar}}</a></li>
 								  <li>No Publicados <a href="#" ng-click="goto_filter('publicar','N')">{{stats.nopublicar}}</a></li>
 							</ul>
-							
+
 		  				</div>
 		  			</div>
 		  		</div>
@@ -99,10 +100,10 @@
 		  				</div>
 		  			</div>
 		  		</div>
-				  
-				  
+
+
 				<div class="col-md-3">
-		  			<div class="row">
+		  			<div class="row"><!-- Se muestra calificacion promedio de los comentarios -->
 		  				<div class="col-md-12">
 		  					<div class="content-box-header">
 			  					<div class="panel-title">Calificacion Visitantes</div>
@@ -112,9 +113,9 @@
 							</div>
 		  				</div>
 		  			</div>
-					  
+
 					<div class="row">
-		  				<div class="col-md-12">
+		  				<div class="col-md-12"><!-- Se muestra cantidades por votacion -->
 		  					<div class="content-box-header">
 			  					<div class="panel-title">Calificacion Visitantes</div>
 				  			</div>
@@ -135,13 +136,13 @@
 		  				</div>
 		  			</div>
 		  		</div>
-		  	</div>	  
+		  	</div>
 		</div>
 	  </div>
     </div>
-
-	<?php $_GET['section']='endAdmin'; require('../layout.php'); ?>    <!-- Se invoca endAdmin del layout general -->
+<!-- se llama a endAdmin del layout general -->
+	<?php $_GET['section']='endAdmin'; require('../layout.php'); ?>
 	<script src="js/controller.comentAdmin.js"></script> <!-- Controlador para la vista -->
-	
+
   </body>
 </html>

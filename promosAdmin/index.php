@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html ng-app="app">
   <head>
+  <!-- Se llama a initAdmin del layout general -->
 	<?php $_GET['section']='initAdmin'; require('../layout.php'); ?>
-	<script src="../js/angular-hmac-sha512.js"></script>
+	<script src="../js/angular-hmac-sha512.js"></script><!-- libreria para encriptacion sha512 -->
+
 	<link href="css/structure.css" rel="stylesheet">
 	<link href="css/design.css" rel="stylesheet">
   </head>
   <body ng-controller="control" ng-cloak >
-
+  <!-- Seccion del encabezado -->
   	<div class="header">
 	     <div class="container">
 	        <div class="row">
@@ -35,7 +37,7 @@
 	        </div>
 	     </div>
 	</div>
-
+	<!-- Menu navegacion izquierda -->
     <div class="page-content">
     	<div class="row">
 		  <div class="col-md-2">
@@ -44,11 +46,10 @@
                     <!-- Main menu -->
                     <li class="current"><a href="index.php"><i class="glyphicon glyphicon-home"></i> Escritorio</a></li>
                     <li><a href="gestion.php"><i class="glyphicon glyphicon-calendar"></i> Gestion</a></li>
-                    
-                    
                 </ul>
              </div>
 		  </div>
+		  <!-- Este div contiene la seccion de gestion -->
 		  <div class="col-md-10">
 		  	<div class="row">
 		  		<div class="col-md-2">
@@ -58,6 +59,7 @@
 						</div>
 		  				<div class="panel-body">
 		  					<ul class="general_stats">
+							  <!-- Se invocan funciones goto_filter, definidas dentro del controlador -->
 								  <li>Aprobados <a href="#" ng-click="goto_filter('estado',1)">{{stats.aprobado}}</a></li>
 								  <li>Por aprobar <a href="#" ng-click="goto_filter('estado',0)">{{stats.pendiente}}</a></li>
 								  <li>Multiples <a href="#" ng-click="goto_filter('tipo','Multiple')">{{stats.multiple}}</a></li>
@@ -75,6 +77,7 @@
 			  					<div class="panel-title">Crear un nuevo código promocional:</div>
 				  			</div>
 				  			<div class="content-box-large box-with-header">
+							  <!-- Se invoca funcion newCode al enviar formulario, definido dentro del controlador -->
 				  				<form accept-charset="UTF-8" ng-submit="newCode();">
 									<fieldset>
 										<div class="form-group">
@@ -109,7 +112,7 @@
 													<option ng-repeat="user in filtered" ng-dblclick="addUser(user)" value="{{ user }}">{{ user.nombre | capitalize }} ({{user.correo}})</option>
 													</select>
 												</div>
-											</fieldset>  
+											</fieldset>
 										</div>
 										<div class="col-md-6">
 											<fieldset>
@@ -119,7 +122,7 @@
 													<option ng-dblclick="list.splice($index,1)" ng-repeat="user in list" value="{{ user }}">{{ user.nombre | capitalize }} ({{user.correo}})</option>
 													</select>
 												</div>
-											</fieldset>  
+											</fieldset>
 										</div>
 									</div>
 									<div class="row" >
@@ -129,7 +132,7 @@
 													<label>Fecha de Inicio de la Promoción</label>
 													<input ng-model="fmin" type="date" name="fmin" id="fmin" min="2016-01-01" max="2016-12-31" required>
 												</div>
-											</fieldset>  
+											</fieldset>
 										</div>
 										<div class="col-md-6">
 											<fieldset>
@@ -137,7 +140,7 @@
 													<label>Fecha de Finalización de la Promoción</label>
 													<input ng-model="fmax" type="date" name="fmax" id="fmax" min="2016-01-01" max="2016-12-31" required>
 												</div>
-											</fieldset>  
+											</fieldset>
 										</div>
 									</div>
 									<fieldset>
@@ -158,13 +161,13 @@
 		  				</div>
 		  			</div>
 				</div>
-		  	</div>	  
+		  	</div>
 		</div>
 	  </div>
     </div>
+<!-- se llama a endAdmin del layout general -->
+<?php $_GET['section']='endAdmin'; require('../layout.php'); ?>
+<script src="js/controller.promosAdmin.js"></script> <!-- Controlador para la vista -->
 
-<?php $_GET['section']='endAdmin'; require('../layout.php'); ?>    
-<script src="js/controller.promosAdmin.js"></script>
-	
   </body>
 </html>

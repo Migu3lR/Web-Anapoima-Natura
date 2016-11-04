@@ -1,14 +1,18 @@
+<!-- Se llama initSite del layout general -->
 <?php $_GET['section']='initSite'; require('../layout.php'); ?>
-	
-	<!-- Natura Wireframe -->
+
+	<!-- Estilos del sitio -->
 	<link rel="stylesheet" href="css/structure.css">
 	<link rel="stylesheet" href="css/design.css">
-			
+
   </head>
 <body ng-controller="control" ng-cloak>
+<!-- Se llama a header del layout general -->
 <?php $_GET['section']='header'; require('../layout.php'); ?>
+<!-- Se llama a reservation del layout general -->
 <?php $_GET['section']='reservation'; require('../layout.php'); ?>
 	<a name="casas"></a>
+<!-- Se muetran secciones de cada tipo de hospedaje -->
 	<div id="inicio" style="height:3em"></div>
 	<div id="comentarios">
 		<div class="title row text-center">
@@ -32,8 +36,8 @@
 					</div>
 				</div>
 			</div>
-		</div> 
-		
+		</div>
+
 		<div class="seccion seccion_1">
 		<div class="franja"></div>
 			<div class="row">
@@ -55,16 +59,16 @@
 								</div>
 								<div class="personas">
 									<h3>11-13</h3>
-									<span>Personas</span> 
+									<span>Personas</span>
 									<span class="desc">(Adultos y niños mayores de 2 años)</span>
 								</div>
-								
+
 							</div>
-							
+
 							<div>
 								<p>Disfrute de la excelente privacidad que brindan espacios exclusivos y modernos, rodeados de hermosa vegetación.</p>
 								<p>Estas Casas están totalmente dotadas constan de:</p>
-								<ul> 
+								<ul>
 								<li>Cocina integral totalmente equipada</li>
 								<li>Comedor</li>
 								<li>Sala de estar</li>
@@ -79,7 +83,7 @@
 								</ul>
 								<p>Igualmente usted podrá hacer uso de todas las zonas comunes para que viva en Natura una experiencia familiar inolvidable.</p>
 							</div>
-							
+
 							<div class="foot">
 								<a href="../galeria/#casas"><img src="../images/detalles/verfotos.png"></a>
                                 <span>¡REALICE SU RESERVA! <a href="../booking/" class="more_button button">INGRESAR</a></span>
@@ -90,7 +94,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="seccion_title_2">
 			<div class="row seccion_title">
 				<div class="large-12 columns">
@@ -100,8 +104,8 @@
 					</div>
 				</div>
 			</div>
-		</div> 
-		
+		</div>
+
 		<div class="seccion seccion_2">
 		<div class="franja"></div>
 			<div class="row">
@@ -123,16 +127,16 @@
 								</div>
 								<div class="personas">
 									<h3>6-7</h3>
-									<span>Personas</span> 
+									<span>Personas</span>
 									<span class="desc">(Adultos y niños mayores de 2 años)</span>
 								</div>
-								
+
 							</div>
-							
+
 							<div>
 								<p> Viva una grata experiencia de descanso en familia con el confort que ofrecen los amplios y funcionales apartamentos de Natura.</p>
 								<p>Estos Cuentan con  completa dotación y constan de:</p>
-								<ul> 
+								<ul>
 								<li>Cocina integral totalmente equipada</li>
 								<li>Comedor</li>
 								<li>Sala Principal</li>
@@ -147,7 +151,7 @@
 								</ul>
 								<p>Igualmente usted podrá hacer uso de todas las zonas comunes para que viva en Natura una experiencia familiar inolvidable.</p>
 							</div>
-							
+
 							<div class="foot">
 								<a href="../galeria/#apartamentos"><img src="../images/detalles/verfotos.png"></a>
 								<span>¡REALICE SU RESERVA! <a href="../booking/" class="more_button button">INGRESAR</a></span>
@@ -158,8 +162,8 @@
 				</div>
 			</div>
 		</div>
-		
-		
+
+
 		<div class="seccion_title_3">
 			<div class="row seccion_title">
 				<div class="large-12 columns">
@@ -169,8 +173,8 @@
 					</div>
 				</div>
 			</div>
-		</div> 
-		
+		</div>
+
 		<div class="seccion seccion_3">
 		<div class="franja"></div>
 			<div class="row">
@@ -192,19 +196,19 @@
 								</div>
 								<div class="personas">
 									<h3>4-6</h3>
-									<span>Personas</span> 
+									<span>Personas</span>
 									<span class="desc">(Adultos y niños mayores de 2 años)</span>
 								</div>
-								
+
 							</div>
-							
+
 							<div>
 								<p> Comparta con su familia una estadía llena de descanso esparcimiento, disfrutando de la comodidad que ofrecen la villas de tipo duplex de estilo contemporáneo y sofisticado.</p>
 								<p>Las Villas gozan de completa dotación y constan de:</p>
 								<table class="villas">
 								<tr>
 									<td style="width: 50%;">
-										<ul> 
+										<ul>
 											<li><strong>Primer nivel</strong>
 												<ul class="inter">
 													<li>- Cocina integral equipada</li>
@@ -236,7 +240,7 @@
 								</table>
 								<p>Igualmente usted podrá hacer uso de todas las zonas comunes para que viva en Natura una experiencia familiar inolvidable.</p>
 							</div>
-							
+
 							<div class="foot">
 								<a href="../galeria/#villas"><img src="../images/detalles/verfotos.png"></a>
 								<span>¡REALICE SU RESERVA! <a href="../booking/" class="more_button button">INGRESAR</a></span>
@@ -247,8 +251,8 @@
 				</div>
 			</div>
 		</div>
-		
-				
+
+
 		<div class="seccion_title_4">
 			<div class="row seccion_title">
 				<div class="large-12 columns">
@@ -258,8 +262,8 @@
 					</div>
 				</div>
 			</div>
-		</div> 
-		
+		</div>
+
 		<div class="seccion seccion_4">
 		<div class="franja"></div>
 			<div class="row">
@@ -281,16 +285,16 @@
 								</div>
 								<div class="personas">
 									<h3>2-4</h3>
-									<span>Personas</span> 
+									<span>Personas</span>
 									<span class="desc">(Adultos y niños mayores de 2 años)</span>
 								</div>
-								
+
 							</div>
-							
+
 							<div>
 								<p> Los apartaestudios son la opción ideal para una magnífica estancia de pequeñas familias. Un moderno espacio, en el cual podrá encontrar confort, descanso y excelente privacidad.</p>
 								<p>Los apartaestudios estan completamente dotados y constan de:</p>
-								<ul> 
+								<ul>
 								<li>Cocina integral equipada</li>
 								<li>Barra comedor</li>
 								<li>Sala de estar (sofacama)</li>
@@ -302,7 +306,7 @@
 								</ul>
 								<p>Igualmente usted podrá hacer uso de todas las zonas comunes para que viva en Natura una experiencia familiar inolvidable.</p>
 							</div>
-							
+
 							<div class="foot">
 								<a href="../galeria/#apartaestudios"><img src="../images/detalles/verfotos.png"></a>
 								<span>¡REALICE SU RESERVA! <a href="../booking/" class="more_button button">INGRESAR</a></span>
@@ -313,8 +317,8 @@
 				</div>
 			</div>
 		</div>
-		
-		
+
+
 		<div class="seccion_title_5">
 			<div class="row seccion_title text-center">
 				<div class="large-12 columns">
@@ -323,9 +327,9 @@
 					</div>
 				</div>
 			</div>
-		</div> 
-		
-		
+		</div>
+
+
 		<div class="seccion seccion_5">
 			<div class="row">
 				<div class=" large-12 columns">
@@ -348,14 +352,14 @@
 		<td>11-13 Personas</td>
 		<td>6-7 Personas</td>
 		<td>4-6 Personas</td>
-		<td>2-4 Personas</td> 
+		<td>2-4 Personas</td>
 	</tr>
 	<tr>
 		<td class="ttl">Tamaño</td>
 		<td>300m<sup class="supercase">2</sup></td>
 		<td>120m<sup class="supercase">2</sup></td>
 		<td>110m<sup class="supercase">2</sup></td>
-		<td>45m<sup class="supercase">2</sup></td> 
+		<td>45m<sup class="supercase">2</sup></td>
 	</tr>
 	<tr>
 		<td class="ttl">Habitaciones</td>
@@ -369,35 +373,35 @@
 		<td>4</td>
 		<td>2</td>
 		<td>2</td>
-		<td>1</td> 
+		<td>1</td>
 	</tr>
 	<tr>
 		<td class="ttl">Cocina</td>
 		<td>Ok</td>
 		<td>Ok</td>
 		<td>Ok</td>
-		<td>Ok</td> 
+		<td>Ok</td>
 	</tr>
 	<tr>
 		<td class="ttl">Comedor</td>
 		<td>Ok</td>
 		<td>Ok</td>
 		<td>Barra</td>
-		<td>Barra</td> 
+		<td>Barra</td>
 	</tr>
 	<tr>
 		<td class="ttl">Sala</td>
 		<td>Ok</td>
 		<td>Ok</td>
 		<td>Ok</td>
-		<td>Ok</td> 
+		<td>Ok</td>
 	</tr>
 	<tr>
 		<td class="ttl">Solar</td>
 		<td>Ok</td>
 		<td>-</td>
 		<td>-</td>
-		<td>-</td> 
+		<td>-</td>
 	</tr>
 	<tr>
 		<td class="ttl">Balcón</td>
@@ -411,27 +415,27 @@
 		<td>Ok</td>
 		<td>Ok</td>
 		<td>Ok</td>
-		<td>Ok</td> 
+		<td>Ok</td>
 	</tr>
 	<tr>
 		<td class="ttl">Piscina privada</td>
 		<td>Ok</td>
 		<td>Semi</td>
-		<td>-</td> 
+		<td>-</td>
 		<td>-</td>
 	</tr>
 	<tr>
 		<td class="ttl">Piscina multifamiliar</td>
 		<td>Ok</td>
 		<td>Ok</td>
-		<td>Ok</td> 
+		<td>Ok</td>
 		<td>Ok</td>
 	</tr>
 	<tr>
 		<td class="ttl">Patio</td>
 		<td>Ok</td>
 		<td>Ok</td>
-		<td>-</td> 
+		<td>-</td>
 		<td>-</td>
 	</tr>
 	<tr>
@@ -439,28 +443,30 @@
 		<td>Ok</td>
 		<td>Ok</td>
 		<td>Ok</td>
-		<td>-</td> 
+		<td>-</td>
 	</tr>
 	<tr>
 		<td class="ttl">Parqueaderos</td>
 		<td>3</td>
 		<td>2</td>
 		<td>2</td>
-		<td>1</td> 
-	</tr>	
+		<td>1</td>
+	</tr>
   </tbody>
 </table>
-							</div>							
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		
+
+
 	</div>
-	
+<!-- se llama footer de layout general -->
 <?php $_GET['section']='footer'; require('../layout.php'); ?>
+
+<!-- Contolador js de Detalles -->
 <script src="js/controller.Detalles.js"> </script>
 </body>
 </html>

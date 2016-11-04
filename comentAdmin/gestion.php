@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html ng-app="app">
   <head>
+	<!-- Se llama a initAdmin del layout general -->
 	<?php $_GET['section']='initAdmin'; require('../layout.php'); ?> <!-- Se invoca initAdmin del layout general -->
 	<link href="css/structure.css" rel="stylesheet">
 	<link href="css/design.css" rel="stylesheet">
   </head>
-  <body ng-controller="control" ng-cloak ng-show="user.rol == 1"> <!-- Se invoca controlador y se valida que el usuario sea administrador -->
+  <body ng-controller="control" ng-cloak ng-show="user.rol == 1">
+
+	<!-- Seccion del encabezado -->
   	<div class="header">
 	     <div class="container">
 	        <div class="row">
@@ -44,11 +47,11 @@
                     <li><a href="index.php"><i class="glyphicon glyphicon-home"></i> Escritorio</a></li>
                     <li class="current"><a href="gestion.php"><i class="glyphicon glyphicon-calendar"></i> Gestion</a></li>
                     <li><a href="calidad.php"><i class="glyphicon glyphicon-stats"></i> Calidad</a></li>
-                    
+
                 </ul>
              </div>
 		  </div>
-			
+
 			<!-- Este div contiene la seccion de gestion -->
 		  <div class="col-md-10">
 		  	<div class="row">
@@ -59,9 +62,9 @@
 						</div>
 		  				<div class="panel-body">
 						<!-- En este div contenemos la grilla de los datos de usuario -->
-						<!-- Se invocan funciones add_filter y editar, definidas dentro del controlador -->	
+						<!-- Se invocan funciones add_filter y editar, definidas dentro del controlador -->
 						<div class="tabla">
-						  <div class="thead">
+						  <div class="thead"><!-- Aqui se contienen los filtros superiores -->
 							<div class="registro">
 								<div id="fecha" class="celda">Fecha<br>
 									<input type="text" ng-model="filtro_fecha" ng-change="add_filter('fecha',filtro_fecha)" ng-value="cookie.fecha">
@@ -109,7 +112,7 @@
 								</div>
 			                </div>
 						  </div>
-						  <div class="tbody">							
+						  <div class="tbody">	<!-- Aqui se contiene la tabla de datos -->
 			                <a ng-repeat="coment in comentarios track by $index" class="registro" href="#" ng-click="editar(coment)">
 								<div id="fecha" class="celda">{{coment.fecha}}</div>
 								<div id="cliente" class="celda">{{coment.nombre == NULL ? '&nbsp;' : coment.nombre}}</div>
@@ -120,21 +123,21 @@
 			                </a>
 						  </div>
 			            </div>
-						
+
 		  				</div>
 		  			</div>
-		  		</div>	
-		  	</div>	  
+		  		</div>
+		  	</div>
 		</div>
 	  </div>
     </div>
-	
+
 	<div>
-		
+
 	<div>
 
     <?php $_GET['section']='endAdmin'; require('../layout.php'); ?>    <!-- Se invoca endAdmin del layout general -->
 	<script src="js/controller.comentAdmin.js"></script> <!-- Controlador para la vista -->
-	
+
   </body>
 </html>
