@@ -7,7 +7,7 @@
 		$from = $_POST['from'];
 		$to = $_POST['to'];
 		
-		$book_url = '/desarrollo/booking/#!/Rooms/date_from:' . $from . '/date_to:' . $to . '/adults:' . $adultos . '/children:' . $ninos;
+		$book_url = '/desarrollo/booking?date_from=' . $from . '&date_to=' . $to . '&adults=' . $adultos . '&children=' . $ninos;
 		header("Location: " . $book_url); //Se llama al aplicativo con la funcion header de PHP...
 		exit(); //Cerramos el codigo para asegurar el salto correcto de pagina.
 	}

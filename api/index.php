@@ -69,6 +69,7 @@ function getRowSQL($sql){
 //Funcion para ejecucion de sentencias en BD
 //Uso executeSQL(Sentencia SQL Update o Insert)
 function executeSQL($sql){
+    $er = response_ok;
     $conexion = connectDB(); //Abrir conexion a la base de datos
     mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
 
@@ -80,6 +81,7 @@ function executeSQL($sql){
 //Funcion para extraccion de data de la BD en formato JSON para Angular
 //Uso: jsonQuery(Sentencia SQL Select)
 function jsonQuery($sql){
+    $er = response_ok;
     $conexion = connectDB(); //Abrir conexion a la base de datos
     mysqli_set_charset($conexion, "utf8"); //formato de datos utf8
     if(!$result = mysqli_query($conexion, $sql)) $er = db_unknown_error;
@@ -655,12 +657,12 @@ function RegisterNewUser($auth,$r){
     //Se consulta si el usuario a crear, existe previamente en la base de datos (El correo es la llave de la tabla de clientes)
     $cmd = "Select id_cln, fuente, estdo_cln FROM clntes where crreo='$correo'";
     $rslt = jsonQuery($cmd);
-
+   
     if (empty($rslt)){
         //Si el usuario no existe, se genera query para insertar el nuevo usuario el base de datos, en estado Pendiente por activacion
         $cmd = "INSERT INTO clntes (id_cln, crreo, nmbre, fcha_ncmnto, tpo_numdoc, id_numdoc, tlfno, ncnldad,cdad,fuente,estdo_cln)
                 VALUES (NULL, '$correo','$nombre','$fecha',$tipo,$documento,$telefono,'$nacionalidad','$municipio','R','P')";
-
+    
     } elseif($rslt[0]['fuente'] != 'R'){
         //Si el usario existe pero la fuente de la informacion no es Registro (Comentarios, Reservas...), Actualizamos los datos del usuario
         $cmd = "UPDATE clntes SET nmbre='$nombre',
@@ -679,7 +681,7 @@ function RegisterNewUser($auth,$r){
     }
 
     $code = executeSQL($cmd); // si no ocurrio error, se ejecuta la consulta resultante llamando executeSQL, y se captura codigo de respuesta
-
+    
     if ($code === response_ok){ //Si no ocurre error...
         //Se crea query para insertar en la base de datos la contraseña de usuario.
         $cmd = "INSERT INTO scrty (id_cln, pass) select id_cln, '$clave' from clntes where crreo='$correo' and estdo_cln='P'";
@@ -694,6 +696,7 @@ function RegisterNewUser($auth,$r){
             //Se crea query para insertar nuevo token en la BD con los datos anteriores
             $cmd = "INSERT INTO tokens (tokenid, token, fecha_creacion, fecha_cierre, uso, correo)
                     VALUES (NULL, '$tkn', '$fechaCreacion', '$fechaCierre', '$uso', '$correo')";
+            
             $code = executeSQL($cmd); //Se ejecuta query llamando a la funcion executeSQL y se captura codigo de error
 
             if ($code === response_ok) {// Si no ocurre error, se envia correo electronico al usuario con Token para activar la cuenta

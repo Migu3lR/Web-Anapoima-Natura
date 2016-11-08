@@ -25,7 +25,20 @@
         <div id="inicio" style="height:5em"></div>
 
         <!-- Dentro de este IFRAME se invoca el formulario de consultas de reserva del aplicativo -->
-        <iframe id="search" src="search.php" width="100%" frameborder="0"></iframe>
+        <?php
+        $book_url = "";
+        if(isset($_GET['date_from']) && isset($_GET['date_to']) && isset($_GET['adults']) && isset($_GET['children'])){
+            $from = $_GET['date_from'];
+            $to = $_GET['date_to'];
+            $adultos = $_GET['adults'];
+            $ninos = $_GET['children']; 
+        
+            $book_url = '#!/Rooms/date_from:' . $from . '/date_to:' . $to . '/adults:' . $adultos . '/children:' . $ninos;
+        }
+        //echo $book_url;
+        //var_dump($_SERVER);
+        ?>
+        <iframe id="search" src="search.php<?php echo $book_url; ?>" width="100%" frameborder="0"></iframe>
 
         <!-- Seccion pie de pagina -->
         <footer>

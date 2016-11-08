@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="../css/jquery-ui.css">
 	<link rel="stylesheet" href="../css/structure_layout.css">
 	<!-- JS -->
+	<script src="../js/vendor/jquery.min.js"></script>
 	<script src="../js/angular.min.js"></script> <!-- Core controlador del sitio -->
 	<script src="../js/angular-hmac-sha512.js"></script> <!-- Libreria encriptacion SHA512 -->
 	<script src="../js/angular-jwt.js"></script> <!-- Libreria para encriptacion de Token de seguridad jwt -->
@@ -21,5 +22,6 @@
 </head>
 <!-- Se invoca Controlador logout para cerrar sesion de usuario -->
 <body ng-controller="logout">
+
 </body>
 </html>

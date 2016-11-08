@@ -69,7 +69,7 @@ if (isset($tpl['limit_arr']) && isset($STORE['_nights']) && isset($STORE['_start
 						<div class="input-group">
 							<span class="input-group-addon" style="padding: 3px 6px; width: 2em;">
 								<span class="glyphicon"  id="basic-addon1" aria-hidden="true" title="Adults">
-									<img src="../images/booking/adult.png" style="display: block; width: 2em;">
+									<img src="../images/booking/adult.png" style="display: block; width: 1em;">
 								</span>
 							</span>
 							<input type="text" class="form-control" aria-describedby="basic-addon1" readonly value="<?php echo $item['adults']; ?>">
@@ -83,7 +83,7 @@ if (isset($tpl['limit_arr']) && isset($STORE['_nights']) && isset($STORE['_start
 						<div class="input-group">
 							<span class="input-group-addon" style="padding: 3px 6px; width: 1.7em;">
 								<span class="glyphicon"  id="basic-addon1" aria-hidden="true" title="Children">
-									<img src="../images/booking/adult.png" style="display: block; width: 1.2em;">
+									<img src="../images/booking/adult.png" style="display: block; width: 0.8em;">
 								</span>
 							</span>
 							<input type="text" class="form-control" aria-describedby="basic-addon2" readonly value="<?php echo $item['children']; ?>">

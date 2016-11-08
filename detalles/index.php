@@ -43,7 +43,7 @@
 			<div class="row">
 				<div class=" large-12 columns">
 					<div class="callout large" >
-						<a name="casas"></a>
+						<a id="casas" name="casas"></a>
 						<div class="row small-up-1 medium-up-1 large-up-2">
 							<div class="column">
 								<div class="callout ">
