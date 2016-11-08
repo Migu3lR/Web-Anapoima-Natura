@@ -38,7 +38,7 @@
 			</div>
 		</div>
 
-		<div class="seccion seccion_1">
+		<div class="seccion seccion_1"> 
 		<div class="franja"></div>
 			<div class="row">
 				<div class=" large-12 columns">
