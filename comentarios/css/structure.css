@@ -1,12 +1,9 @@
+/*Fuentes para el sitio */
 body,
 h1,h2,h3,h4,h5 {
 	font-family: "Titillium Web" !important;
 }
-
-.callout {
-	margin : 0;
-}
-
+/*Propiedades para barra sticky*/
 .sticky{
 	position: fixed;
 	z-index: 9999;
@@ -78,7 +75,7 @@ h1,h2,h3,h4,h5 {
 }
 
 
-/* title */
+/* Titulo del sitio*/
 .title {
 	max-width: 100%;
     margin: 0;
@@ -119,47 +116,6 @@ h1,h2,h3,h4,h5 {
 	padding-top: 1em;
 }
 
-.seccion_title_1{
-	background-color: #F8A51C;
-}
-.seccion_1{
-	background-color: rgb(255, 201, 103);
-    background-image: url("../img/fondo_seccion1.jpg");
-}
-
-.seccion_title_2{
-	background-color: #FECA07;
-	z-index: 3;
-}
-.seccion_2{
-	background-color: rgb(255, 225, 95);
-	background-image: url("../img/fondo_seccion2.jpg");
-}
-
-.seccion_title_3{
-	background-color: #BED538;
-}
-.seccion_3{
-	background-color: rgb(213, 226, 118);
-	background-image: url("../img/fondo_seccion3.jpg");
-}
-
-.seccion_title_4{
-	background-color: #8BC541;
-}
-.seccion_4{
-	background-color: rgb(187, 217, 129);
-	background-image: url("../img/fondo_seccion4.jpg");
-}
-
-.seccion_title_5{
-	background-color: rgb(1, 142, 162);
-	padding-top: 1em;
-}
-.seccion_5{
-	background-color: rgb(1, 142, 162);
-	background-image: url("../img/fondo_seccion5.jpg");
-}
 
 .seccion .p{
 	display: block;
@@ -218,9 +174,6 @@ h1,h2,h3,h4,h5 {
 	bottom: 0;
 	/* z-index: 0; */
 }
-.seccion.seccion_1 .franja{
-	/* bottom: -340px; */
-}
 .seccion.seccion_2 .franja{
 	bottom: -1084px;
 }
@@ -242,8 +195,6 @@ h1,h2,h3,h4,h5 {
 
 .image{
 	display: inline-block;
-    /*max-width: 60px;
-    height: auto;*/
     line-height: 1.42857;
     background-color: rgb(255, 255, 255);
     padding: 4px;
@@ -271,6 +222,7 @@ footer .column {
 .callout {
 	border: 0;
 	background-color: transparent;
+	margin : 0;
 }
 
 

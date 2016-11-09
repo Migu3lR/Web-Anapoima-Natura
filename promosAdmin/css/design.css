@@ -1,3 +1,29 @@
+/*Diseño para stats kpi*/
+ul.general_stats{
+    padding: 0;
+    list-style:none;
+}
+
+ul.general_stats a.star{
+    margin-left: 2em;
+}
+
+/*Diseños de tabla*/
+table.listado { 
+    width: auto;
+    background-color: #eee;
+    border: 1px solid #666666;
+}
+
+.listado thead {
+    background-color: #ccc;
+}
+
+.listado th{
+    text-align: center;
+}
+
+
 h1.calificacion {
     text-align: center;
 }

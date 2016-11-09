@@ -1,30 +1,9 @@
-ul.general_stats{
-    padding: 0;
-    list-style:none;
-}
-
-ul.general_stats a.star{
-    margin-left: 2em;
-}
-table { 
-    width: auto;
-    background-color: #eee;
-    border: 1px solid #666666;
-}
+/*Estructura columnas de tabla*/
 #accion{ 
     min-width: 5rem;
     width: 10rem;
     text-align: center;
 }
-
-thead {
-    background-color: #ccc;
-}
-
-th{
-    text-align: center;
-}
-
 
 #fecha{
     min-width: 12rem;

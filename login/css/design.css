@@ -1,7 +1,8 @@
+/*fondo*/
 body{
 	background: #c1bdba;
 }
-
+/*Diseño ventana de login y registro*/
 h1,h2,h3,h4,h5 {
 	color: white;
 	font-weight:200;

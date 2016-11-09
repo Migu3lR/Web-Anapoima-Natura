@@ -1,16 +1,14 @@
+/*Fuentes  del Sitio*/
 body,
 h1,h2,h3,h4,h5,p {
 	font-family: "Titillium Web" !important;
-}
-body {
-	background: black;
 }
 
 .callout {
 	border: 0;
 	background-color: transparent;
 }
-
+/*Estructuracion de ventana formulario registro y login*/
 .form {
     padding: 40px;
     max-width: 600px;

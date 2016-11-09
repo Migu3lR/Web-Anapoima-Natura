@@ -1,10 +1,11 @@
+/*Titulo del sitio*/
 .title {
 	background-color: #008da1;
 }
 .title h1{
 	color:white;
 }
-
+/*Diseño seccion galeria*/
 #galeria .seccion {
     background-color: #fff;
     border: 0;

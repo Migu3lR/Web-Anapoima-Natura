@@ -366,7 +366,7 @@ footer a:hover{
 .overlay-fade-in a:hover > p {
     color: #47362a;
 }
-
+/*Colores de overlay en imagenes seccion galeria */
 #img_1 .overlay-fade-in .image-overlay-content {
   background-color: rgba( 248, 165, 28, 0.9);}
 #img_3 .overlay-fade-in .image-overlay-content {

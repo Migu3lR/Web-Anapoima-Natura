@@ -1,3 +1,4 @@
+/*Stats KPI */
 ul.general_stats{
     padding: 0;
     list-style:none;
@@ -6,13 +7,13 @@ ul.general_stats{
 ul.general_stats a.star{
     margin-left: 2em;
 }
+
+/*Estructura para tabla con div */
 .tabla { 
     display:table;
     border-collapse: separate;
     border-spacing: 5px;
     width: auto;
-    background-color: #eee;
-    border: 1px solid #666666;
 }
 .registro { 
     display:table-row;
@@ -25,9 +26,6 @@ ul.general_stats a.star{
     overflow: hidden;
 }
 
-.thead {
-    background-color: #ccc;
-}
 
 .thead .celda{
     font-weight: bolder;

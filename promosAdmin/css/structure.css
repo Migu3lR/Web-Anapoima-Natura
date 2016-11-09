@@ -1,30 +1,9 @@
-ul.general_stats{
-    padding: 0;
-    list-style:none;
-}
-
-ul.general_stats a.star{
-    margin-left: 2em;
-}
-table.listado { 
-    width: auto;
-    background-color: #eee;
-    border: 1px solid #666666;
-}
+/*Estructura para Tabla*/
 #accion{ 
     min-width: 5rem;
     width: 10rem;
     text-align: center;
 }
-
-.listado thead {
-    background-color: #ccc;
-}
-
-.listado th{
-    text-align: center;
-}
-
 
 #fecha{
     min-width: 12rem;
@@ -54,7 +33,7 @@ table.listado {
     width: 8rem;
     text-align: center;
 }
-
+/*Cuadros de dialogo*/
 .ngdialog.ngdialog-theme-default {
     padding-bottom: 16px;
     padding-top: 16px;

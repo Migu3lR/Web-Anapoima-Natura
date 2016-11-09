@@ -1,8 +1,9 @@
+/*Diseño para mostrar imagen cargada*/
 #profile img.avatar{
   height: 8em;
   width: auto;
 }
-
+/*Diseño de tabla muestra de informacion*/
 #profile .userProfile td.title{
   background: #edf3f4;
   text-align: right;
@@ -17,7 +18,7 @@
 #profile .bt_volver{
   margin-top: 1.5rem;
 }
-
+/*Diseño color errores*/
 label.error{
 	color: red;  
 }
